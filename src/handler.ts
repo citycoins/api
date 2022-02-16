@@ -7,4 +7,4 @@ router
   .get('/stacks-block-height', StacksBlockHeight)
   .get('*', () => new Response("Not found", { status: 404 }))
 
-export const handleRequest = (request: Request): string => router.handle(request)
+export const handleRequest = (request: Request):Response => router.handle(request)
