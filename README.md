@@ -1,39 +1,33 @@
-# ʕ •́؈•̀) `worker-typescript-template`
+# CityCoins API
 
-A batteries included template for kick starting a TypeScript Cloudflare worker project.
+## Probably Nothing
 
-## Note: You must use [wrangler](https://developers.cloudflare.com/workers/cli-wrangler/install-update) 1.17 or newer to use this template.
+CF Workers + IttyRouter + micro-stacks + TypeScript
 
-## 🔋 Getting Started
+**...and it feels _good!_**
 
-This template is meant to be used with [Wrangler](https://github.com/cloudflare/wrangler). If you are not already familiar with the tool, we recommend that you install the tool and configure it to work with your [Cloudflare account](https://dash.cloudflare.com). Documentation can be found [here](https://developers.cloudflare.com/workers/tooling/wrangler/).
+## Things to Note
 
-To generate using Wrangler, run this command:
+- use simple responses with plain text for values and JSON for tuples
+- all `:cityname` routes accept three letter city names, e.g. mia, nyc
+- all `:blockheight` routes always follow `:cityname` routes when required
+- all additional parameters follow `:cityname` and `:blockheight` routes
+- routes are structured the same as the contract functions and documentation
 
-```bash
-wrangler generate my-ts-project https://github.com/cloudflare/worker-typescript-template
-```
+**This is an early stage experiment and will be open-sourced soon!**
 
-### 👩 💻 Developing
+## Endpoint Examples
 
-[`src/index.ts`](./src/index.ts) calls the request handler in [`src/handler.ts`](./src/handler.ts), and will return the [request method](https://developer.mozilla.org/en-US/docs/Web/API/Request/method) for the given request.
+[Get the current Stacks block height](https://api.citycoins.co/stacks-block-height)
+[Get the activation block height for MIA](https://api.citycoins.co/activation/get-activation-block/mia)
+[Get total registered users for MIA](https://api.citycoins.co/activation/get-registered-users-nonce/mia)
+[Get an address using ID for NYC](https://api.citycoins.co/activation/get-user/nyc/682)
+[Get an ID using an address for NYC](https://api.citycoins.co/activation/get-user-id/nyc/SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S)
+[Get the mining stats at block 49000 for MIA](https://api.citycoins.co/mining/mining-stats-at-block/mia/49000)
+[Get the miner info for an address at block 49000 for NYC](https://api.citycoins.co/mining/miner-at-block/nyc/49000/SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S)
+[Get the total supply for MIA](https://api.citycoins.co/token/total-supply/mia)
 
-### 🧪 Testing
-
-This template comes with jest tests which simply test that the request handler can handle each request method. `npm test` will run your tests.
-
-### ✏️ Formatting
-
-This template uses [`prettier`](https://prettier.io/) to format the project. To invoke, run `npm run format`.
-
-### 👀 Previewing and Publishing
-
-For information on how to preview and publish your worker, please see the [Wrangler docs](https://developers.cloudflare.com/workers/tooling/wrangler/commands/#publish).
-
-## 🤢 Issues
-
-If you run into issues with this specific project, please feel free to file an issue [here](https://github.com/cloudflare/worker-typescript-template/issues). If the problem is with Wrangler, please file an issue [here](https://github.com/cloudflare/wrangler/issues).
-
-## ⚠️ Caveats
-
-The `service-worker-mock` used by the tests is not a perfect representation of the Cloudflare Workers runtime. It is a general approximation. We recommend that you test end to end with `wrangler dev` in addition to a [staging environment](https://developers.cloudflare.com/workers/tooling/wrangler/configuration/environments/) to test things before deploying.
+> “Continuous effort, not strength or intelligence
+> is the key to unlocking our potential.”
+>
+> Winston Churchill
