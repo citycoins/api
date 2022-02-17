@@ -4,14 +4,14 @@ import { CityConfig } from '../types/cities'
 import { MinerAtBlock, MiningStatsAtBlock } from '../types/mining'
 import { STACKS_NETWORK } from './common'
 
-export async function getMiaTotalSupply<T>(): Promise<T> {
+export async function getTotalSupply(cityConfig: CityConfig): Promise<string> {
   return fetchReadOnlyFunction({
-    contractAddress: 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27',
-    contractName: 'miamicoin-token',
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.tokenContract,
     functionName: 'get-total-supply',
     functionArgs: [],
     network: STACKS_NETWORK,
-    senderAddress: 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27',
+    senderAddress: cityConfig.deployer,
   }, true)
 }
 
