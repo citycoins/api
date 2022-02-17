@@ -7,7 +7,7 @@ import { STACKS_NETWORK } from './common'
  * @returns {integer}
  */
 export async function getStacksBlockHeight<T>(): Promise<T> {
-  const url = `https://stacks-node-api.stacks.co/v2/info`
+  const url = `${STACKS_NETWORK.getCoreApiUrl()}/v2/info`
   return fetch(url)
     .then(response => {
       if (!response.ok) {
