@@ -18,14 +18,14 @@ CF Workers + IttyRouter + micro-stacks + TypeScript
 
 ## Endpoint Examples
 
-[Get the current Stacks block height](https://api.citycoins.co/stacks-block-height)
-[Get the activation block height for MIA](https://api.citycoins.co/activation/get-activation-block/mia)
-[Get total registered users for MIA](https://api.citycoins.co/activation/get-registered-users-nonce/mia)
-[Get an address using ID for NYC](https://api.citycoins.co/activation/get-user/nyc/682)
-[Get an ID using an address for NYC](https://api.citycoins.co/activation/get-user-id/nyc/SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S)
-[Get the mining stats at block 49000 for MIA](https://api.citycoins.co/mining/mining-stats-at-block/mia/49000)
-[Get the miner info for an address at block 49000 for NYC](https://api.citycoins.co/mining/miner-at-block/nyc/49000/SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S)
-[Get the total supply for MIA](https://api.citycoins.co/token/total-supply/mia)
+- [Get the current Stacks block height](https://api.citycoins.co/stacks-block-height)
+- [Get the activation block height for MIA](https://api.citycoins.co/activation/get-activation-block/mia)
+- [Get total registered users for MIA](https://api.citycoins.co/activation/get-registered-users-nonce/mia)
+- [Get an address using ID for NYC](https://api.citycoins.co/activation/get-user/nyc/682)
+- [Get an ID using an address for NYC](https://api.citycoins.co/activation/get-user-id/nyc/SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S)
+- [Get the mining stats at block 49000 for MIA](https://api.citycoins.co/mining/mining-stats-at-block/mia/49000)
+- [Get the miner info for an address at block 49000 for NYC](https://api.citycoins.co/mining/miner-at-block/nyc/49000/SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S)
+- [Get the total supply for MIA](https://api.citycoins.co/token/total-supply/mia)
 
 > “Continuous effort, not strength or intelligence
 > is the key to unlocking our potential.”
