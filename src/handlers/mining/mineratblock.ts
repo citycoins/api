@@ -1,7 +1,7 @@
 import { Request as IttyRequest } from 'itty-router'
-import { getMinerAtBlock, getUserId } from "../lib/citycoins"
-import { getCityConfig } from '../types/cities';
-import { MinerAtBlock } from "../types/mining";
+import { getMinerAtBlock, getUserId } from "../../lib/citycoins"
+import { getCityConfig } from '../../types/cities';
+import { MinerAtBlock } from "../../types/mining";
 
 const MinerAtBlock = async (request: IttyRequest): Promise<Response> => {
   const city = request.params?.cityname ?? undefined
@@ -19,9 +19,9 @@ const MinerAtBlock = async (request: IttyRequest): Promise<Response> => {
     return new Response(`Block height not specified or invalid`, { status: 400 })
   }
   const userId = await getUserId(cityConfig, address).catch(() => {
-    return 0
+    return ''
   })
-  if (userId === 0) {
+  if (userId === '') {
     return new Response(`User ID not found for address: ${address}`, { status: 404 })
   }
   const minerAtBlock: MinerAtBlock = await getMinerAtBlock(cityConfig, blockHeightValue, userId);

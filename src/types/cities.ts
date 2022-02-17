@@ -23,6 +23,8 @@ interface CitySettings {
 // cityLogo: imported SVG?
 // https://stackoverflow.com/questions/44717164/unable-to-import-svg-files-in-typescript
 
+// another name: CityDetails
+
 const emptyConfig: CityConfig = {
   deployer: '',
   authContract: '',

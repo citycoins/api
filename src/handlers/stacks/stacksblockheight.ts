@@ -1,4 +1,4 @@
-import { getStacksBlockHeight } from "../lib/stacks"
+import { getStacksBlockHeight } from "../../lib/stacks"
 
 const StacksBlockHeight = async (): Promise<Response> => {
   const currentBlockHeight: string = await getStacksBlockHeight()

@@ -8,6 +8,28 @@ import { STACKS_NETWORK } from './common'
 // ACTIVATION FUNCTIONS
 //////////////////////////////////////////////////
 
+export async function getActivationBlock(cityConfig: CityConfig): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'get-activation-block',
+    functionArgs: [],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer
+  })
+}
+
+export async function getRegisteredUsersNonce(cityConfig: CityConfig): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'get-registered-users-nonce',
+    functionArgs: [],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer
+  })
+}
+
 export async function getUser(cityConfig: CityConfig, id: number): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
@@ -45,7 +67,7 @@ export async function getMiningStatsAtBlock(cityConfig: CityConfig, blockHeight:
   }, true)
 }
 
-export async function getMinerAtBlock(cityConfig: CityConfig, blockHeight: number, userId: number): Promise<MinerAtBlock> {
+export async function getMinerAtBlock(cityConfig: CityConfig, blockHeight: number, userId: string): Promise<MinerAtBlock> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.coreContract,

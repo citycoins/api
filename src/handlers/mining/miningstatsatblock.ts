@@ -1,7 +1,7 @@
 import { Request as IttyRequest } from 'itty-router'
-import { getMiningStatsAtBlock } from "../lib/citycoins"
-import { getCityConfig } from '../types/cities';
-import { MiningStatsAtBlock } from "../types/mining";
+import { getMiningStatsAtBlock } from "../../lib/citycoins"
+import { getCityConfig } from '../../types/cities';
+import { MiningStatsAtBlock } from "../../types/mining";
 
 const MiningStatsAtBlock = async (request: IttyRequest): Promise<Response> => {
   const city = request.params?.cityname ?? undefined
