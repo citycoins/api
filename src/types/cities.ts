@@ -8,23 +8,6 @@ export interface CityConfig {
   tokenSymbol: string;
 }
 
-interface CityPrices {
-  [key: string]: number;
-}
-
-interface CitySettings {
-  config: CityConfig,
-  cityName: string;
-  cityWallet: string;
-  deployed: boolean;
-  activated: boolean;
-  startBlock?: number;
-}
-// cityLogo: imported SVG?
-// https://stackoverflow.com/questions/44717164/unable-to-import-svg-files-in-typescript
-
-// another name: CityDetails
-
 const emptyConfig: CityConfig = {
   deployer: '',
   authContract: '',
@@ -65,3 +48,24 @@ export async function getCityConfig(city: string): Promise<CityConfig> {
       return emptyConfig;
   }
 }
+
+/* IDEAS
+
+interface CityPrices {
+  [key: string]: number;
+}
+
+interface CitySettings {
+  config: CityConfig,
+  cityName: string;
+  cityWallet: string;
+  deployed: boolean;
+  activated: boolean;
+  startBlock?: number;
+}
+// cityLogo: imported SVG?
+// https://stackoverflow.com/questions/44717164/unable-to-import-svg-files-in-typescript
+
+// another name: CityDetails
+
+*/

@@ -30,7 +30,7 @@ export async function getRegisteredUsersNonce(cityConfig: CityConfig): Promise<s
   })
 }
 
-export async function getUser(cityConfig: CityConfig, id: number): Promise<string> {
+export async function getUser(cityConfig: CityConfig, id: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.coreContract,
