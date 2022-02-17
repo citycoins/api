@@ -9,7 +9,6 @@ const router = Router()
 
 router
   .get('/stacks-block-height', StacksBlockHeight)
-  .get('/mining-stats-at-block', MiningStatsAtBlock)
   .get('/mining-stats-at-block/:cityname/:blockheight', MiningStatsAtBlock)
   .get('/miner-at-block/:cityname/:blockheight/:address', MinerAtBlock)
   .get('/total-supply/:cityname', TotalSupply)
