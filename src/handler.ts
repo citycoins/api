@@ -1,4 +1,5 @@
 import { Router } from 'itty-router'
+import Landing from './landing'
 import GetActivationBlock from './handlers/activation/getactivationblock'
 import GetRegisteredUsersNonce from './handlers/activation/getregisteredusersnonce'
 import GetUser from './handlers/activation/getuser'
@@ -11,6 +12,7 @@ import TotalSupply from './handlers/token/totalsupply'
 const router = Router()
 
 router
+  .get('/', Landing)
   .get('/stacks-block-height', StacksBlockHeight)
   .get('/activation/get-activation-block/:cityname', GetActivationBlock)
   .get('/activation/get-registered-users-nonce/:cityname', GetRegisteredUsersNonce)
