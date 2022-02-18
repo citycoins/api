@@ -22,6 +22,7 @@ const landingPage = `
 </ul>
 <p style="font-weight: bold">This is an early stage experiment and <a href="https://github.com/citycoins/api" target="_blank" rel="noreferrer">available on GitHub!</a></p>
 <h2>Endpoint Examples</h2>
+<p>A full list of routes can be found in the <a href="https://github.com/citycoins/api/blob/main/src/handler.ts" target="_blank" rel="noreferrer">handler.ts</a> file until they are documented.</p>
 <div style="max-width: fit-content; text-align: left; margin: 0 auto;">
   <a href="https://api.citycoins.co/stacks-block-height" target="_blank" rel="noreferrer">Get the current Stacks block height</a><br />
   <a href="https://api.citycoins.co/activation/get-activation-block/mia" target="_blank" rel="noreferrer">Get the activation block height for MIA</a><br />
