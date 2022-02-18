@@ -5,7 +5,7 @@ import { getCityConfig } from '../../types/cities'
 const GetUser = async (request: IttyRequest): Promise<Response> => {
   // check inputs
   const city = request.params?.cityname ?? undefined
-  const userId = request.params?.id ?? undefined
+  const userId = request.params?.userid ?? undefined
   if (city === undefined || userId === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
