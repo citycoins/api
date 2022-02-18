@@ -14,7 +14,7 @@ CF Workers + IttyRouter + micro-stacks + TypeScript
 - all additional parameters follow `:cityname` and `:blockheight` routes
 - routes are structured the same as the contract functions and documentation
 
-**This is an early stage experiment and will be open-sourced soon!**
+**This is an early stage experiment!**
 
 ## Implementation
 
