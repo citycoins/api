@@ -20,7 +20,7 @@ const landingPage = `
   <li>all additional parameters follow :cityname and :blockheight routes</li>
   <li>routes are structured the same as the contract functions and documentation</li>
 </ul>
-<p style="font-weight: bold">This is an early stage experiment and will be open-sourced soon!</p>
+<p style="font-weight: bold">This is an early stage experiment and <a href="https://github.com/citycoins/api" target="_blank" rel="noreferrer">available on GitHub!</a></p>
 <h2>Endpoint Examples</h2>
 <div style="max-width: fit-content; text-align: left; margin: 0 auto;">
   <a href="https://api.citycoins.co/stacks-block-height" target="_blank" rel="noreferrer">Get the current Stacks block height</a><br />
