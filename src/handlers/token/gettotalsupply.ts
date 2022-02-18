@@ -2,7 +2,7 @@ import { Request as IttyRequest } from 'itty-router'
 import { getTotalSupply } from "../../lib/citycoins"
 import { getCityConfig } from '../../types/cities'
 
-const TotalSupply = async (request: IttyRequest): Promise<Response> => {
+const GetTotalSupply = async (request: IttyRequest): Promise<Response> => {
   // check inputs
   const city = request.params?.cityname ?? undefined
   if (city === undefined) {
@@ -23,4 +23,4 @@ const TotalSupply = async (request: IttyRequest): Promise<Response> => {
   return new Response(totalSupply, { headers })
 }
 
-export default TotalSupply
+export default GetTotalSupply

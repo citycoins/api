@@ -1,14 +1,13 @@
 import { Request as IttyRequest } from 'itty-router'
-import { getMinerAtBlock, getUserId } from "../../lib/citycoins"
+import { getMiningStatsAtBlock } from "../../lib/citycoins"
 import { getCityConfig } from '../../types/cities';
-import { MinerAtBlock } from "../../types/mining";
+import { MiningStatsAtBlock } from "../../types/mining";
 
-const MinerAtBlock = async (request: IttyRequest): Promise<Response> => {
+const GetMiningStatsAtBlock = async (request: IttyRequest): Promise<Response> => {
   // check inputs
   const city = request.params?.cityname ?? undefined
   const blockHeight = request.params?.blockheight ?? undefined
-  const address = request.params?.address ?? undefined
-  if (city === undefined || blockHeight === undefined || address === undefined) {
+  if (city === undefined || blockHeight === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
   // get city configuration object
@@ -21,24 +20,17 @@ const MinerAtBlock = async (request: IttyRequest): Promise<Response> => {
   if (isNaN(blockHeightValue)) {
     return new Response(`Block height not specified or invalid`, { status: 400 })
   }
-  // get user ID
-  const userId = await getUserId(cityConfig, address).catch(() => {
-    return ''
-  })
-  if (userId === '') {
-    return new Response(`User ID not found for address: ${address}`, { status: 404 })
-  }
-  // get miner info at block height
-  const minerAtBlock: MinerAtBlock = await getMinerAtBlock(cityConfig, blockHeightValue, userId);
+  // get mining stats at block height
+  const miningStatsAtBlock: MiningStatsAtBlock = await getMiningStatsAtBlock(cityConfig, blockHeightValue);
   // return response
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
   }
-  if (minerAtBlock === null) {
+  if (miningStatsAtBlock === null) {
     return new Response(`Mining stats not found at block height: ${blockHeightValue}`, { status: 404 })
   }
-  return new Response(JSON.stringify(minerAtBlock), { headers })
+  return new Response(JSON.stringify(miningStatsAtBlock), { headers })
 }
 
-export default MinerAtBlock
+export default GetMiningStatsAtBlock
