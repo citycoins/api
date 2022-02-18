@@ -3,7 +3,7 @@ import { getStackingStatsAtCycle } from "../../lib/citycoins"
 import { getCityConfig } from '../../types/cities';
 import { StackingStatsAtCycle } from "../../types/stacking";
 
-const StackingStatsAtCycle = async (request: IttyRequest): Promise<Response> => {
+const GetStackingStatsAtCycle = async (request: IttyRequest): Promise<Response> => {
   // check inputs
   const city = request.params?.cityname ?? undefined
   const cycle = request.params?.cycleid ?? undefined
@@ -33,4 +33,4 @@ const StackingStatsAtCycle = async (request: IttyRequest): Promise<Response> => 
   return new Response(JSON.stringify(stackingStatsAtCycle), { headers })
 }
 
-export default StackingStatsAtCycle
+export default GetStackingStatsAtCycle

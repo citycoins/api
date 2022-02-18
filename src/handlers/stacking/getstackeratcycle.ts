@@ -3,7 +3,7 @@ import { getStackerAtCycle } from "../../lib/citycoins"
 import { getCityConfig } from '../../types/cities';
 import { StackerAtCycle } from "../../types/stacking";
 
-const StackerAtCycle = async (request: IttyRequest): Promise<Response> => {
+const GetStackerAtCycle = async (request: IttyRequest): Promise<Response> => {
   // check inputs
   const city = request.params?.cityname ?? undefined
   const cycle = request.params?.cycleid ?? undefined
@@ -39,4 +39,4 @@ const StackerAtCycle = async (request: IttyRequest): Promise<Response> => {
   return new Response(JSON.stringify(stackerAtCycle), { headers })
 }
 
-export default StackerAtCycle
+export default GetStackerAtCycle

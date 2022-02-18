@@ -28,9 +28,9 @@ const landingPage = `
   <a href="https://api.citycoins.co/activation/get-registered-users-nonce/mia" target="_blank" rel="noreferrer">Get total registered users for MIA</a><br />
   <a href="https://api.citycoins.co/activation/get-user/nyc/682" target="_blank" rel="noreferrer">Get an address using ID for NYC</a><br />
   <a href="https://api.citycoins.co/activation/get-user-id/nyc/SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S" target="_blank" rel="noreferrer">Get an ID using an address for NYC</a><br />
-  <a href="https://api.citycoins.co/mining/mining-stats-at-block/mia/49000" target="_blank" rel="noreferrer">Get the mining stats at block 49000 for MIA</a><br />
-  <a href="https://api.citycoins.co/mining/miner-at-block/nyc/49000/SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S" target="_blank" rel="noreferrer">Get the miner info for an address at block 49000 for NYC</a><br />
-  <a href="https://api.citycoins.co/token/total-supply/mia" target="_blank" rel="noreferrer">Get the total supply for MIA</a><br />
+  <a href="https://api.citycoins.co/mining/get-mining-stats-at-block/mia/49000" target="_blank" rel="noreferrer">Get the mining stats at block 49000 for MIA</a><br />
+  <a href="https://api.citycoins.co/mining/get-miner-at-block/nyc/49000/SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S" target="_blank" rel="noreferrer">Get the miner info for an address at block 49000 for NYC</a><br />
+  <a href="https://api.citycoins.co/token/get-total-supply/mia" target="_blank" rel="noreferrer">Get the total supply for MIA</a><br />
 </div>
 <hr />
 <blockquote>

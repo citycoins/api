@@ -2,7 +2,7 @@ import { Request as IttyRequest } from 'itty-router'
 import { getRewardCycle } from "../../lib/citycoins"
 import { getCityConfig } from '../../types/cities';
 
-const RewardCycle = async (request: IttyRequest): Promise<Response> => {
+const GetRewardCycle = async (request: IttyRequest): Promise<Response> => {
   // check inputs
   const city = request.params?.cityname ?? undefined
   const blockHeight = request.params?.blockheight ?? undefined
@@ -32,4 +32,4 @@ const RewardCycle = async (request: IttyRequest): Promise<Response> => {
   return new Response(rewardCycle, { headers })
 }
 
-export default RewardCycle
+export default GetRewardCycle
