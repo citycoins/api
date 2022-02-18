@@ -1,9 +1,7 @@
 name = "citycoins-api"
 type = "javascript"
-zone_id = "3e5041a8cc83842af0c2734fe6b33adc"
 account_id = "6f54e90da6d1b280fe00a153cb394c68"
-route = "api.citycoins.co/*"
-workers_dev = false
+workers_dev = true
 compatibility_date = "2022-02-16"
 
 [build]
@@ -11,3 +9,7 @@ command = "npm install && npm run build"
 
 [build.upload]
 format = "service-worker"
+
+[env.production]
+route = "api.citycoins.co/*"
+zone_id = "3e5041a8cc83842af0c2734fe6b33adc"
