@@ -16,6 +16,12 @@ CF Workers + IttyRouter + micro-stacks + TypeScript
 
 **This is an early stage experiment and will be open-sourced soon!**
 
+## Implementation
+
+If you would like to use this with an app, please file an issue or reach out in the [CityCoins Discord](https://discord.gg/citycoins) and let us know, we'd love to credit you here!
+
+If you'd like to request an endpoint, please [file an isssue](https://github.com/citycoins/api/issues/new) and let us know, this API is meant to evolve!
+
 ## Endpoint Examples
 
 - [Get the current Stacks block height](https://api.citycoins.co/stacks-block-height)
