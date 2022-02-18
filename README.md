@@ -22,6 +22,8 @@ If you would like to use this with an app, please file an issue or reach out in 
 
 If you'd like to request an endpoint, please [file an isssue](https://github.com/citycoins/api/issues/new) and let us know, this API is meant to evolve!
 
+Any pushes to the `develop` branch are automatically built and [available here for testing](https://citycoins-api.citycoins.workers.dev).
+
 ## Endpoint Examples
 
 A full list of routes can be found in the [handler.ts](./src/handler.ts) file until they are documented.
