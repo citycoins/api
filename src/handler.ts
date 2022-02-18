@@ -6,6 +6,7 @@ import GetUser from './handlers/activation/getuser'
 import GetUserId from './handlers/activation/getuserid'
 import MinerAtBlock from './handlers/mining/mineratblock'
 import MiningStatsAtBlock from './handlers/mining/miningstatsatblock'
+import RewardCycle from './handlers/stacking/rewardcycle'
 import StackerAtCycle from './handlers/stacking/stackeratcycle'
 import StackingStatsAtCycle from './handlers/stacking/stackingstatsatcycle'
 import StacksBlockHeight from './handlers/stacks/stacksblockheight'
@@ -24,6 +25,7 @@ router
   .get('/mining/miner-at-block/:cityname/:blockheight/:address', MinerAtBlock)
   .get('/stacking/stacking-stats-at-cycle/:cityname/:cycleid', StackingStatsAtCycle)
   .get('/stacking/stacker-at-cycle/:cityname/:cycleid/:userid', StackerAtCycle)
+  .get('/stacking/get-reward-cycle/:cityname/:blockheight', RewardCycle)
   .get('/token/total-supply/:cityname', TotalSupply)
   .get('*', () => new Response("Resource not found, please check the URL.", { status: 404 }))
 

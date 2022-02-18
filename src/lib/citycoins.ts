@@ -105,6 +105,17 @@ export async function getStackerAtCycle(cityConfig: CityConfig, cycleId: number,
   }, true)
 }
 
+export async function getRewardCycle(cityConfig: CityConfig, blockHeight: number): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'get-reward-cycle',
+    functionArgs: [uintCV(blockHeight)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
 //////////////////////////////////////////////////
 // TOKEN FUNCTIONS
 //////////////////////////////////////////////////
