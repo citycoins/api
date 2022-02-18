@@ -6,11 +6,13 @@ import GetUser from './handlers/activation/getuser'
 import GetUserId from './handlers/activation/getuserid'
 import GetMinerAtBlock from './handlers/mining/getmineratblock'
 import GetMiningStatsAtBlock from './handlers/mining/getminingstatsatblock'
+import GetFirstStacksBlockInRewardCycle from './handlers/stacking/getfirststacksblockinrewardcycle'
 import GetRewardCycle from './handlers/stacking/getrewardcycle'
 import GetStackerAtCycle from './handlers/stacking/getstackeratcycle'
 import GetStackingStatsAtCycle from './handlers/stacking/getstackingstatsatcycle'
 import StacksBlockHeight from './handlers/stacks/stacksblockheight'
 import GetTotalSupply from './handlers/token/gettotalsupply'
+
 
 const router = Router()
 
@@ -26,6 +28,7 @@ router
   .get('/stacking/get-stacking-stats-at-cycle/:cityname/:cycleid', GetStackingStatsAtCycle)
   .get('/stacking/get-stacker-at-cycle/:cityname/:cycleid/:userid', GetStackerAtCycle)
   .get('/stacking/get-reward-cycle/:cityname/:blockheight', GetRewardCycle)
+  .get('/stacking/get-first-stacks-block-in-reward-cycle/:cityname/:cycleid', GetFirstStacksBlockInRewardCycle)
   .get('/token/get-total-supply/:cityname', GetTotalSupply)
   .get('*', () => new Response("Resource not found, please check the URL.", { status: 404 }))
 
