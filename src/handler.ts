@@ -18,7 +18,7 @@ router
   .get('/stacks-block-height', StacksBlockHeight)
   .get('/activation/get-activation-block/:cityname', GetActivationBlock)
   .get('/activation/get-registered-users-nonce/:cityname', GetRegisteredUsersNonce)
-  .get('/activation/get-user/:cityname/:id', GetUser)
+  .get('/activation/get-user/:cityname/:userid', GetUser)
   .get('/activation/get-user-id/:cityname/:address', GetUserId)
   .get('/mining/mining-stats-at-block/:cityname/:blockheight', MiningStatsAtBlock)
   .get('/mining/miner-at-block/:cityname/:blockheight/:address', MinerAtBlock)
