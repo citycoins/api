@@ -2,6 +2,7 @@ import { fetchReadOnlyFunction } from 'micro-stacks/api'
 import { standardPrincipalCV, uintCV } from 'micro-stacks/clarity'
 import { CityConfig } from '../types/cities'
 import { MinerAtBlock, MiningStatsAtBlock } from '../types/mining'
+import { StackerAtCycle, StackingStatsAtCycle } from '../types/stacking'
 import { STACKS_NETWORK } from './common'
 
 //////////////////////////////////////////////////
@@ -73,6 +74,32 @@ export async function getMinerAtBlock(cityConfig: CityConfig, blockHeight: numbe
     contractName: cityConfig.coreContract,
     functionName: 'get-miner-at-block',
     functionArgs: [uintCV(blockHeight), uintCV(userId)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+//////////////////////////////////////////////////
+// STACKING FUNCTIONS
+//////////////////////////////////////////////////
+
+export async function getStackingStatsAtCycle(cityConfig: CityConfig, cycleId: number): Promise<StackingStatsAtCycle> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'get-stacking-stats-at-cycle',
+    functionArgs: [uintCV(cycleId)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+export async function getStackerAtCycle(cityConfig: CityConfig, cycleId: number, userId: number): Promise<StackerAtCycle> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'get-stacker-at-cycle',
+    functionArgs: [uintCV(cycleId), uintCV(userId)],
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer,
   }, true)
