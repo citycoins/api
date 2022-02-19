@@ -12,6 +12,7 @@ import GetStackerAtCycle from './handlers/stacking/getstackeratcycle'
 import GetStackingStatsAtCycle from './handlers/stacking/getstackingstatsatcycle'
 import StacksBlockHeight from './handlers/stacks/stacksblockheight'
 import GetTotalSupply from './handlers/token/gettotalsupply'
+import GetCoinbaseThresholds from './handlers/token/getcoinbasethresholds'
 
 
 const router = Router()
@@ -29,6 +30,7 @@ router
   .get('/stacking/get-stacker-at-cycle/:cityname/:cycleid/:userid', GetStackerAtCycle)
   .get('/stacking/get-reward-cycle/:cityname/:blockheight', GetRewardCycle)
   .get('/stacking/get-first-stacks-block-in-reward-cycle/:cityname/:cycleid', GetFirstStacksBlockInRewardCycle)
+  .get('/token/get-coinbase-thresholds/:cityname', GetCoinbaseThresholds)
   .get('/token/get-total-supply/:cityname', GetTotalSupply)
   .get('*', () => new Response("Resource not found, please check the URL.", { status: 404 }))
 
