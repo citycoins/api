@@ -135,12 +135,23 @@ export async function getFirstStacksBlockInRewardCycle(cityConfig: CityConfig, c
 export async function getCoinbaseThresholds(cityConfig: CityConfig): Promise<CoinbaseThresholds> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.tokenContract,
     functionName: 'get-coinbase-thresholds',
     functionArgs: [],
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer,
   }, true)
+}
+
+export async function getCoinbaseAmount(cityConfig: CityConfig, blockHeight: number): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'get-coinbase-amount',
+    functionArgs: [uintCV(blockHeight)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  })
 }
 
 export async function getTotalSupply(cityConfig: CityConfig): Promise<string> {
