@@ -28,7 +28,7 @@ Any pushes to the `develop` branch are automatically built and [available here f
 
 A full list of routes can be found in the [handler.ts](./src/handler.ts) file until they are documented.
 
-- [Get the current Stacks block height](https://api.citycoins.co/stacks-block-height)
+- [Get the current Stacks block height](https://api.citycoins.co/stacks/get-block-height)
 - [Get the activation block height for MIA](https://api.citycoins.co/activation/get-activation-block/mia)
 - [Get total registered users for MIA](https://api.citycoins.co/activation/get-registered-users-nonce/mia)
 - [Get an address using ID for NYC](https://api.citycoins.co/activation/get-user/nyc/682)

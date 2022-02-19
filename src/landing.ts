@@ -24,7 +24,7 @@ const landingPage = `
 <h2>Endpoint Examples</h2>
 <p>A full list of routes can be found in the <a href="https://github.com/citycoins/api/blob/main/src/handler.ts" target="_blank" rel="noreferrer">handler.ts</a> file until they are documented.</p>
 <div style="max-width: fit-content; text-align: left; margin: 0 auto;">
-  <a href="https://api.citycoins.co/stacks-block-height" target="_blank" rel="noreferrer">Get the current Stacks block height</a><br />
+  <a href="https://api.citycoins.co/stacks/get-block-height" target="_blank" rel="noreferrer">Get the current Stacks block height</a><br />
   <a href="https://api.citycoins.co/activation/get-activation-block/mia" target="_blank" rel="noreferrer">Get the activation block height for MIA</a><br />
   <a href="https://api.citycoins.co/activation/get-registered-users-nonce/mia" target="_blank" rel="noreferrer">Get total registered users for MIA</a><br />
   <a href="https://api.citycoins.co/activation/get-user/nyc/682" target="_blank" rel="noreferrer">Get an address using ID for NYC</a><br />
