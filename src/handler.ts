@@ -10,7 +10,7 @@ import GetFirstStacksBlockInRewardCycle from './handlers/stacking/getfirststacks
 import GetRewardCycle from './handlers/stacking/getrewardcycle'
 import GetStackerAtCycle from './handlers/stacking/getstackeratcycle'
 import GetStackingStatsAtCycle from './handlers/stacking/getstackingstatsatcycle'
-import StacksBlockHeight from './handlers/stacks/stacksblockheight'
+import GetStacksBlockHeight from './handlers/stacks/getstacksblockheight'
 import GetCoinbaseAmount from './handlers/token/getcoinbaseamount'
 import GetCoinbaseThresholds from './handlers/token/getcoinbasethresholds'
 import GetTotalSupply from './handlers/token/gettotalsupply'
@@ -20,12 +20,16 @@ import GetDecimals from './handlers/token/getdecimals'
 import GetTokenUri from './handlers/token/gettokenuri'
 import GetBalance from './handlers/token/getbalance'
 import GetTokenUriJson from './handlers/token/gettokenurijson'
+import GetBnsNames from './handlers/stacks/getbnsnames'
+import GetStxBalance from './handlers/stacks/getstxbalance'
 
 const router = Router()
 
 router
   .get('/', Landing)
-  .get('/stacks-block-height', StacksBlockHeight)
+  .get('/stacks/get-block-height', GetStacksBlockHeight)
+  .get('/stacks/get-bns-name/:address', GetBnsNames)
+  .get('/stacks/get-stx-balance/:address', GetStxBalance)
   .get('/activation/get-activation-block/:cityname', GetActivationBlock)
   .get('/activation/get-registered-users-nonce/:cityname', GetRegisteredUsersNonce)
   .get('/activation/get-user/:cityname/:userid', GetUser)

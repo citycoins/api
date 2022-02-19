@@ -11,3 +11,27 @@ export async function getStacksBlockHeight(): Promise<string> {
     })
     .then(data => { return data.stacks_tip_height })
 }
+
+export async function getStxBalance(address: string): Promise<string> {
+  const url = `${STACKS_NETWORK.getCoreApiUrl()}/extended/v1/address/${address}/stx`
+  return fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`)
+      }
+      return response.json() as Promise<{ balance: string }>
+    })
+    .then(data => { return data.balance })
+}
+
+export async function getBnsNames(address: string): Promise<string> {
+  const url = `${STACKS_NETWORK.getCoreApiUrl()}/v1/addresses/stacks/${address}`
+  return fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`)
+      }
+      return response.json() as Promise<{ names: string }>
+    })
+    .then(data => { return data.names })  
+}
