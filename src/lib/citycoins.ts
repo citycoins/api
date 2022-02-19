@@ -151,7 +151,7 @@ export async function getCoinbaseAmount(cityConfig: CityConfig, blockHeight: num
     functionArgs: [uintCV(blockHeight)],
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer,
-  })
+  }, true)
 }
 
 export async function getTotalSupply(cityConfig: CityConfig): Promise<string> {
@@ -159,6 +159,39 @@ export async function getTotalSupply(cityConfig: CityConfig): Promise<string> {
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.tokenContract,
     functionName: 'get-total-supply',
+    functionArgs: [],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+export async function getName(cityConfig: CityConfig): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.tokenContract,
+    functionName: 'get-name',
+    functionArgs: [],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+export async function getSymbol(cityConfig: CityConfig): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.tokenContract,
+    functionName: 'get-symbol',
+    functionArgs: [],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+export async function getDecimals(cityConfig: CityConfig): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.tokenContract,
+    functionName: 'get-decimals',
     functionArgs: [],
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer,

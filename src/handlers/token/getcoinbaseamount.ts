@@ -24,7 +24,7 @@ const GetCoinbaseAmount = async (request: IttyRequest): Promise<Response> => {
   // return response
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
+    'Content-Type': 'text/html; charset=utf-8',
   }
   if (coinbaseAmount === null) {
     return new Response(`Coinbase amount not found at block height: ${blockHeightValue}`, { status: 404 })
