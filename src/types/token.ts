@@ -6,3 +6,9 @@ export interface CoinbaseThresholds {
   coinbaseThreshold4: number,
   coinbaseThreshold5: number,
 }
+
+export interface TokenUri {
+  name: string,
+  description: string,
+  image: string,
+}

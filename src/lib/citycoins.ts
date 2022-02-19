@@ -154,17 +154,6 @@ export async function getCoinbaseAmount(cityConfig: CityConfig, blockHeight: num
   }, true)
 }
 
-export async function getTotalSupply(cityConfig: CityConfig): Promise<string> {
-  return fetchReadOnlyFunction({
-    contractAddress: cityConfig.deployer,
-    contractName: cityConfig.tokenContract,
-    functionName: 'get-total-supply',
-    functionArgs: [],
-    network: STACKS_NETWORK,
-    senderAddress: cityConfig.deployer,
-  }, true)
-}
-
 export async function getName(cityConfig: CityConfig): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
@@ -192,6 +181,39 @@ export async function getDecimals(cityConfig: CityConfig): Promise<string> {
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.tokenContract,
     functionName: 'get-decimals',
+    functionArgs: [],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+export async function getBalance(cityConfig: CityConfig, address: string): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.tokenContract,
+    functionName: 'get-balance',
+    functionArgs: [standardPrincipalCV(address)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+export async function getTotalSupply(cityConfig: CityConfig): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.tokenContract,
+    functionName: 'get-total-supply',
+    functionArgs: [],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+export async function getTokenUri(cityConfig: CityConfig): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.tokenContract,
+    functionName: 'get-token-uri',
     functionArgs: [],
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer,
