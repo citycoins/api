@@ -11,8 +11,15 @@ import GetRewardCycle from './handlers/stacking/getrewardcycle'
 import GetStackerAtCycle from './handlers/stacking/getstackeratcycle'
 import GetStackingStatsAtCycle from './handlers/stacking/getstackingstatsatcycle'
 import StacksBlockHeight from './handlers/stacks/stacksblockheight'
+import GetCoinbaseAmount from './handlers/token/getcoinbaseamount'
+import GetCoinbaseThresholds from './handlers/token/getcoinbasethresholds'
 import GetTotalSupply from './handlers/token/gettotalsupply'
-
+import GetName from './handlers/token/getname'
+import GetSymbol from './handlers/token/getsymbol'
+import GetDecimals from './handlers/token/getdecimals'
+import GetTokenUri from './handlers/token/gettokenuri'
+import GetBalance from './handlers/token/getbalance'
+import GetTokenUriJson from './handlers/token/gettokenurijson'
 
 const router = Router()
 
@@ -29,7 +36,15 @@ router
   .get('/stacking/get-stacker-at-cycle/:cityname/:cycleid/:userid', GetStackerAtCycle)
   .get('/stacking/get-reward-cycle/:cityname/:blockheight', GetRewardCycle)
   .get('/stacking/get-first-stacks-block-in-reward-cycle/:cityname/:cycleid', GetFirstStacksBlockInRewardCycle)
+  .get('/token/get-coinbase-amount/:cityname/:blockheight', GetCoinbaseAmount)
+  .get('/token/get-coinbase-thresholds/:cityname', GetCoinbaseThresholds)
+  .get('/token/get-name/:cityname', GetName)
+  .get('/token/get-symbol/:cityname', GetSymbol)
+  .get('/token/get-decimals/:cityname', GetDecimals)
+  .get('/token/get-balance/:cityname/:address', GetBalance)
   .get('/token/get-total-supply/:cityname', GetTotalSupply)
+  .get('/token/get-token-uri/:cityname', GetTokenUri)
+  .get('/token/get-token-uri-json/:cityname', GetTokenUriJson)
   .get('*', () => new Response("Resource not found, please check the URL.", { status: 404 }))
 
 export const handleRequest = (request: Request):Response => router.handle(request)
