@@ -6,77 +6,6 @@ info:
 servers:
   - url: https://api.citycoins.co
 paths:
-  /mining/get-mining-stats-at-block/{cityname}/{blockheight}:
-    get:
-      description: Get the mining stats for a given CityCoin city and Stacks block height
-      parameters:
-        - $ref: './parameters/cityname.yml'
-        - $ref: './parameters/blockheight.yml'
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  amount:
-                    type: string
-                  amountToCity:
-                    type: string
-                  amountToStackers:
-                    type: string
-                  rewardClaimed:
-                    type: boolean
-                  minersCount:
-                    type: string
-              examples:
-                "0":
-                  value: >-
-                    {"amount":"253600601","amountToCity":"76080180","amountToStackers":"177520421","minersCount":"6","rewardClaimed":true}
-
-  /token/get-balance/{cityname}/{address}:
-    get:
-      description: Get the token balance for a given CityCoin city abbreviation and Stacks address
-      parameters:
-        - $ref: './parameters/cityname.yml'
-        - $ref: './parameters/address.yml'
-      responses:
-        "200":
-          description: Success
-          content:
-            text/html; charset=utf-8:
-              schema:
-                type: string
-      externalDocs:
-        url: https://docs.citycoins.co/contract-functions/token#get-balance
-
-  /token/get-symbol/{cityname}:
-    get:
-      description: Get the SIP-010 symbol for a given CityCoin city
-      parameters:
-        - $ref: './parameters/cityname.yml'
-      responses:
-        "200":
-          description: Success
-          content:
-            text/html; charset=utf-8:
-              schema:
-                type: string
-
-  /token/get-decimals/{cityname}:
-    get:
-      description: Get the SIP-010 decimals for a given CityCoin city
-      parameters:
-        - $ref: './parameters/cityname.yml'
-      responses:
-        "200":
-          description: Success
-          content:
-            text/html; charset=utf-8:
-              schema:
-                type: string
-
   /activation/get-user/{cityname}/{userid}:
     get:
       description: Get the Stacks address for a given CityCoin city and user ID
@@ -108,6 +37,192 @@ paths:
   /activation/get-registered-users-nonce/{cityname}:
     get:
       description: Get the total number of users assigned an ID from the core contract for a given CityCoin city
+      parameters:
+        - $ref: './parameters/cityname.yml'
+      responses:
+        "200":
+          description: Success
+          content:
+            text/html; charset=utf-8:
+              schema:
+                type: string
+
+  /activation/get-activation-block/{cityname}:
+    get:
+      description: Get the Stacks block height the core contract was activated at for a given CityCoin city
+      parameters:
+        - $ref: './parameters/cityname.yml'
+      responses:
+        "200":
+          description: Success
+          content:
+            text/html; charset=utf-8:
+              schema:
+                type: string
+
+  /mining/get-mining-stats-at-block/{cityname}/{blockheight}:
+    get:
+      description: Get the mining stats for a given CityCoin city and Stacks block height
+      parameters:
+        - $ref: './parameters/cityname.yml'
+        - $ref: './parameters/blockheight.yml'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  amount:
+                    type: string
+                  amountToCity:
+                    type: string
+                  amountToStackers:
+                    type: string
+                  rewardClaimed:
+                    type: boolean
+                  minersCount:
+                    type: string
+              examples:
+                "0":
+                  value: >-
+                    {"amount":"253600601","amountToCity":"76080180","amountToStackers":"177520421","minersCount":"6","rewardClaimed":true}
+
+  /mining/get-miner-at-block/{cityname}/{blockheight}/{address}:
+    get:
+      description: Get the miner details for a given CityCoin city, Stacks block height, and Stacks address
+      parameters:
+        - $ref: './parameters/cityname.yml'
+        - $ref: './parameters/blockheight.yml'
+        - $ref: './parameters/address.yml'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lowValue:
+                    type: string
+                  winner:
+                    type: boolean
+                  highValue:
+                    type: string
+                  ustx:
+                    type: string
+              examples:
+                "0":
+                  value: >-
+                    {"highValue":"41000000","lowValue":"1000001","ustx":"40000000","winner":true}
+
+
+  /stacking/get-stacking-stats-at-cycle/{cityname}/{cycleid}:
+    get:
+      description: Get the stacking stats for a given CityCoin city and reward cycle ID
+      parameters:
+        - $ref: './parameters/cityname.yml'
+        - $ref: './parameters/cycleid.yml'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  amountToken:
+                    type: string
+                  amountUstx:
+                    type: string
+              examples:
+                "0":
+                  value: '{"amountToken":"1281126283","amountUstx":"6617244628227"}'
+
+  /stacking/get-first-stacks-block-in-reward-cycle/{cityname}/{cycleid}:
+    get:
+      description: Get the first Stacks block in a reward cycle for the given CityCoin city and reward cycle ID
+      parameters:
+        - $ref: './parameters/cityname.yml'
+        - $ref: './parameters/cycleid.yml'
+      responses:
+        "200":
+          description: Success
+          content:
+            text/html; charset=utf-8:
+              schema:
+                type: string
+
+  /stacking/get-reward-cycle/{cityname}/{blockheight}:
+    get:
+      description: Get the reward cycle for a given CityCoin city and Stacks block height
+      parameters:
+        - $ref: './parameters/cityname.yml'
+        - $ref: './parameters/blockheight.yml'
+      responses:
+        "200":
+          description: Success
+          content:
+            text/html; charset=utf-8:
+              schema:
+                type: string
+
+  /stacking/get-stacker-at-cycle/{cityname}/{cycleid}/{userid}:
+    get:
+      description: Get the amount stacked and amount to return for a given CityCoin city, reward cycle ID, and user ID.
+      parameters:
+        - $ref: './parameters/cityname.yml'
+        - $ref: './parameters/cycleid.yml'
+        - $ref: './parameters/userid.yml'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  toReturn:
+                    type: string
+                  amountStacked:
+                    type: string
+              examples:
+                "0":
+                  value: '{"amountStacked":"0","toReturn":"0"}'
+
+  /token/get-balance/{cityname}/{address}:
+    get:
+      description: Get the token balance for a given CityCoin city and Stacks address
+      parameters:
+        - $ref: './parameters/cityname.yml'
+        - $ref: './parameters/address.yml'
+      responses:
+        "200":
+          description: Success
+          content:
+            text/html; charset=utf-8:
+              schema:
+                type: string
+      externalDocs:
+        url: https://docs.citycoins.co/contract-functions/token#get-balance
+
+  /token/get-symbol/{cityname}:
+    get:
+      description: Get the SIP-010 symbol for a given CityCoin city
+      parameters:
+        - $ref: './parameters/cityname.yml'
+      responses:
+        "200":
+          description: Success
+          content:
+            text/html; charset=utf-8:
+              schema:
+                type: string
+
+  /token/get-decimals/{cityname}:
+    get:
+      description: Get the SIP-010 decimals for a given CityCoin city
       parameters:
         - $ref: './parameters/cityname.yml'
       responses:
@@ -157,41 +272,6 @@ paths:
                     ticker is MIA, Stack it to earn Stacks
                     (STX)","image":"https://cdn.citycoins.co/logos/miamicoin.png"}
 
-  /stacking/get-stacking-stats-at-cycle/{cityname}/{cycleid}:
-    get:
-      description: Get the stacking stats for a given CityCoin city and reward cycle ID
-      parameters:
-        - $ref: './parameters/cityname.yml'
-        - $ref: './parameters/cycleid.yml'
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  amountToken:
-                    type: string
-                  amountUstx:
-                    type: string
-              examples:
-                "0":
-                  value: '{"amountToken":"1281126283","amountUstx":"6617244628227"}'
-
-  /activation/get-activation-block/{cityname}:
-    get:
-      description: Get the Stacks block height the core contract was activated at for a given CityCoin city
-      parameters:
-        - $ref: './parameters/cityname.yml'
-      responses:
-        "200":
-          description: Success
-          content:
-            text/html; charset=utf-8:
-              schema:
-                type: string
-
   /token/get-name/{cityname}:
     get:
       description: Get the SIP-010 name for a given CityCoin city
@@ -205,62 +285,11 @@ paths:
               schema:
                 type: string
 
-  /stacking/get-first-stacks-block-in-reward-cycle/{cityname}/{cycleid}:
-    get:
-      description: Get the first Stacks block in a reward cycle for the given CityCoin city and reward cycle ID
-      parameters:
-        - $ref: './parameters/cityname.yml'
-        - $ref: './parameters/cycleid.yml'
-      responses:
-        "200":
-          description: Success
-          content:
-            text/html; charset=utf-8:
-              schema:
-                type: string
-
-  /stacking/get-stacker-at-cycle/{cityname}/{cycleid}/{userid}:
-    get:
-      description: Get the amount stacked and amount to return for a given CityCoin city, reward cycle ID, and user ID.
-      parameters:
-        - $ref: './parameters/cityname.yml'
-        - $ref: './parameters/cycleid.yml'
-        - $ref: './parameters/userid.yml'
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  toReturn:
-                    type: string
-                  amountStacked:
-                    type: string
-              examples:
-                "0":
-                  value: '{"amountStacked":"0","toReturn":"0"}'
-
   /token/get-total-supply/{cityname}:
     get:
       description: Get the SIP-010 total supply for a given CityCoin city
       parameters:
         - $ref: './parameters/cityname.yml'
-      responses:
-        "200":
-          description: Success
-          content:
-            text/html; charset=utf-8:
-              schema:
-                type: string
-
-  /stacking/get-reward-cycle/{cityname}/{blockheight}:
-    get:
-      description: Get the reward cycle for a given CityCoin city and Stacks block height
-      parameters:
-        - $ref: './parameters/cityname.yml'
-        - $ref: './parameters/blockheight.yml'
       responses:
         "200":
           description: Success
@@ -282,31 +311,3 @@ paths:
             text/html; charset=utf-8:
               schema:
                 type: string
-
-  /mining/get-miner-at-block/{cityname}/{blockheight}/{address}:
-    get:
-      description: Get the miner details for a given CityCoin city, Stacks block height, and Stacks address
-      parameters:
-        - $ref: './parameters/cityname.yml'
-        - $ref: './parameters/blockheight.yml'
-        - $ref: './parameters/address.yml'
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  lowValue:
-                    type: string
-                  winner:
-                    type: boolean
-                  highValue:
-                    type: string
-                  ustx:
-                    type: string
-              examples:
-                "0":
-                  value: >-
-                    {"highValue":"41000000","lowValue":"1000001","ustx":"40000000","winner":true}
