@@ -14,70 +14,70 @@ paths:
       description: Get the current Stacks block height
       responses:
         "200":
-          $ref: './definitions.yml#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessText'
 
   /stacks/get-bns-name/{address}:
     get:
       description: Get the BNS name for a given Stacks address
       parameters:
-        - $ref: './definitions.yml#/components/parameters/address'
+        - $ref: '#/components/parameters/address'
       responses:
         "200":
-          $ref: './definitions.yml#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessText'
 
   /stacks/get-stx-balance/{address}:
     get:
       description: Get the Stacks balance for a given Stacks address
       parameters:
-        - $ref: './definitions.yml#/components/parameters/address'
+        - $ref: '#/components/parameters/address'
       responses:
         "200":
-          $ref: './definitions.yml#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessText'
 
   /activation/get-activation-block/{cityname}:
     get:
       description: Get the Stacks block height the core contract was activated at for a given CityCoin
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: './definitions.yml#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessText'
 
   /activation/get-registered-users-nonce/{cityname}:
     get:
       description: Get the total number of users assigned an ID from the core contract for a given CityCoin
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: './definitions.yml#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessText'
 
   /activation/get-user/{cityname}/{userid}:
     get:
       description: Get the Stacks address for a given CityCoin and user ID
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
-        - $ref: './definitions.yml#/components/parameters/userid'
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/userid'
       responses:
         "200":
-          $ref: './definitions.yml#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessText'
 
   /activation/get-user-id/{cityname}/{address}:
     get:
       description: Get the CityCoins user ID from the core contract for a given CityCoin and Stacks address
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
-        - $ref: './definitions.yml#/components/parameters/address'
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/address'
       responses:
         "200":
-          $ref: './definitions.yml#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessText'
 
   /mining/get-mining-stats-at-block/{cityname}/{blockheight}:
     get:
       description: Get the mining stats for a given CityCoin and Stacks block height
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
-        - $ref: './definitions.yml#/components/parameters/blockheight'
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
       responses:
         "200":
           description: Success
@@ -105,9 +105,9 @@ paths:
     get:
       description: Get the miner details for a given CityCoin, Stacks block height, and Stacks address
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
-        - $ref: './definitions.yml#/components/parameters/blockheight'
-        - $ref: './definitions.yml#/components/parameters/address'
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
+        - $ref: '#/components/parameters/address'
       responses:
         "200":
           description: Success
@@ -133,8 +133,8 @@ paths:
     get:
       description: Get the stacking stats for a given CityCoin and reward cycle ID
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
-        - $ref: './definitions.yml#/components/parameters/cycleid'
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cycleid'
       responses:
         "200":
           description: Success
@@ -155,9 +155,9 @@ paths:
     get:
       description: Get the amount stacked and amount to return for a given CityCoin, reward cycle ID, and user ID.
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
-        - $ref: './definitions.yml#/components/parameters/cycleid'
-        - $ref: './definitions.yml#/components/parameters/userid'
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cycleid'
+        - $ref: '#/components/parameters/userid'
       responses:
         "200":
           description: Success
@@ -178,38 +178,38 @@ paths:
     get:
       description: Get the reward cycle for a given CityCoin and Stacks block height
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
-        - $ref: './definitions.yml#/components/parameters/blockheight'
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
       responses:
         "200":
-          $ref: './definitions.yml#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessText'
 
   /stacking/get-first-stacks-block-in-reward-cycle/{cityname}/{cycleid}:
     get:
       description: Get the first Stacks block in a reward cycle for the given CityCoin and reward cycle ID
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
-        - $ref: './definitions.yml#/components/parameters/cycleid'
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cycleid'
       responses:
         "200":
-          $ref: './definitions.yml#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessText'
 
   /token/get-coinbase-amount/{cityname}/{blockheight}:
     get:
       description: Get the coinbase amount for a given CityCoin and Stacks block height
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
-        - $ref: './definitions.yml#/components/parameters/blockheight'
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
       responses:
         "200":
-          $ref: './definitions.yml#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessText'
 
   /token/get-coinbase-thresholds/{cityname}:
     get:
       description: Get the coinbase thresholds (Stacks block heights) for a given CityCoin
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
-        - $ref: './definitions.yml#/components/parameters/blockheight'
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
       responses:
         "200":
           description: Success
@@ -237,62 +237,62 @@ paths:
     get:
       description: Get the SIP-010 name for a given CityCoin
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: './definitions.yml#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessText'
 
   /token/get-symbol/{cityname}:
     get:
       description: Get the SIP-010 symbol for a given CityCoin
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: './definitions.yml#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessText'
 
   /token/get-decimals/{cityname}:
     get:
       description: Get the SIP-010 decimals for a given CityCoin
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: './definitions.yml#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessText'
 
   /token/get-balance/{cityname}/{address}:
     get:
       description: Get the token balance for a given CityCoin and Stacks address
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
-        - $ref: './definitions.yml#/components/parameters/address'
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/address'
       responses:
         "200":
-          $ref: './definitions.yml#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessText'
 
   /token/get-total-supply/{cityname}:
     get:
       description: Get the SIP-010 total supply for a given CityCoin
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: './definitions.yml#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessText'
 
   /token/get-token-uri/{cityname}:
     get:
       description: Get the token URI URL for a given CityCoin
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: './definitions.yml#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessText'
 
   /token/get-token-uri-json/{cityname}:
     get:
       description: Get the contents of the token URI URL for a given CityCoin
       parameters:
-        - $ref: './definitions.yml#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cityname'
       responses:
         "200":
           description: Success
@@ -313,3 +313,54 @@ paths:
                     {"name":"MiamiCoin","description":"A CityCoin for Miami,
                     ticker is MIA, Stack it to earn Stacks
                     (STX)","image":"https://cdn.citycoins.co/logos/miamicoin.png"}
+
+components:
+  #-------------------------------
+  # Reusable operation parameters
+  #-------------------------------
+  parameters:
+    address: 
+      in: path
+      name: address
+      required: true
+      schema:
+        type: string
+      description: The Stacks address to query
+    blockheight:
+      in: path
+      name: blockheight
+      required: true
+      schema:
+        type: string
+      description: The Stacks block height to query
+    cityname:
+      in: path
+      name: cityname
+      required: true
+      schema:
+        type: string
+      description: The CityCoin symbol to query, e.g. mia or nyc
+    cycleid:
+      in: path
+      name: cycleid
+      required: true
+      schema:
+        type: string
+      description: The reward cycle ID to query
+    userid:
+      in: path
+      name: userid
+      required: true
+      schema:
+        type: string
+      description: The user ID stored in a CityCoins core contract for a Stacks address
+  #-------------------------------
+  # Reusable responses
+  #-------------------------------
+  responses:
+    200SuccessText:
+      description: Success
+      content:
+        text/html; charset=utf-8:
+          schema:
+            type: string
