@@ -1,4 +1,3 @@
-
 const docsHtml = `
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +7,7 @@ const docsHtml = `
   <title>CityCoins API Documentation</title>
 </head>
 <body style="margin: 0; padding: 0;">
-<redoc spec-url='http://petstore.swagger.io/v2/swagger.json'></redoc>
+<redoc spec-url='/openapi.yml'></redoc>
 <script src="https://cdn.jsdelivr.net/npm/redoc@latest/bundles/redoc.standalone.js"> </script>
 </body>
 </html>

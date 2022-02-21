@@ -4,6 +4,10 @@ account_id = "6f54e90da6d1b280fe00a153cb394c68"
 workers_dev = true
 compatibility_date = "2022-02-16"
 
+[site]
+bucket = "./static"
+entry-point = "./"
+
 [build]
 command = "npm install && npm run build"
 
