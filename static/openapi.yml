@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
   title: CityCoins API
-  description: A simple API to interact with Stacks and CityCoins data. See the [CityCoins documentation site](https://docs.citycoins.co/) or  [GitHub for more info.](https://github.com/citycoins/api)
+  description: A simple API to interact with Stacks and CityCoins data. See the [CityCoins documentation site](https://docs.citycoins.co/) or [GitHub for more info.](https://github.com/citycoins/api)
   version: 0.0.1
 servers:
   - url: https://api.citycoins.co
@@ -12,27 +12,27 @@ tags:
   - name: Activation
     description: Endpoints for interacting with [CityCoins activation data](https://docs.citycoins.co/core-protocol/registration-and-activation)
     externalDocs:
-      description: Contract Functions
+      description: Contract Functions Reference
       url: https://docs.citycoins.co/contract-functions/activation
   - name: Mining
     description: Endpoints for interacting with [CityCoins mining data](https://docs.citycoins.co/core-protocol/mining-citycoins)
     externalDocs:
-      description: Contract Functions
+      description: Contract Functions Reference
       url: https://docs.citycoins.co/contract-functions/mining
   - name: Stacking
     description: Endpoints for interacting with [CityCoins stacking data](https://docs.citycoins.co/core-protocol/stacking-citycoins)
     externalDocs:
-      description: Contract Functions
+      description: Contract Functions Reference
       url: https://docs.citycoins.co/contract-functions/stacking
   - name: Token
     description: Endpoints for interacting with [CityCoins token data](https://docs.citycoins.co/core-protocol/token-configuration)
     externalDocs:
-      description: Contract Functions
+      description: Contract Functions Reference
       url: https://docs.citycoins.co/contract-functions/token
   - name: Stacks
     description: Wrappers and tools using the [Stacks Blockchain API](https://hirosystems.github.io/stacks-blockchain-api/)
     externalDocs:
-      description: Hiro Documentation
+      description: Hiro Documentation Reference
       url: https://docs.hiro.so/get-started/stacks-blockchain-api
 paths:
   /stacks/get-block-height:
@@ -60,7 +60,7 @@ paths:
   /stacks/get-stx-balance/{address}:
     get:
       summary: Get Stacks Balance
-      description: Get the Stacks balance for a given Stacks address
+      description: Get the STX balance in uSTX for a given Stacks address
       tags:
         - Stacks
       parameters:
