@@ -1,0 +1,6 @@
+in: path
+name: cityname
+required: true
+schema:
+  type: string
+description: The shortened city abbreviation to query, e.g. `mia` or `nyc`

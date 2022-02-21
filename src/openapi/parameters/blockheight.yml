@@ -1,0 +1,6 @@
+in: path
+name: blockheight
+required: true
+schema:
+  type: string
+description: The Stacks block height to query

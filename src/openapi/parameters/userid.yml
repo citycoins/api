@@ -1,0 +1,6 @@
+in: path
+name: userid
+required: true
+schema:
+  type: string
+description: The user ID stored in a CityCoins core contract for a Stacks address
