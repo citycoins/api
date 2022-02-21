@@ -8,7 +8,7 @@ servers:
 paths:
   /activation/get-user/{cityname}/{userid}:
     get:
-      description: Get the Stacks address for a given CityCoin city and user ID
+      description: Get the Stacks address for a given CityCoin and user ID
       parameters:
         - $ref: './parameters/cityname.yml'
         - $ref: './parameters/userid.yml'
@@ -22,7 +22,7 @@ paths:
 
   /activation/get-user-id/{cityname}/{address}:
     get:
-      description: Get the CityCoins user ID from the core contract for a given CityCoin city and Stacks address
+      description: Get the CityCoins user ID from the core contract for a given CityCoin and Stacks address
       parameters:
         - $ref: './parameters/cityname.yml'
         - $ref: './parameters/address.yml'
@@ -36,7 +36,7 @@ paths:
 
   /activation/get-registered-users-nonce/{cityname}:
     get:
-      description: Get the total number of users assigned an ID from the core contract for a given CityCoin city
+      description: Get the total number of users assigned an ID from the core contract for a given CityCoin
       parameters:
         - $ref: './parameters/cityname.yml'
       responses:
@@ -49,7 +49,7 @@ paths:
 
   /activation/get-activation-block/{cityname}:
     get:
-      description: Get the Stacks block height the core contract was activated at for a given CityCoin city
+      description: Get the Stacks block height the core contract was activated at for a given CityCoin
       parameters:
         - $ref: './parameters/cityname.yml'
       responses:
@@ -62,7 +62,7 @@ paths:
 
   /mining/get-mining-stats-at-block/{cityname}/{blockheight}:
     get:
-      description: Get the mining stats for a given CityCoin city and Stacks block height
+      description: Get the mining stats for a given CityCoin and Stacks block height
       parameters:
         - $ref: './parameters/cityname.yml'
         - $ref: './parameters/blockheight.yml'
@@ -91,7 +91,7 @@ paths:
 
   /mining/get-miner-at-block/{cityname}/{blockheight}/{address}:
     get:
-      description: Get the miner details for a given CityCoin city, Stacks block height, and Stacks address
+      description: Get the miner details for a given CityCoin, Stacks block height, and Stacks address
       parameters:
         - $ref: './parameters/cityname.yml'
         - $ref: './parameters/blockheight.yml'
@@ -120,7 +120,7 @@ paths:
 
   /stacking/get-stacking-stats-at-cycle/{cityname}/{cycleid}:
     get:
-      description: Get the stacking stats for a given CityCoin city and reward cycle ID
+      description: Get the stacking stats for a given CityCoin and reward cycle ID
       parameters:
         - $ref: './parameters/cityname.yml'
         - $ref: './parameters/cycleid.yml'
@@ -142,7 +142,7 @@ paths:
 
   /stacking/get-first-stacks-block-in-reward-cycle/{cityname}/{cycleid}:
     get:
-      description: Get the first Stacks block in a reward cycle for the given CityCoin city and reward cycle ID
+      description: Get the first Stacks block in a reward cycle for the given CityCoin and reward cycle ID
       parameters:
         - $ref: './parameters/cityname.yml'
         - $ref: './parameters/cycleid.yml'
@@ -156,7 +156,7 @@ paths:
 
   /stacking/get-reward-cycle/{cityname}/{blockheight}:
     get:
-      description: Get the reward cycle for a given CityCoin city and Stacks block height
+      description: Get the reward cycle for a given CityCoin and Stacks block height
       parameters:
         - $ref: './parameters/cityname.yml'
         - $ref: './parameters/blockheight.yml'
@@ -170,7 +170,7 @@ paths:
 
   /stacking/get-stacker-at-cycle/{cityname}/{cycleid}/{userid}:
     get:
-      description: Get the amount stacked and amount to return for a given CityCoin city, reward cycle ID, and user ID.
+      description: Get the amount stacked and amount to return for a given CityCoin, reward cycle ID, and user ID.
       parameters:
         - $ref: './parameters/cityname.yml'
         - $ref: './parameters/cycleid.yml'
@@ -193,7 +193,7 @@ paths:
 
   /token/get-balance/{cityname}/{address}:
     get:
-      description: Get the token balance for a given CityCoin city and Stacks address
+      description: Get the token balance for a given CityCoin and Stacks address
       parameters:
         - $ref: './parameters/cityname.yml'
         - $ref: './parameters/address.yml'
@@ -209,7 +209,7 @@ paths:
 
   /token/get-symbol/{cityname}:
     get:
-      description: Get the SIP-010 symbol for a given CityCoin city
+      description: Get the SIP-010 symbol for a given CityCoin
       parameters:
         - $ref: './parameters/cityname.yml'
       responses:
@@ -222,7 +222,7 @@ paths:
 
   /token/get-decimals/{cityname}:
     get:
-      description: Get the SIP-010 decimals for a given CityCoin city
+      description: Get the SIP-010 decimals for a given CityCoin
       parameters:
         - $ref: './parameters/cityname.yml'
       responses:
@@ -235,7 +235,7 @@ paths:
 
   /token/get-token-uri/{cityname}:
     get:
-      description: Get the token URI URL for a given CityCoin city
+      description: Get the token URI URL for a given CityCoin
       parameters:
         - $ref: './parameters/cityname.yml'
       responses:
@@ -248,7 +248,7 @@ paths:
 
   /token/get-token-uri-json/{cityname}:
     get:
-      description: Get the contents of the token URI URL for a given CityCoin city
+      description: Get the contents of the token URI URL for a given CityCoin
       parameters:
         - $ref: './parameters/cityname.yml'
       responses:
@@ -274,7 +274,7 @@ paths:
 
   /token/get-name/{cityname}:
     get:
-      description: Get the SIP-010 name for a given CityCoin city
+      description: Get the SIP-010 name for a given CityCoin
       parameters:
         - $ref: './parameters/cityname.yml'
       responses:
@@ -287,7 +287,7 @@ paths:
 
   /token/get-total-supply/{cityname}:
     get:
-      description: Get the SIP-010 total supply for a given CityCoin city
+      description: Get the SIP-010 total supply for a given CityCoin
       parameters:
         - $ref: './parameters/cityname.yml'
       responses:
@@ -300,7 +300,7 @@ paths:
 
   /token/get-coinbase-amount/{cityname}/{blockheight}:
     get:
-      description: Get the coinbase amount for a given CityCoin city and Stacks block height
+      description: Get the coinbase amount for a given CityCoin and Stacks block height
       parameters:
         - $ref: './parameters/cityname.yml'
         - $ref: './parameters/blockheight.yml'
