@@ -142,14 +142,18 @@ paths:
                     type: string
                   amountToStackers:
                     type: string
-                  rewardClaimed:
-                    type: boolean
                   minersCount:
                     type: string
+                  rewardClaimed:
+                    type: boolean
               examples:
                 "0":
-                  value: >-
-                    {"amount":"253600601","amountToCity":"76080180","amountToStackers":"177520421","minersCount":"6","rewardClaimed":true}
+                  value: 
+                    amount: "253600601"
+                    amountToCity: "76080180"
+                    amountToStackers: "177520421"
+                    minersCount: "6"
+                    rewardClaimed: true
 
   /mining/get-miner-at-block/{cityname}/{blockheight}/{address}:
     get:
@@ -171,16 +175,19 @@ paths:
                 properties:
                   lowValue:
                     type: string
-                  winner:
-                    type: boolean
                   highValue:
                     type: string
                   ustx:
                     type: string
+                  winner:
+                    type: boolean
               examples:
                 "0":
-                  value: >-
-                    {"highValue":"41000000","lowValue":"1000001","ustx":"40000000","winner":true}
+                  value:
+                    lowValue: "1000001"
+                    highValue: "41000000"
+                    ustx: "40000000"
+                    winner: true
 
   /stacking/get-stacking-stats-at-cycle/{cityname}/{cycleid}:
     get:
@@ -205,7 +212,9 @@ paths:
                     type: string
               examples:
                 "0":
-                  value: '{"amountToken":"1281126283","amountUstx":"6617244628227"}'
+                  value:
+                    amountToken: "1281126283"
+                    amountUstx: "6617244628227"
 
   /stacking/get-stacker-at-cycle/{cityname}/{cycleid}/{userid}:
     get:
@@ -225,13 +234,15 @@ paths:
               schema:
                 type: object
                 properties:
-                  toReturn:
-                    type: string
                   amountStacked:
+                    type: string
+                  toReturn:
                     type: string
               examples:
                 "0":
-                  value: '{"amountStacked":"0","toReturn":"0"}'
+                  value: 
+                    amountStacked: "0"
+                    toReturn: "0"
 
   /stacking/get-reward-cycle/{cityname}/{blockheight}:
     get:
@@ -301,8 +312,12 @@ paths:
                     type: string
               examples:
                 "0":
-                  value: >-
-                    {"coinbaseThreshold1":"234497","coinbaseThreshold2":"444497","coinbaseThreshold3":"654497","coinbaseThreshold4":"864497","coinbaseThreshold5":"1074497"}
+                  value: 
+                    coinbaseThreshold1: "234497"
+                    coinbaseThreshold2: "444497"
+                    coinbaseThreshold3: "654497"
+                    coinbaseThreshold4: "864497"
+                    coinbaseThreshold5: "1074497"
 
   /token/get-name/{cityname}:
     get:
@@ -401,10 +416,10 @@ paths:
                     type: string
               examples:
                 "0":
-                  value: >-
-                    {"name":"MiamiCoin","description":"A CityCoin for Miami,
-                    ticker is MIA, Stack it to earn Stacks
-                    (STX)","image":"https://cdn.citycoins.co/logos/miamicoin.png"}
+                  value: 
+                    name: "MiamiCoin"
+                    description: "A CityCoin for Miami, ticker is MIA, Stack it to earn Stacks (STX)"
+                    image: "https://cdn.citycoins.co/logos/miamicoin.png"
 
 components:
   #-------------------------------
@@ -431,7 +446,8 @@ components:
       required: true
       schema:
         type: string
-      description: The CityCoin symbol to query, e.g. mia or nyc
+        enum: [mia, nyc]
+      description: The CityCoin symbol to query
     cycleid:
       in: path
       name: cycleid
