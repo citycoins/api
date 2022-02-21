@@ -37,6 +37,7 @@ tags:
 paths:
   /stacks/get-block-height:
     get:
+      summary: Get Stacks Block Height
       description: Get the current Stacks block height
       tags:
         - Stacks
@@ -46,6 +47,7 @@ paths:
 
   /stacks/get-bns-name/{address}:
     get:
+      summary: Get BNS Name
       description: Get the BNS name for a given Stacks address
       tags:
         - Stacks
@@ -57,6 +59,7 @@ paths:
 
   /stacks/get-stx-balance/{address}:
     get:
+      summary: Get Stacks Balance
       description: Get the Stacks balance for a given Stacks address
       tags:
         - Stacks
@@ -68,6 +71,7 @@ paths:
 
   /activation/get-activation-block/{cityname}:
     get:
+      summary: Get Activation Block
       description: Get the Stacks block height the core contract was activated at for a given CityCoin
       tags:
         - Activation
@@ -79,6 +83,7 @@ paths:
 
   /activation/get-registered-users-nonce/{cityname}:
     get:
+      summary: Get Registered Users
       description: Get the total number of users assigned an ID from the core contract for a given CityCoin
       tags:
         - Activation
@@ -90,6 +95,7 @@ paths:
 
   /activation/get-user/{cityname}/{userid}:
     get:
+      summary: Get User
       description: Get the Stacks address for a given CityCoin and user ID
       tags:
         - Activation
@@ -102,6 +108,7 @@ paths:
 
   /activation/get-user-id/{cityname}/{address}:
     get:
+      summary: Get User ID
       description: Get the CityCoins user ID from the core contract for a given CityCoin and Stacks address
       tags:
         - Activation
@@ -114,6 +121,7 @@ paths:
 
   /mining/get-mining-stats-at-block/{cityname}/{blockheight}:
     get:
+      summary: Get Mining Stats
       description: Get the mining stats for a given CityCoin and Stacks block height
       tags:
         - Mining
@@ -145,6 +153,7 @@ paths:
 
   /mining/get-miner-at-block/{cityname}/{blockheight}/{address}:
     get:
+      summary: Get Miner Info
       description: Get the miner details for a given CityCoin, Stacks block height, and Stacks address
       tags:
         - Mining
@@ -175,6 +184,7 @@ paths:
 
   /stacking/get-stacking-stats-at-cycle/{cityname}/{cycleid}:
     get:
+      summary: Get Stacking Stats
       description: Get the stacking stats for a given CityCoin and reward cycle ID
       tags:
         - Stacking
@@ -199,6 +209,7 @@ paths:
 
   /stacking/get-stacker-at-cycle/{cityname}/{cycleid}/{userid}:
     get:
+      summary: Get Stacker Info
       description: Get the amount stacked and amount to return for a given CityCoin, reward cycle ID, and user ID.
       tags:
         - Stacking
@@ -224,6 +235,7 @@ paths:
 
   /stacking/get-reward-cycle/{cityname}/{blockheight}:
     get:
+      summary: Get Reward Cycle
       description: Get the reward cycle for a given CityCoin and Stacks block height
       tags:
         - Stacking
@@ -236,6 +248,7 @@ paths:
 
   /stacking/get-first-stacks-block-in-reward-cycle/{cityname}/{cycleid}:
     get:
+      summary: Get First Block In Reward Cycle
       description: Get the first Stacks block in a reward cycle for the given CityCoin and reward cycle ID
       tags:
         - Stacking
@@ -248,6 +261,7 @@ paths:
 
   /token/get-coinbase-amount/{cityname}/{blockheight}:
     get:
+      summary: Get Coinbase Amount
       description: Get the coinbase amount for a given CityCoin and Stacks block height
       tags:
         - Token
@@ -260,6 +274,7 @@ paths:
 
   /token/get-coinbase-thresholds/{cityname}:
     get:
+      summary: Get Coinbase Thresholds
       description: Get the coinbase thresholds (Stacks block heights) for a given CityCoin
       tags:
         - Token
@@ -291,6 +306,7 @@ paths:
 
   /token/get-name/{cityname}:
     get:
+      summary: Get Token Name
       description: Get the SIP-010 name for a given CityCoin
       tags:
         - Token
@@ -302,6 +318,7 @@ paths:
 
   /token/get-symbol/{cityname}:
     get:
+      summary: Get Token Symbol
       description: Get the SIP-010 symbol for a given CityCoin
       tags:
         - Token
@@ -313,6 +330,7 @@ paths:
 
   /token/get-decimals/{cityname}:
     get:
+      summary: Get Token Decimals
       description: Get the SIP-010 decimals for a given CityCoin
       tags:
         - Token
@@ -324,6 +342,7 @@ paths:
 
   /token/get-balance/{cityname}/{address}:
     get:
+      summary: Get Token Balance
       description: Get the token balance for a given CityCoin and Stacks address
       tags:
         - Token
@@ -336,6 +355,7 @@ paths:
 
   /token/get-total-supply/{cityname}:
     get:
+      summary: Get Total Supply
       description: Get the SIP-010 total supply for a given CityCoin
       tags:
         - Token
@@ -347,6 +367,7 @@ paths:
 
   /token/get-token-uri/{cityname}:
     get:
+      summary: Get Token URI
       description: Get the token URI URL for a given CityCoin
       tags:
         - Token
@@ -358,6 +379,7 @@ paths:
 
   /token/get-token-uri-json/{cityname}:
     get:
+      summary: Get Token URI JSON
       description: Get the contents of the token URI URL for a given CityCoin
       tags:
         - Token
