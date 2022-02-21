@@ -5,6 +5,9 @@ info:
   version: 0.0.1
 servers:
   - url: https://api.citycoins.co
+    description: Main
+  - url: https://citycoins-api.citycoins.workers.dev
+    description: Development
 paths:
   /stacks/get-block-height:
     get:
