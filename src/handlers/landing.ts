@@ -1,5 +1,5 @@
 
-const landingPage = `
+const landingHtml = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +49,7 @@ const Landing = async (): Promise<Response> => {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'text/html; charset=utf-8',
   }
-  return new Response(landingPage, { headers })
+  return new Response(landingHtml, { headers })
 }
 
 export default Landing
