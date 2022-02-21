@@ -1,5 +1,6 @@
 import { Router } from 'itty-router'
-import Landing from './landing'
+import Landing from './handlers/landing'
+import Documentation from './handlers/documentation'
 import GetActivationBlock from './handlers/activation/getactivationblock'
 import GetRegisteredUsersNonce from './handlers/activation/getregisteredusersnonce'
 import GetUser from './handlers/activation/getuser'
@@ -27,6 +28,7 @@ const router = Router()
 
 router
   .get('/', Landing)
+  .get('/docs', Documentation)
   .get('/stacks/get-block-height', GetStacksBlockHeight)
   .get('/stacks/get-bns-name/:address', GetBnsNames)
   .get('/stacks/get-stx-balance/:address', GetStxBalance)
