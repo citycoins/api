@@ -1,6 +1,0 @@
-in: path
-name: address
-required: true
-schema:
-  type: string
-description: The Stacks address to query

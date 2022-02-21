@@ -1,6 +1,0 @@
-in: path
-name: cycleid
-required: true
-schema:
-  type: string
-description: The reward cycle ID to query
