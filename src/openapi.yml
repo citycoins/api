@@ -8,10 +8,38 @@ servers:
     description: Main
   - url: https://citycoins-api.citycoins.workers.dev
     description: Development
+tags:
+  - name: Activation
+    description: Endpoints for interacting with [CityCoins activation data](https://docs.citycoins.co/core-protocol/registration-and-activation)
+    externalDocs:
+      description: Contract Functions
+      url: https://docs.citycoins.co/contract-functions/activation
+  - name: Mining
+    description: Endpoints for interacting with [CityCoins mining data](https://docs.citycoins.co/core-protocol/mining-citycoins)
+    externalDocs:
+      description: Contract Functions
+      url: https://docs.citycoins.co/contract-functions/mining
+  - name: Stacking
+    description: Endpoints for interacting with [CityCoins stacking data](https://docs.citycoins.co/core-protocol/stacking-citycoins)
+    externalDocs:
+      description: Contract Functions
+      url: https://docs.citycoins.co/contract-functions/stacking
+  - name: Token
+    description: Endpoints for interacting with [CityCoins token data](https://docs.citycoins.co/core-protocol/token-configuration)
+    externalDocs:
+      description: Contract Functions
+      url: https://docs.citycoins.co/contract-functions/token
+  - name: Stacks
+    description: Wrappers and tools using the [Stacks Blockchain API](https://hirosystems.github.io/stacks-blockchain-api/)
+    externalDocs:
+      description: Hiro Documentation
+      url: https://docs.hiro.so/get-started/stacks-blockchain-api
 paths:
   /stacks/get-block-height:
     get:
       description: Get the current Stacks block height
+      tags:
+        - Stacks
       responses:
         "200":
           $ref: '#/components/responses/200SuccessText'
@@ -19,6 +47,8 @@ paths:
   /stacks/get-bns-name/{address}:
     get:
       description: Get the BNS name for a given Stacks address
+      tags:
+        - Stacks
       parameters:
         - $ref: '#/components/parameters/address'
       responses:
@@ -28,6 +58,8 @@ paths:
   /stacks/get-stx-balance/{address}:
     get:
       description: Get the Stacks balance for a given Stacks address
+      tags:
+        - Stacks
       parameters:
         - $ref: '#/components/parameters/address'
       responses:
@@ -37,6 +69,8 @@ paths:
   /activation/get-activation-block/{cityname}:
     get:
       description: Get the Stacks block height the core contract was activated at for a given CityCoin
+      tags:
+        - Activation
       parameters:
         - $ref: '#/components/parameters/cityname'
       responses:
@@ -46,6 +80,8 @@ paths:
   /activation/get-registered-users-nonce/{cityname}:
     get:
       description: Get the total number of users assigned an ID from the core contract for a given CityCoin
+      tags:
+        - Activation
       parameters:
         - $ref: '#/components/parameters/cityname'
       responses:
@@ -55,6 +91,8 @@ paths:
   /activation/get-user/{cityname}/{userid}:
     get:
       description: Get the Stacks address for a given CityCoin and user ID
+      tags:
+        - Activation
       parameters:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/userid'
@@ -65,6 +103,8 @@ paths:
   /activation/get-user-id/{cityname}/{address}:
     get:
       description: Get the CityCoins user ID from the core contract for a given CityCoin and Stacks address
+      tags:
+        - Activation
       parameters:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/address'
@@ -75,6 +115,8 @@ paths:
   /mining/get-mining-stats-at-block/{cityname}/{blockheight}:
     get:
       description: Get the mining stats for a given CityCoin and Stacks block height
+      tags:
+        - Mining
       parameters:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
@@ -104,6 +146,8 @@ paths:
   /mining/get-miner-at-block/{cityname}/{blockheight}/{address}:
     get:
       description: Get the miner details for a given CityCoin, Stacks block height, and Stacks address
+      tags:
+        - Mining
       parameters:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
@@ -132,6 +176,8 @@ paths:
   /stacking/get-stacking-stats-at-cycle/{cityname}/{cycleid}:
     get:
       description: Get the stacking stats for a given CityCoin and reward cycle ID
+      tags:
+        - Stacking
       parameters:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/cycleid'
@@ -154,6 +200,8 @@ paths:
   /stacking/get-stacker-at-cycle/{cityname}/{cycleid}/{userid}:
     get:
       description: Get the amount stacked and amount to return for a given CityCoin, reward cycle ID, and user ID.
+      tags:
+        - Stacking
       parameters:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/cycleid'
@@ -177,6 +225,8 @@ paths:
   /stacking/get-reward-cycle/{cityname}/{blockheight}:
     get:
       description: Get the reward cycle for a given CityCoin and Stacks block height
+      tags:
+        - Stacking
       parameters:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
@@ -187,6 +237,8 @@ paths:
   /stacking/get-first-stacks-block-in-reward-cycle/{cityname}/{cycleid}:
     get:
       description: Get the first Stacks block in a reward cycle for the given CityCoin and reward cycle ID
+      tags:
+        - Stacking
       parameters:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/cycleid'
@@ -197,6 +249,8 @@ paths:
   /token/get-coinbase-amount/{cityname}/{blockheight}:
     get:
       description: Get the coinbase amount for a given CityCoin and Stacks block height
+      tags:
+        - Token
       parameters:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
@@ -207,6 +261,8 @@ paths:
   /token/get-coinbase-thresholds/{cityname}:
     get:
       description: Get the coinbase thresholds (Stacks block heights) for a given CityCoin
+      tags:
+        - Token
       parameters:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
@@ -236,6 +292,8 @@ paths:
   /token/get-name/{cityname}:
     get:
       description: Get the SIP-010 name for a given CityCoin
+      tags:
+        - Token
       parameters:
         - $ref: '#/components/parameters/cityname'
       responses:
@@ -245,6 +303,8 @@ paths:
   /token/get-symbol/{cityname}:
     get:
       description: Get the SIP-010 symbol for a given CityCoin
+      tags:
+        - Token
       parameters:
         - $ref: '#/components/parameters/cityname'
       responses:
@@ -254,6 +314,8 @@ paths:
   /token/get-decimals/{cityname}:
     get:
       description: Get the SIP-010 decimals for a given CityCoin
+      tags:
+        - Token
       parameters:
         - $ref: '#/components/parameters/cityname'
       responses:
@@ -263,6 +325,8 @@ paths:
   /token/get-balance/{cityname}/{address}:
     get:
       description: Get the token balance for a given CityCoin and Stacks address
+      tags:
+        - Token
       parameters:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/address'
@@ -273,6 +337,8 @@ paths:
   /token/get-total-supply/{cityname}:
     get:
       description: Get the SIP-010 total supply for a given CityCoin
+      tags:
+        - Token
       parameters:
         - $ref: '#/components/parameters/cityname'
       responses:
@@ -282,6 +348,8 @@ paths:
   /token/get-token-uri/{cityname}:
     get:
       description: Get the token URI URL for a given CityCoin
+      tags:
+        - Token
       parameters:
         - $ref: '#/components/parameters/cityname'
       responses:
@@ -291,6 +359,8 @@ paths:
   /token/get-token-uri-json/{cityname}:
     get:
       description: Get the contents of the token URI URL for a given CityCoin
+      tags:
+        - Token
       parameters:
         - $ref: '#/components/parameters/cityname'
       responses:
