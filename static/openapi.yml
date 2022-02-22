@@ -43,7 +43,7 @@ paths:
         - Stacks
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
 
   /stacks/get-bns-name/{address}:
     get:
@@ -55,7 +55,7 @@ paths:
         - $ref: '#/components/parameters/address'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonString'
 
   /stacks/get-stx-balance/{address}:
     get:
@@ -67,7 +67,7 @@ paths:
         - $ref: '#/components/parameters/address'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonString'
 
   /activation/get-activation-block/{cityname}:
     get:
@@ -79,7 +79,7 @@ paths:
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonString'
 
   /activation/get-registered-users-nonce/{cityname}:
     get:
@@ -91,7 +91,7 @@ paths:
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
 
   /activation/get-user/{cityname}/{userid}:
     get:
@@ -104,7 +104,7 @@ paths:
         - $ref: '#/components/parameters/userid'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonString'
 
   /activation/get-user-id/{cityname}/{address}:
     get:
@@ -117,7 +117,7 @@ paths:
         - $ref: '#/components/parameters/address'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
 
   /mining/get-mining-stats-at-block/{cityname}/{blockheight}:
     get:
@@ -255,7 +255,7 @@ paths:
         - $ref: '#/components/parameters/blockheight'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
 
   /stacking/get-first-stacks-block-in-reward-cycle/{cityname}/{cycleid}:
     get:
@@ -268,7 +268,7 @@ paths:
         - $ref: '#/components/parameters/cycleid'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
 
   /token/get-coinbase-amount/{cityname}/{blockheight}:
     get:
@@ -281,7 +281,7 @@ paths:
         - $ref: '#/components/parameters/blockheight'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
 
   /token/get-coinbase-thresholds/{cityname}:
     get:
@@ -329,7 +329,7 @@ paths:
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonString'
 
   /token/get-symbol/{cityname}:
     get:
@@ -341,7 +341,7 @@ paths:
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonString'
 
   /token/get-decimals/{cityname}:
     get:
@@ -353,7 +353,7 @@ paths:
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
 
   /token/get-balance/{cityname}/{address}:
     get:
@@ -366,7 +366,7 @@ paths:
         - $ref: '#/components/parameters/address'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
 
   /token/get-total-supply/{cityname}:
     get:
@@ -378,7 +378,7 @@ paths:
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
 
   /token/get-token-uri/{cityname}:
     get:
@@ -390,7 +390,7 @@ paths:
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonString'
 
   /token/get-token-uri-json/{cityname}:
     get:
@@ -466,9 +466,21 @@ components:
   # Reusable responses
   #-------------------------------
   responses:
-    200SuccessText:
+    200SuccessJsonNumber:
       description: Success
       content:
-        text/html; charset=utf-8:
+        application/json:
           schema:
-            type: string
+            type: object
+            properties:
+              value:
+                type: number
+    200SuccessJsonString:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              value:
+                type: string
