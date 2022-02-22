@@ -14,8 +14,6 @@ CF Workers + IttyRouter + micro-stacks + TypeScript
 - all additional parameters follow `:cityname` and `:blockheight` routes
 - routes are structured the same as the contract functions and documentation
 
-**This is an early stage experiment in alpha and endpoints may change.**
-
 ## Implementation
 
 If you want to use this for your project, build a copy for yourself, or have any questions, please join the [CityCoins Discord](https://discord.gg/citycoins) or [file a GitHub Issue](https://github.com/citycoins/api/issues/new) and reach out!
