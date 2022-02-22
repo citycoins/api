@@ -24,7 +24,7 @@ export async function getStxBalance(address: string): Promise<string> {
     .then(data => { return data.balance })
 }
 
-export async function getBnsNames(address: string): Promise<string> {
+export async function getBnsName(address: string): Promise<string> {
   const url = `${STACKS_NETWORK.getCoreApiUrl()}/v1/addresses/stacks/${address}`
   return fetch(url)
     .then(response => {
@@ -33,5 +33,5 @@ export async function getBnsNames(address: string): Promise<string> {
       }
       return response.json() as Promise<{ names: string }>
     })
-    .then(data => { return data.names })  
+    .then(data => { return String(data.names[0]) })
 }

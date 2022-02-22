@@ -44,6 +44,8 @@ paths:
       responses:
         "200":
           $ref: '#/components/responses/200SuccessJsonNumber'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /stacks/get-bns-name/{address}:
     get:
@@ -58,6 +60,8 @@ paths:
           $ref: '#/components/responses/200SuccessJsonString'
         "400":
           $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /stacks/get-stx-balance/{address}:
     get:
@@ -72,6 +76,8 @@ paths:
           $ref: '#/components/responses/200SuccessJsonString'
         "400":
           $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /activation/get-activation-block/{cityname}:
     get:

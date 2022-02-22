@@ -21,7 +21,7 @@ import GetDecimals from './handlers/token/getdecimals'
 import GetTokenUri from './handlers/token/gettokenuri'
 import GetBalance from './handlers/token/getbalance'
 import GetTokenUriJson from './handlers/token/gettokenurijson'
-import GetBnsNames from './handlers/stacks/getbnsnames'
+import GetBnsName from './handlers/stacks/getbnsname'
 import GetStxBalance from './handlers/stacks/getstxbalance'
 
 const router = Router()
@@ -30,7 +30,7 @@ router
   .get('/', Landing)
   .get('/docs', Documentation)
   .get('/stacks/get-block-height', GetStacksBlockHeight)
-  .get('/stacks/get-bns-name/:address', GetBnsNames)
+  .get('/stacks/get-bns-name/:address', GetBnsName)
   .get('/stacks/get-stx-balance/:address', GetStxBalance)
   .get('/activation/get-activation-block/:cityname', GetActivationBlock)
   .get('/activation/get-registered-users-nonce/:cityname', GetRegisteredUsersNonce)

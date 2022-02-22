@@ -9,8 +9,12 @@ const GetStxBalance = async (request: IttyRequest): Promise<Response> => {
   if (address === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
-  // get Stacks block height from API
+  // get Stacks balance in uSTX from API
   const stxBalance: string = await getStxBalance(address)
+    .catch(() => { return '' })
+  if (stxBalance === '') {
+    return new Response(`Stacks balance not found for address: ${address}`, { status: 404 })
+  }
   // return response
   const response: SingleValue = await createSingleValue(stxBalance)
   const headers = {
