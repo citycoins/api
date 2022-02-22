@@ -1,6 +1,8 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getUser } from "../../lib/citycoins"
+import { createSingleValue, isStringAllDigits } from '../../lib/common'
 import { getCityConfig } from '../../types/cities'
+import { SingleValue } from '../../types/common'
 
 const GetUser = async (request: IttyRequest): Promise<Response> => {
   // check inputs
@@ -14,17 +16,22 @@ const GetUser = async (request: IttyRequest): Promise<Response> => {
   if (cityConfig.deployer === '') {
     return new Response(`City name not found: ${city}`, { status: 404 })
   }
+  // verify user ID is valid
+  if (!isStringAllDigits(userId)) {
+    return new Response(`User ID not specified or invalid`, { status: 400 })
+  }
   // get user STX address
-  const userAddress = await getUser(cityConfig, userId).catch(() => { return ''})
-  if (userAddress === '') {
+  const userAddress = await getUser(cityConfig, userId)
+  if (userAddress === null) {
     return new Response(`User ID not found: ${userId}`, { status: 404 })
   }
   // return response
+  const response: SingleValue = await createSingleValue(userAddress)
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'text/html; charset=utf-8',
+    'Content-Type': 'application/json',
   }
-  return new Response(userAddress, { headers })
+  return new Response(JSON.stringify(response), { headers })
 }
 
 export default GetUser

@@ -1,6 +1,8 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getBalance } from "../../lib/citycoins"
+import { createSingleValue } from '../../lib/common'
 import { getCityConfig } from '../../types/cities'
+import { SingleValue } from '../../types/common'
 
 const GetBalance = async (request: IttyRequest): Promise<Response> => {
   // check inputs
@@ -14,17 +16,19 @@ const GetBalance = async (request: IttyRequest): Promise<Response> => {
   if (cityConfig.deployer === '') {
     return new Response(`City name not found: ${city}`, { status: 404 })
   }
-  // get user ID
-  const balance = await getBalance(cityConfig, user).catch(() => { return '' })
+  // get CityCoin balance
+  const balance = await getBalance(cityConfig, user)
+    .catch(() => { return '' })
   if (balance === '') {
     return new Response(`User not found: ${user}`, { status: 404 })
   }
   // return response
+  const response: SingleValue = await createSingleValue(balance)
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'text/html; charset=utf-8',
+    'Content-Type': 'application/json',
   }
-  return new Response(balance, { headers })
+  return new Response(JSON.stringify(response), { headers })
 }
 
 export default GetBalance

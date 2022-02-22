@@ -18,7 +18,7 @@ export async function getActivationBlock(cityConfig: CityConfig): Promise<string
     functionArgs: [],
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer
-  })
+  }, true)
 }
 
 export async function getRegisteredUsersNonce(cityConfig: CityConfig): Promise<string> {
@@ -29,7 +29,7 @@ export async function getRegisteredUsersNonce(cityConfig: CityConfig): Promise<s
     functionArgs: [],
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer
-  })
+  }, true)
 }
 
 export async function getUser(cityConfig: CityConfig, id: string): Promise<string> {
@@ -58,7 +58,7 @@ export async function getUserId(cityConfig: CityConfig, address: string): Promis
 // MINING FUNCTIONS
 //////////////////////////////////////////////////
 
-export async function getMiningStatsAtBlock(cityConfig: CityConfig, blockHeight: number): Promise<MiningStatsAtBlock> {
+export async function getMiningStatsAtBlock(cityConfig: CityConfig, blockHeight: string): Promise<MiningStatsAtBlock> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.coreContract,
@@ -69,7 +69,7 @@ export async function getMiningStatsAtBlock(cityConfig: CityConfig, blockHeight:
   }, true)
 }
 
-export async function getMinerAtBlock(cityConfig: CityConfig, blockHeight: number, userId: string): Promise<MinerAtBlock> {
+export async function getMinerAtBlock(cityConfig: CityConfig, blockHeight: string, userId: string): Promise<MinerAtBlock> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.coreContract,
@@ -84,7 +84,7 @@ export async function getMinerAtBlock(cityConfig: CityConfig, blockHeight: numbe
 // STACKING FUNCTIONS
 //////////////////////////////////////////////////
 
-export async function getStackingStatsAtCycle(cityConfig: CityConfig, cycleId: number): Promise<StackingStatsAtCycle> {
+export async function getStackingStatsAtCycle(cityConfig: CityConfig, cycleId: string): Promise<StackingStatsAtCycle> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.coreContract,
@@ -95,7 +95,7 @@ export async function getStackingStatsAtCycle(cityConfig: CityConfig, cycleId: n
   }, true)
 }
 
-export async function getStackerAtCycle(cityConfig: CityConfig, cycleId: number, userId: number): Promise<StackerAtCycle> {
+export async function getStackerAtCycle(cityConfig: CityConfig, cycleId: string, userId: string): Promise<StackerAtCycle> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.coreContract,
@@ -106,7 +106,7 @@ export async function getStackerAtCycle(cityConfig: CityConfig, cycleId: number,
   }, true)
 }
 
-export async function getRewardCycle(cityConfig: CityConfig, blockHeight: number): Promise<string> {
+export async function getRewardCycle(cityConfig: CityConfig, blockHeight: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.coreContract,
@@ -117,7 +117,7 @@ export async function getRewardCycle(cityConfig: CityConfig, blockHeight: number
   }, true)
 }
 
-export async function getFirstStacksBlockInRewardCycle(cityConfig: CityConfig, cycleId: number): Promise<string> {
+export async function getFirstStacksBlockInRewardCycle(cityConfig: CityConfig, cycleId: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.coreContract,
@@ -143,7 +143,7 @@ export async function getCoinbaseThresholds(cityConfig: CityConfig): Promise<Coi
   }, true)
 }
 
-export async function getCoinbaseAmount(cityConfig: CityConfig, blockHeight: number): Promise<string> {
+export async function getCoinbaseAmount(cityConfig: CityConfig, blockHeight: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.coreContract,

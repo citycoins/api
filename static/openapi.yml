@@ -1,0 +1,584 @@
+openapi: 3.0.2
+info:
+  title: CityCoins API
+  description: A simple API to interact with Stacks and CityCoins data. See the [CityCoins documentation site](https://docs.citycoins.co/) or [GitHub for more info.](https://github.com/citycoins/api)
+  version: 0.0.1
+servers:
+  - url: https://api.citycoins.co
+    description: Main
+  - url: https://citycoins-api.citycoins.workers.dev
+    description: Development
+tags:
+  - name: Activation
+    description: Endpoints for interacting with [CityCoins activation data](https://docs.citycoins.co/core-protocol/registration-and-activation)
+    externalDocs:
+      description: Contract Functions Reference
+      url: https://docs.citycoins.co/contract-functions/activation
+  - name: Mining
+    description: Endpoints for interacting with [CityCoins mining data](https://docs.citycoins.co/core-protocol/mining-citycoins)
+    externalDocs:
+      description: Contract Functions Reference
+      url: https://docs.citycoins.co/contract-functions/mining
+  - name: Stacking
+    description: Endpoints for interacting with [CityCoins stacking data](https://docs.citycoins.co/core-protocol/stacking-citycoins)
+    externalDocs:
+      description: Contract Functions Reference
+      url: https://docs.citycoins.co/contract-functions/stacking
+  - name: Token
+    description: Endpoints for interacting with [CityCoins token data](https://docs.citycoins.co/core-protocol/token-configuration)
+    externalDocs:
+      description: Contract Functions Reference
+      url: https://docs.citycoins.co/contract-functions/token
+  - name: Stacks
+    description: Wrappers and tools using the [Stacks Blockchain API](https://hirosystems.github.io/stacks-blockchain-api/)
+    externalDocs:
+      description: Hiro Documentation Reference
+      url: https://docs.hiro.so/get-started/stacks-blockchain-api
+paths:
+  /stacks/get-block-height:
+    get:
+      summary: Get Stacks Block Height
+      description: Get the current Stacks block height
+      tags:
+        - Stacks
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /stacks/get-bns-name/{address}:
+    get:
+      summary: Get BNS Name
+      description: Get the BNS name for a given Stacks address
+      tags:
+        - Stacks
+      parameters:
+        - $ref: '#/components/parameters/address'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /stacks/get-stx-balance/{address}:
+    get:
+      summary: Get Stacks Balance
+      description: Get the STX balance in uSTX for a given Stacks address
+      tags:
+        - Stacks
+      parameters:
+        - $ref: '#/components/parameters/address'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /activation/get-activation-block/{cityname}:
+    get:
+      summary: Get Activation Block
+      description: Get the Stacks block height the core contract was activated at for a given CityCoin
+      tags:
+        - Activation
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /activation/get-registered-users-nonce/{cityname}:
+    get:
+      summary: Get Registered Users
+      description: Get the total number of users assigned an ID from the core contract for a given CityCoin
+      tags:
+        - Activation
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /activation/get-user/{cityname}/{userid}:
+    get:
+      summary: Get User
+      description: Get the Stacks address for a given CityCoin and user ID
+      tags:
+        - Activation
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/userid'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /activation/get-user-id/{cityname}/{address}:
+    get:
+      summary: Get User ID
+      description: Get the CityCoins user ID from the core contract for a given CityCoin and Stacks address
+      tags:
+        - Activation
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/address'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /mining/get-mining-stats-at-block/{cityname}/{blockheight}:
+    get:
+      summary: Get Mining Stats
+      description: Get the mining stats for a given CityCoin and Stacks block height
+      tags:
+        - Mining
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  amount:
+                    type: string
+                  amountToCity:
+                    type: string
+                  amountToStackers:
+                    type: string
+                  minersCount:
+                    type: string
+                  rewardClaimed:
+                    type: boolean
+              examples:
+                "0":
+                  value: 
+                    amount: "253600601"
+                    amountToCity: "76080180"
+                    amountToStackers: "177520421"
+                    minersCount: "6"
+                    rewardClaimed: true
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /mining/get-miner-at-block/{cityname}/{blockheight}/{address}:
+    get:
+      summary: Get Miner Info
+      description: Get the miner details for a given CityCoin, Stacks block height, and Stacks address
+      tags:
+        - Mining
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
+        - $ref: '#/components/parameters/address'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lowValue:
+                    type: string
+                  highValue:
+                    type: string
+                  ustx:
+                    type: string
+                  winner:
+                    type: boolean
+              examples:
+                "0":
+                  value:
+                    lowValue: "1000001"
+                    highValue: "41000000"
+                    ustx: "40000000"
+                    winner: true
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /stacking/get-stacking-stats-at-cycle/{cityname}/{cycleid}:
+    get:
+      summary: Get Stacking Stats
+      description: Get the stacking stats for a given CityCoin and reward cycle ID
+      tags:
+        - Stacking
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cycleid'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  amountToken:
+                    type: string
+                  amountUstx:
+                    type: string
+              examples:
+                "0":
+                  value:
+                    amountToken: "1281126283"
+                    amountUstx: "6617244628227"
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /stacking/get-stacker-at-cycle/{cityname}/{cycleid}/{userid}:
+    get:
+      summary: Get Stacker Info
+      description: Get the amount stacked and amount to return for a given CityCoin, reward cycle ID, and user ID.
+      tags:
+        - Stacking
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cycleid'
+        - $ref: '#/components/parameters/userid'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  amountStacked:
+                    type: string
+                  toReturn:
+                    type: string
+              examples:
+                "0":
+                  value: 
+                    amountStacked: "0"
+                    toReturn: "0"
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /stacking/get-reward-cycle/{cityname}/{blockheight}:
+    get:
+      summary: Get Reward Cycle
+      description: Get the reward cycle for a given CityCoin and Stacks block height
+      tags:
+        - Stacking
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /stacking/get-first-stacks-block-in-reward-cycle/{cityname}/{cycleid}:
+    get:
+      summary: Get First Block In Reward Cycle
+      description: Get the first Stacks block in a reward cycle for the given CityCoin and reward cycle ID
+      tags:
+        - Stacking
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cycleid'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /token/get-coinbase-amount/{cityname}/{blockheight}:
+    get:
+      summary: Get Coinbase Amount
+      description: Get the coinbase amount for a given CityCoin and Stacks block height
+      tags:
+        - Token
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /token/get-coinbase-thresholds/{cityname}:
+    get:
+      summary: Get Coinbase Thresholds
+      description: Get the coinbase thresholds (Stacks block heights) for a given CityCoin
+      tags:
+        - Token
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coinbaseThreshold1:
+                    type: string
+                  coinbaseThreshold2:
+                    type: string
+                  coinbaseThreshold3:
+                    type: string
+                  coinbaseThreshold4:
+                    type: string
+                  coinbaseThreshold5:
+                    type: string
+              examples:
+                "0":
+                  value: 
+                    coinbaseThreshold1: "234497"
+                    coinbaseThreshold2: "444497"
+                    coinbaseThreshold3: "654497"
+                    coinbaseThreshold4: "864497"
+                    coinbaseThreshold5: "1074497"
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /token/get-name/{cityname}:
+    get:
+      summary: Get Token Name
+      description: Get the SIP-010 name for a given CityCoin
+      tags:
+        - Token
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /token/get-symbol/{cityname}:
+    get:
+      summary: Get Token Symbol
+      description: Get the SIP-010 symbol for a given CityCoin
+      tags:
+        - Token
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /token/get-decimals/{cityname}:
+    get:
+      summary: Get Token Decimals
+      description: Get the SIP-010 decimals for a given CityCoin
+      tags:
+        - Token
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /token/get-balance/{cityname}/{address}:
+    get:
+      summary: Get Token Balance
+      description: Get the token balance for a given CityCoin and Stacks address
+      tags:
+        - Token
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/address'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /token/get-total-supply/{cityname}:
+    get:
+      summary: Get Total Supply
+      description: Get the SIP-010 total supply for a given CityCoin
+      tags:
+        - Token
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /token/get-token-uri/{cityname}:
+    get:
+      summary: Get Token URI
+      description: Get the token URI URL for a given CityCoin
+      tags:
+        - Token
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /token/get-token-uri-json/{cityname}:
+    get:
+      summary: Get Token URI JSON
+      description: Get the contents of the token URI URL for a given CityCoin
+      tags:
+        - Token
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+              examples:
+                "0":
+                  value: 
+                    name: "MiamiCoin"
+                    description: "A CityCoin for Miami, ticker is MIA, Stack it to earn Stacks (STX)"
+                    image: "https://cdn.citycoins.co/logos/miamicoin.png"
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+components:
+  #-------------------------------
+  # Reusable operation parameters
+  #-------------------------------
+  parameters:
+    address: 
+      in: path
+      name: address
+      required: true
+      schema:
+        type: string
+      description: The Stacks address to query
+    blockheight:
+      in: path
+      name: blockheight
+      required: true
+      schema:
+        type: string
+      description: The Stacks block height to query
+    cityname:
+      in: path
+      name: cityname
+      required: true
+      schema:
+        type: string
+        enum: [mia, nyc]
+      description: The CityCoin symbol to query
+    cycleid:
+      in: path
+      name: cycleid
+      required: true
+      schema:
+        type: string
+      description: The reward cycle ID to query
+    userid:
+      in: path
+      name: userid
+      required: true
+      schema:
+        type: string
+      description: The user ID stored in a CityCoins core contract for a Stacks address
+  #-------------------------------
+  # Reusable responses
+  #-------------------------------
+  responses:
+    200SuccessJsonNumber:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              value:
+                type: number
+    200SuccessJsonString:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              value:
+                type: string
+    400BadRequest:
+      description: Bad Request
+      content:
+        text/plain;charset=UTF-8:
+          schema:
+            type: string
+    404NotFound:
+      description: Not Found
+      content:
+        text/plain;charset=UTF-8:
+          schema:
+            type: string

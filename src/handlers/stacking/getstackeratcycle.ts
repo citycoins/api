@@ -1,5 +1,6 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getStackerAtCycle } from "../../lib/citycoins"
+import { isStringAllDigits } from '../../lib/common';
 import { getCityConfig } from '../../types/cities';
 import { StackerAtCycle } from "../../types/stacking";
 
@@ -17,24 +18,22 @@ const GetStackerAtCycle = async (request: IttyRequest): Promise<Response> => {
     return new Response(`City name not found: ${city}`, { status: 404 })
   }
   // verify target cycle is valid
-  const cycleValue = parseInt(cycle)
-  if (isNaN(cycleValue)) {
+  if (!isStringAllDigits(cycle)) {
     return new Response(`Target cycle not specified or invalid`, { status: 400 })
   }
   // verify user ID is valid
-  const userIdValue = parseInt(userId)
-  if (isNaN(userIdValue)) {
+  if (!isStringAllDigits(userId)) {
     return new Response(`User ID not specified or invalid`, { status: 400 })
   }
   // get stacker stats at cycle
-  const stackerAtCycle: StackerAtCycle = await getStackerAtCycle(cityConfig, cycleValue, userIdValue);
+  const stackerAtCycle: StackerAtCycle = await getStackerAtCycle(cityConfig, cycle, userId);
+  if (stackerAtCycle === null) {
+    return new Response(`Stacker ${userId} not found at reward cycle: ${cycle}`, { status: 404 })
+  }
   // return response
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
-  }
-  if (stackerAtCycle === null) {
-    return new Response(`Stacker ${userIdValue} not found at reward cycle: ${cycleValue}`, { status: 404 })
   }
   return new Response(JSON.stringify(stackerAtCycle), { headers })
 }

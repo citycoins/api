@@ -1,6 +1,8 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getSymbol } from "../../lib/citycoins"
+import { createSingleValue } from '../../lib/common'
 import { getCityConfig } from '../../types/cities'
+import { SingleValue } from '../../types/common'
 
 const GetSymbol = async (request: IttyRequest): Promise<Response> => {
   // check inputs
@@ -16,11 +18,12 @@ const GetSymbol = async (request: IttyRequest): Promise<Response> => {
   // get SIP-010 symbol
   const symbol: string = await getSymbol(cityConfig)
   // return response
+  const response: SingleValue = await createSingleValue(symbol)
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'text/html; charset=utf-8',
+    'Content-Type': 'application/json',
   }
-  return new Response(symbol, { headers })
+  return new Response(JSON.stringify(response), { headers })
 }
 
 export default GetSymbol

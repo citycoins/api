@@ -16,13 +16,13 @@ const GetCoinbaseThresholds = async (request: IttyRequest): Promise<Response> =>
   }
   // get coinbase thresholds
   const coinbaseThresholds: CoinbaseThresholds = await getCoinbaseThresholds(cityConfig)
+  if (coinbaseThresholds === null) {
+    return new Response(`Coinbase thresholds not found for city: ${city}`, { status: 404 })
+  }
   // return response
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
-  }
-  if (coinbaseThresholds === null) {
-    return new Response(`Coinbase thresholds not found for city: ${city}`, { status: 404 })
   }
   return new Response(JSON.stringify(coinbaseThresholds), { headers })
 }

@@ -1,6 +1,8 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getRewardCycle } from "../../lib/citycoins"
+import { createSingleValue, isStringAllDigits } from '../../lib/common';
 import { getCityConfig } from '../../types/cities';
+import { SingleValue } from '../../types/common';
 
 const GetRewardCycle = async (request: IttyRequest): Promise<Response> => {
   // check inputs
@@ -14,22 +16,22 @@ const GetRewardCycle = async (request: IttyRequest): Promise<Response> => {
   if (cityConfig.deployer === '') {
     return new Response(`City name not found: ${city}`, { status: 404 })
   }
-  // verify target cycle is valid
-  const blockHeightValue = parseInt(blockHeight)
-  if (isNaN(blockHeightValue)) {
-    return new Response(`Target cycle not specified or invalid`, { status: 400 })
+  // verify block height is valid
+  if (!isStringAllDigits(blockHeight)) {
+    return new Response(`Block height not specified or invalid`, { status: 400 })
   }
   // get reward cycle at block height
-  const rewardCycle: string = await getRewardCycle(cityConfig, blockHeightValue);
+  const rewardCycle: string = await getRewardCycle(cityConfig, blockHeight);
+  if (rewardCycle === null) {
+    return new Response(`Reward cycle not found at block height: ${blockHeight}`, { status: 404 })
+  }
   // return response
+  const response: SingleValue = await createSingleValue(rewardCycle)
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'text/html; charset=utf-8',
+    'Content-Type': 'application/json',
   }
-  if (rewardCycle === null) {
-    return new Response(`Reward cycle not found at block height: ${blockHeightValue}`, { status: 404 })
-  }
-  return new Response(rewardCycle, { headers })
+  return new Response(JSON.stringify(response), { headers })
 }
 
 export default GetRewardCycle

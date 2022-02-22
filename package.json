@@ -37,6 +37,7 @@
     "webpack-cli": "^4.7.0"
   },
   "dependencies": {
+    "@cloudflare/kv-asset-handler": "^0.2.0",
     "itty-router": "^2.4.10",
     "micro-stacks": "^0.2.2"
   }

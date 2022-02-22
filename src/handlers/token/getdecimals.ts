@@ -1,6 +1,8 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getDecimals } from "../../lib/citycoins"
+import { createSingleValue } from '../../lib/common'
 import { getCityConfig } from '../../types/cities'
+import { SingleValue } from '../../types/common'
 
 const GetDecimals = async (request: IttyRequest): Promise<Response> => {
   // check inputs
@@ -16,11 +18,12 @@ const GetDecimals = async (request: IttyRequest): Promise<Response> => {
   // get SIP-010 decimals
   const decimals: string = await getDecimals(cityConfig)
   // return response
+  const response: SingleValue = await createSingleValue(decimals)
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'text/html; charset=utf-8',
+    'Content-Type': 'application/json',
   }
-  return new Response(decimals, { headers })
+  return new Response(JSON.stringify(response), { headers })
 }
 
 export default GetDecimals
