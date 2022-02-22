@@ -15,5 +15,6 @@ command = "npm install && npm run build"
 format = "service-worker"
 
 [env.production]
+name = "citycoins-api-production"
 route = "api.citycoins.co/*"
 zone_id = "3e5041a8cc83842af0c2734fe6b33adc"
