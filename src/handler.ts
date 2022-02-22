@@ -21,7 +21,7 @@ import GetDecimals from './handlers/token/getdecimals'
 import GetTokenUri from './handlers/token/gettokenuri'
 import GetBalance from './handlers/token/getbalance'
 import GetTokenUriJson from './handlers/token/gettokenurijson'
-import GetBnsNames from './handlers/stacks/getbnsnames'
+import GetBnsName from './handlers/stacks/getbnsname'
 import GetStxBalance from './handlers/stacks/getstxbalance'
 
 const router = Router()
@@ -30,14 +30,14 @@ router
   .get('/', Landing)
   .get('/docs', Documentation)
   .get('/stacks/get-block-height', GetStacksBlockHeight)
-  .get('/stacks/get-bns-name/:address', GetBnsNames)
+  .get('/stacks/get-bns-name/:address', GetBnsName)
   .get('/stacks/get-stx-balance/:address', GetStxBalance)
   .get('/activation/get-activation-block/:cityname', GetActivationBlock)
   .get('/activation/get-registered-users-nonce/:cityname', GetRegisteredUsersNonce)
   .get('/activation/get-user/:cityname/:userid', GetUser)
   .get('/activation/get-user-id/:cityname/:address', GetUserId)
   .get('/mining/get-mining-stats-at-block/:cityname/:blockheight', GetMiningStatsAtBlock)
-  .get('/mining/get-miner-at-block/:cityname/:blockheight/:address', GetMinerAtBlock)
+  .get('/mining/get-miner-at-block/:cityname/:blockheight/:userid', GetMinerAtBlock)
   .get('/stacking/get-stacking-stats-at-cycle/:cityname/:cycleid', GetStackingStatsAtCycle)
   .get('/stacking/get-stacker-at-cycle/:cityname/:cycleid/:userid', GetStackerAtCycle)
   .get('/stacking/get-reward-cycle/:cityname/:blockheight', GetRewardCycle)

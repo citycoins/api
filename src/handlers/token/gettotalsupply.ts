@@ -1,6 +1,8 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getTotalSupply } from "../../lib/citycoins"
+import { createSingleValue } from '../../lib/common'
 import { getCityConfig } from '../../types/cities'
+import { SingleValue } from '../../types/common'
 
 const GetTotalSupply = async (request: IttyRequest): Promise<Response> => {
   // check inputs
@@ -16,11 +18,12 @@ const GetTotalSupply = async (request: IttyRequest): Promise<Response> => {
   // get total supply
   const totalSupply: string = await getTotalSupply(cityConfig)
   // return response
+  const response: SingleValue = await createSingleValue(totalSupply)
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'text/html; charset=utf-8',
+    'Content-Type': 'application/json',
   }
-  return new Response(totalSupply, { headers })
+  return new Response(JSON.stringify(response), { headers })
 }
 
 export default GetTotalSupply

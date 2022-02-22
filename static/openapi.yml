@@ -43,7 +43,9 @@ paths:
         - Stacks
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /stacks/get-bns-name/{address}:
     get:
@@ -55,7 +57,11 @@ paths:
         - $ref: '#/components/parameters/address'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /stacks/get-stx-balance/{address}:
     get:
@@ -67,7 +73,11 @@ paths:
         - $ref: '#/components/parameters/address'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /activation/get-activation-block/{cityname}:
     get:
@@ -79,7 +89,11 @@ paths:
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /activation/get-registered-users-nonce/{cityname}:
     get:
@@ -91,7 +105,11 @@ paths:
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /activation/get-user/{cityname}/{userid}:
     get:
@@ -104,7 +122,11 @@ paths:
         - $ref: '#/components/parameters/userid'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /activation/get-user-id/{cityname}/{address}:
     get:
@@ -117,7 +139,11 @@ paths:
         - $ref: '#/components/parameters/address'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /mining/get-mining-stats-at-block/{cityname}/{blockheight}:
     get:
@@ -154,6 +180,10 @@ paths:
                     amountToStackers: "177520421"
                     minersCount: "6"
                     rewardClaimed: true
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /mining/get-miner-at-block/{cityname}/{blockheight}/{address}:
     get:
@@ -188,6 +218,10 @@ paths:
                     highValue: "41000000"
                     ustx: "40000000"
                     winner: true
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /stacking/get-stacking-stats-at-cycle/{cityname}/{cycleid}:
     get:
@@ -215,6 +249,10 @@ paths:
                   value:
                     amountToken: "1281126283"
                     amountUstx: "6617244628227"
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /stacking/get-stacker-at-cycle/{cityname}/{cycleid}/{userid}:
     get:
@@ -243,6 +281,10 @@ paths:
                   value: 
                     amountStacked: "0"
                     toReturn: "0"
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /stacking/get-reward-cycle/{cityname}/{blockheight}:
     get:
@@ -255,7 +297,11 @@ paths:
         - $ref: '#/components/parameters/blockheight'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /stacking/get-first-stacks-block-in-reward-cycle/{cityname}/{cycleid}:
     get:
@@ -268,7 +314,11 @@ paths:
         - $ref: '#/components/parameters/cycleid'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /token/get-coinbase-amount/{cityname}/{blockheight}:
     get:
@@ -281,7 +331,11 @@ paths:
         - $ref: '#/components/parameters/blockheight'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /token/get-coinbase-thresholds/{cityname}:
     get:
@@ -318,6 +372,10 @@ paths:
                     coinbaseThreshold3: "654497"
                     coinbaseThreshold4: "864497"
                     coinbaseThreshold5: "1074497"
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /token/get-name/{cityname}:
     get:
@@ -329,7 +387,11 @@ paths:
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /token/get-symbol/{cityname}:
     get:
@@ -341,7 +403,11 @@ paths:
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /token/get-decimals/{cityname}:
     get:
@@ -353,7 +419,11 @@ paths:
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /token/get-balance/{cityname}/{address}:
     get:
@@ -366,7 +436,11 @@ paths:
         - $ref: '#/components/parameters/address'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /token/get-total-supply/{cityname}:
     get:
@@ -378,7 +452,11 @@ paths:
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /token/get-token-uri/{cityname}:
     get:
@@ -390,7 +468,11 @@ paths:
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
-          $ref: '#/components/responses/200SuccessText'
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
   /token/get-token-uri-json/{cityname}:
     get:
@@ -420,6 +502,10 @@ paths:
                     name: "MiamiCoin"
                     description: "A CityCoin for Miami, ticker is MIA, Stack it to earn Stacks (STX)"
                     image: "https://cdn.citycoins.co/logos/miamicoin.png"
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
 
 components:
   #-------------------------------
@@ -466,9 +552,33 @@ components:
   # Reusable responses
   #-------------------------------
   responses:
-    200SuccessText:
+    200SuccessJsonNumber:
       description: Success
       content:
-        text/html; charset=utf-8:
+        application/json:
+          schema:
+            type: object
+            properties:
+              value:
+                type: number
+    200SuccessJsonString:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              value:
+                type: string
+    400BadRequest:
+      description: Bad Request
+      content:
+        text/plain;charset=UTF-8:
+          schema:
+            type: string
+    404NotFound:
+      description: Not Found
+      content:
+        text/plain;charset=UTF-8:
           schema:
             type: string

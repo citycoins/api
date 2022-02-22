@@ -1,5 +1,6 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getStackingStatsAtCycle } from "../../lib/citycoins"
+import { isStringAllDigits } from '../../lib/common';
 import { getCityConfig } from '../../types/cities';
 import { StackingStatsAtCycle } from "../../types/stacking";
 
@@ -16,19 +17,18 @@ const GetStackingStatsAtCycle = async (request: IttyRequest): Promise<Response> 
     return new Response(`City name not found: ${city}`, { status: 404 })
   }
   // verify target cycle is valid
-  const cycleValue = parseInt(cycle)
-  if (isNaN(cycleValue)) {
+  if (!isStringAllDigits(cycle)) {
     return new Response(`Target cycle not specified or invalid`, { status: 400 })
   }
   // get stacking stats at cycle
-  const stackingStatsAtCycle: StackingStatsAtCycle = await getStackingStatsAtCycle(cityConfig, cycleValue);
+  const stackingStatsAtCycle: StackingStatsAtCycle = await getStackingStatsAtCycle(cityConfig, cycle);
+  if (stackingStatsAtCycle === null) {
+    return new Response(`Stacking stats not found at reward cycle: ${cycle}`, { status: 404 })
+  }
   // return response
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
-  }
-  if (stackingStatsAtCycle === null) {
-    return new Response(`Stacking stats not found at reward cycle: ${cycleValue}`, { status: 404 })
   }
   return new Response(JSON.stringify(stackingStatsAtCycle), { headers })
 }

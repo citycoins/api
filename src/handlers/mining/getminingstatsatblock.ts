@@ -1,5 +1,6 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getMiningStatsAtBlock } from "../../lib/citycoins"
+import { isStringAllDigits } from '../../lib/common';
 import { getCityConfig } from '../../types/cities';
 import { MiningStatsAtBlock } from "../../types/mining";
 
@@ -16,19 +17,18 @@ const GetMiningStatsAtBlock = async (request: IttyRequest): Promise<Response> =>
     return new Response(`City name not found: ${city}`, { status: 404 })
   }
   // verify block height is valid
-  const blockHeightValue = parseInt(blockHeight)
-  if (isNaN(blockHeightValue)) {
+  if (!isStringAllDigits(blockHeight)) {
     return new Response(`Block height not specified or invalid`, { status: 400 })
   }
   // get mining stats at block height
-  const miningStatsAtBlock: MiningStatsAtBlock = await getMiningStatsAtBlock(cityConfig, blockHeightValue);
+  const miningStatsAtBlock: MiningStatsAtBlock = await getMiningStatsAtBlock(cityConfig, blockHeight);
+  if (miningStatsAtBlock === null) {
+    return new Response(`Mining stats not found at block height: ${blockHeight}`, { status: 404 })
+  }
   // return response
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
-  }
-  if (miningStatsAtBlock === null) {
-    return new Response(`Mining stats not found at block height: ${blockHeightValue}`, { status: 404 })
   }
   return new Response(JSON.stringify(miningStatsAtBlock), { headers })
 }
