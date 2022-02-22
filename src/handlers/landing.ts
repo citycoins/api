@@ -8,7 +8,7 @@ const landingHtml = `
   <title>CityCoins API</title>
 </head>
 <body style="text-align: center; max-width: 600px; margin: 0 auto; padding: 1em">
-<h1>Probably Nothing</h1>
+<img src="/citycoins-api-logo.png" alt="CityCoins API Logo" style="width: 100%; max-width: 300px; margin: 0 auto;">
 <p>CF Workers + IttyRouter + micro-stacks + TypeScript</p>
 <p style="font-weight: bold">...and it feels <span style="font-style: italic;">good!</span></p>
 <hr />

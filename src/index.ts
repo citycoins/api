@@ -15,10 +15,13 @@ addEventListener('fetch', (event) => {
 // returns true if the URL matches a given string
 function matchDownload(target: string): boolean {
   const url = new URL(target)
-  if (url.pathname === '/openapi.yml') {
-    return true
+  switch (url.pathname) {
+    case '/openapi.yml':
+    case '/citycoins-api-logo.png':
+      return true
+    default:
+      return false
   }
-  return false
 }
 
 // returns the response from KV for the asset
