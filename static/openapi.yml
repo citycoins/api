@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
   title: CityCoins API
-  description: A simple API to interact with Stacks and CityCoins data. See the [CityCoins documentation site](https://docs.citycoins.co/) or [GitHub for more info.](https://github.com/citycoins/api)
+  description: A simple API to interact with Stacks and CityCoins data. See the [CityCoins documentation site](https://docs.citycoins.co/developer-resources/api) or [GitHub for more info.](https://github.com/citycoins/api)
   version: 0.0.1
 servers:
   - url: https://api.citycoins.co

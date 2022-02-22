@@ -14,7 +14,7 @@ const landingHtml = `
 <hr />
 <h2>Things to Note</h2>
 <ul style="max-width: fit-content; text-align: left; margin: 0 auto;">
-  <li>uses simple responses with plain text for values and JSON for tuples</li>
+  <li>uses simple typed responses and provides detailed error messages</li>
   <li>all <code>:cityname</code> routes accept three letter city names, e.g. mia, nyc</li>
   <li>all <code>:blockheight</code> routes always follow <code>:cityname</code> routes when required</li>
   <li>all additional parameters follow <code>:cityname</code> and <code>:blockheight</code> routes</li>
