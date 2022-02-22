@@ -30,7 +30,7 @@ const GetFirstStacksBlockInRewardCycle = async (request: IttyRequest): Promise<R
     'Content-Type': 'application/json',
   }
   if (firstBlockInCycle === null) {
-    return new Response(`Reward cycle not found at block height: ${cycleValue}`, { status: 404 })
+    return new Response(`Reward cycle not found: ${cycleValue}`, { status: 404 })
   }
   return new Response(JSON.stringify(response), { headers })
 }

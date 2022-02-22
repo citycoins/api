@@ -16,10 +16,14 @@ const GetUser = async (request: IttyRequest): Promise<Response> => {
   if (cityConfig.deployer === '') {
     return new Response(`City name not found: ${city}`, { status: 404 })
   }
+  // verify user ID is valid
+  const userIdValue = parseInt(userId)
+  if (isNaN(userIdValue)) {
+    return new Response(`User ID not specified or invalid`, { status: 400 })
+  }
   // get user STX address
-  const userAddress = await getUser(cityConfig, userId)
-    .catch(() => { return '' })
-  if (userAddress === '' || userAddress === null) {
+  const userAddress = await getUser(cityConfig, userIdValue)
+  if (userAddress === null) {
     return new Response(`User ID not found: ${userId}`, { status: 404 })
   }
   // return response
