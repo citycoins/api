@@ -1,6 +1,8 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getRegisteredUsersNonce } from "../../lib/citycoins"
+import { createSingleValue } from '../../lib/common'
 import { getCityConfig } from '../../types/cities'
+import { SingleValue } from '../../types/common'
 
 const GetRegisteredUsersNonce = async (request: IttyRequest): Promise<Response> => {
   // check inputs
@@ -16,11 +18,12 @@ const GetRegisteredUsersNonce = async (request: IttyRequest): Promise<Response> 
   // get registered users
   const registeredUsers = await getRegisteredUsersNonce(cityConfig)
   // return response
+  const response: SingleValue = await createSingleValue(registeredUsers)
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'text/html; charset=utf-8',
+    'Content-Type': 'application/json',
   }
-  return new Response(registeredUsers, { headers })
+  return new Response(JSON.stringify(response), { headers })
 }
 
 export default GetRegisteredUsersNonce

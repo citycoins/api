@@ -1,6 +1,8 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getFirstStacksBlockInRewardCycle } from "../../lib/citycoins"
+import { createSingleValue } from '../../lib/common';
 import { getCityConfig } from '../../types/cities';
+import { SingleValue } from '../../types/common';
 
 const GetFirstStacksBlockInRewardCycle = async (request: IttyRequest): Promise<Response> => {
   // check inputs
@@ -22,14 +24,15 @@ const GetFirstStacksBlockInRewardCycle = async (request: IttyRequest): Promise<R
   // get first stacks block in reward cycle
   const firstBlockInCycle: string = await getFirstStacksBlockInRewardCycle(cityConfig, cycleValue);
   // return response
+  const response: SingleValue = await createSingleValue(firstBlockInCycle)
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'text/html; charset=utf-8',
+    'Content-Type': 'application/json',
   }
   if (firstBlockInCycle === null) {
     return new Response(`Reward cycle not found at block height: ${cycleValue}`, { status: 404 })
   }
-  return new Response(firstBlockInCycle, { headers })
+  return new Response(JSON.stringify(response), { headers })
 }
 
 export default GetFirstStacksBlockInRewardCycle

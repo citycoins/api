@@ -1,5 +1,7 @@
 import { Request as IttyRequest } from 'itty-router'
+import { createSingleValue } from '../../lib/common'
 import { getBnsNames } from "../../lib/stacks"
+import { SingleValue } from '../../types/common'
 
 const GetBnsNames = async (request: IttyRequest): Promise<Response> => {
   // check inputs
@@ -10,11 +12,12 @@ const GetBnsNames = async (request: IttyRequest): Promise<Response> => {
   // get Stacks block height from API
   const bnsNames: string = await getBnsNames(address)
   // return response
+  const response: SingleValue = await createSingleValue(bnsNames)
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'text/html; charset=utf-8',
+    'Content-Type': 'application/json',
   }
-  return new Response(bnsNames, { headers })
+  return new Response(JSON.stringify(response), { headers })
 }
 
 export default GetBnsNames
