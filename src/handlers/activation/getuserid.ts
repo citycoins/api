@@ -17,8 +17,9 @@ const GetUserId = async (request: IttyRequest): Promise<Response> => {
     return new Response(`City name not found: ${city}`, { status: 404 })
   }
   // get user ID
-  const userId = await getUserId(cityConfig, user).catch(() => { return '' })
-  if (userId === '') {
+  const userId = await getUserId(cityConfig, user)
+    .catch(() => { return '' })
+  if (userId === '' || userId === null) {
     return new Response(`User not found: ${user}`, { status: 404 })
   }
   // return response

@@ -17,8 +17,9 @@ const GetUser = async (request: IttyRequest): Promise<Response> => {
     return new Response(`City name not found: ${city}`, { status: 404 })
   }
   // get user STX address
-  const userAddress = await getUser(cityConfig, userId).catch(() => { return ''})
-  if (userAddress === '') {
+  const userAddress = await getUser(cityConfig, userId)
+    .catch(() => { return '' })
+  if (userAddress === '' || userAddress === null) {
     return new Response(`User ID not found: ${userId}`, { status: 404 })
   }
   // return response
