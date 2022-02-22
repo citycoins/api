@@ -1,7 +1,7 @@
 {
-  "name": "worker-typescript-template",
+  "name": "citycoins-api",
   "version": "1.0.0",
-  "description": "Cloudflare worker TypeScript template",
+  "description": "A simple API to interact with Stacks and CityCoins data.",
   "main": "dist/worker.js",
   "scripts": {
     "build": "webpack",

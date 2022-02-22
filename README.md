@@ -8,17 +8,13 @@ CF Workers + IttyRouter + micro-stacks + TypeScript
 
 ## Things to Note
 
-- uses simple responses with plain text for values and JSON for tuples
+- uses simple typed responses and provides detailed error messages
 - all `:cityname` routes accept three letter city names, e.g. mia, nyc
 - all `:blockheight` routes always follow `:cityname` routes when required
 - all additional parameters follow `:cityname` and `:blockheight` routes
 - routes are structured the same as the contract functions and documentation
 
-**This is an early stage experiment in alpha and endpoints may change.**
-
 ## Implementation
-
-If you would like to use this with an app, please file an issue or reach out in the [CityCoins Discord](https://discord.gg/citycoins) and let us know, we'd love to credit you here!
 
 If you want to use this for your project, build a copy for yourself, or have any questions, please join the [CityCoins Discord](https://discord.gg/citycoins) or [file a GitHub Issue](https://github.com/citycoins/api/issues/new) and reach out!
 
