@@ -1,6 +1,6 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getCoinbaseAmount } from "../../lib/citycoins"
-import { createSingleValue } from '../../lib/common'
+import { createSingleValue, isStringAllDigits } from '../../lib/common'
 import { getCityConfig } from '../../types/cities'
 import { SingleValue } from '../../types/common'
 
@@ -17,20 +17,19 @@ const GetCoinbaseAmount = async (request: IttyRequest): Promise<Response> => {
     return new Response(`City name not found: ${city}`, { status: 404 })
   }
   // verify block height is valid
-  const blockHeightValue = parseInt(blockHeight)
-  if (isNaN(blockHeightValue)) {
+  if (!isStringAllDigits(blockHeight)) {
     return new Response(`Block height not specified or invalid`, { status: 400 })
   }
   // get coinbase thresholds
-  const coinbaseAmount: string = await getCoinbaseAmount(cityConfig, blockHeightValue)
+  const coinbaseAmount: string = await getCoinbaseAmount(cityConfig, blockHeight)
+  if (coinbaseAmount === null) {
+    return new Response(`Coinbase amount not found at block height: ${blockHeight}`, { status: 404 })
+  }
   // return response
   const response: SingleValue = await createSingleValue(coinbaseAmount)
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
-  }
-  if (coinbaseAmount === null) {
-    return new Response(`Coinbase amount not found at block height: ${blockHeightValue}`, { status: 404 })
   }
   return new Response(JSON.stringify(response), { headers })
 }

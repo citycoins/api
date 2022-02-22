@@ -37,7 +37,7 @@ router
   .get('/activation/get-user/:cityname/:userid', GetUser)
   .get('/activation/get-user-id/:cityname/:address', GetUserId)
   .get('/mining/get-mining-stats-at-block/:cityname/:blockheight', GetMiningStatsAtBlock)
-  .get('/mining/get-miner-at-block/:cityname/:blockheight/:address', GetMinerAtBlock)
+  .get('/mining/get-miner-at-block/:cityname/:blockheight/:userid', GetMinerAtBlock)
   .get('/stacking/get-stacking-stats-at-cycle/:cityname/:cycleid', GetStackingStatsAtCycle)
   .get('/stacking/get-stacker-at-cycle/:cityname/:cycleid/:userid', GetStackerAtCycle)
   .get('/stacking/get-reward-cycle/:cityname/:blockheight', GetRewardCycle)

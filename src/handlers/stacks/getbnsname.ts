@@ -17,7 +17,6 @@ const GetBnsName = async (request: IttyRequest): Promise<Response> => {
   }
   // return response
   const response: SingleValue = await createSingleValue(bnsNames)
-  console.log(`response: ${response}`)
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',

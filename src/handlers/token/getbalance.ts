@@ -16,8 +16,9 @@ const GetBalance = async (request: IttyRequest): Promise<Response> => {
   if (cityConfig.deployer === '') {
     return new Response(`City name not found: ${city}`, { status: 404 })
   }
-  // get user ID
-  const balance = await getBalance(cityConfig, user).catch(() => { return '' })
+  // get CityCoin balance
+  const balance = await getBalance(cityConfig, user)
+    .catch(() => { return '' })
   if (balance === '') {
     return new Response(`User not found: ${user}`, { status: 404 })
   }
