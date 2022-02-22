@@ -18,7 +18,7 @@ export async function getActivationBlock(cityConfig: CityConfig): Promise<string
     functionArgs: [],
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer
-  })
+  }, true)
 }
 
 export async function getRegisteredUsersNonce(cityConfig: CityConfig): Promise<string> {
@@ -29,7 +29,7 @@ export async function getRegisteredUsersNonce(cityConfig: CityConfig): Promise<s
     functionArgs: [],
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer
-  })
+  }, true)
 }
 
 export async function getUser(cityConfig: CityConfig, id: string): Promise<string> {
