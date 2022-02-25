@@ -223,6 +223,24 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
+  /mining/has-mined-at-block/{cityname}/{blockheight}/{userid}:
+    get:
+      summary: Has Mined at Block
+      description: Check if a the user has mined with a given CityCoin, Stacks block height, and user ID.
+      tags:
+        - Mining
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
+        - $ref: '#/components/parameters/userid'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonBoolean'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
   /stacking/get-stacking-stats-at-cycle/{cityname}/{cycleid}:
     get:
       summary: Get Stacking Stats
@@ -570,6 +588,15 @@ components:
             properties:
               value:
                 type: string
+    200SuccessJsonBoolean:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              value:
+                type: boolean
     400BadRequest:
       description: Bad Request
       content:

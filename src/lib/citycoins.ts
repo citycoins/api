@@ -80,6 +80,17 @@ export async function getMinerAtBlock(cityConfig: CityConfig, blockHeight: strin
   }, true)
 }
 
+export async function hasMinedAtBlock(cityConfig: CityConfig, blockHeight: string, userId: string): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'has-mined-at-block',
+    functionArgs: [uintCV(blockHeight), uintCV(userId)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
 //////////////////////////////////////////////////
 // STACKING FUNCTIONS
 //////////////////////////////////////////////////
