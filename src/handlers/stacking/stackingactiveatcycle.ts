@@ -1,5 +1,5 @@
 import { Request as IttyRequest } from 'itty-router'
-import { getFirstStacksBlockInRewardCycle, getRewardCycle, stackingActiveAtCycle } from '../../lib/citycoins'
+import { getRewardCycle, stackingActiveAtCycle } from '../../lib/citycoins'
 import { createSingleValue, isStringAllDigits } from '../../lib/common'
 import { getStacksBlockHeight } from '../../lib/stacks'
 import { getCityConfig } from '../../types/cities'
