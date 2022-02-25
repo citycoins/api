@@ -114,6 +114,32 @@ export async function hasMinedAtBlock(cityConfig: CityConfig, blockHeight: strin
 }
 
 //////////////////////////////////////////////////
+// MINING CLAIM FUNCTIONS
+//////////////////////////////////////////////////
+
+export async function canClaimMiningReward(cityConfig: CityConfig, address: string, blockHeight: string): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'can-claim-mining-reward',
+    functionArgs: [standardPrincipalCV(address), uintCV(blockHeight)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+export async function isBlockWinner(cityConfig: CityConfig, address: string, blockHeight: string): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'is-block-winner',
+    functionArgs: [standardPrincipalCV(address), uintCV(blockHeight)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+//////////////////////////////////////////////////
 // STACKING FUNCTIONS
 //////////////////////////////////////////////////
 

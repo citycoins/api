@@ -19,6 +19,11 @@ tags:
     externalDocs:
       description: Contract Functions Reference
       url: https://docs.citycoins.co/contract-functions/mining
+  - name: Mining Claims
+    description: Endpoints for interacting with [CityCoins mining claims](https://docs.citycoins.co/core-protocol/mining-citycoins)
+    externalDocs:
+      description: Contract Functions Reference
+      url: https://docs.citycoins.co/contract-functions/mining-claims
   - name: Stacking
     description: Endpoints for interacting with [CityCoins stacking data](https://docs.citycoins.co/core-protocol/stacking-citycoins)
     externalDocs:
@@ -267,6 +272,42 @@ paths:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
         - $ref: '#/components/parameters/userid'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonBoolean'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /mining-claims/can-claim-mining-reward/{cityname}/{blockheight}/{address}:
+    get:
+      summary: Can Claim Mining Reward
+      description: Returns a boolean value indicating if the user's principal won and is eligible to claim the block reward at a given block height.
+      tags:
+        - Mining Claims
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
+        - $ref: '#/components/parameters/address'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonBoolean'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /mining-claims/is-block-winner/{cityname}/{blockheight}/{address}:
+    get:
+      summary: Is Block Winner
+      description: Returns a boolean value indicating if the user's principal won at a given block height.
+      tags:
+        - Mining Claims
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
+        - $ref: '#/components/parameters/address'
       responses:
         "200":
           $ref: '#/components/responses/200SuccessJsonBoolean'

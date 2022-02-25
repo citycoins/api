@@ -27,6 +27,8 @@ import HasMinedAtBlock from './handlers/mining/hasminedatblock'
 import GetLastHighValueAtBlock from './handlers/mining/getlasthighvalueatblock'
 import GetBlockWinnerId from './handlers/mining/getblockwinnerid'
 import StackingActiveAtCycle from './handlers/stacking/stackingactiveatcycle'
+import IsBlockWinner from './handlers/miningclaims/isblockwinner'
+import CanClaimMiningReward from './handlers/miningclaims/canclaimminingreward'
 
 const router = Router()
 
@@ -45,6 +47,8 @@ router
   .get('/mining/get-miner-at-block/:cityname/:blockheight/:userid', GetMinerAtBlock)
   .get('/mining/get-last-high-value-at-block/:cityname/:blockheight', GetLastHighValueAtBlock)
   .get('/mining/has-mined-at-block/:cityname/:blockheight/:userid', HasMinedAtBlock)
+  .get('/mining-claims/can-claim-mining-reward/:cityname/:blockheight/:address', CanClaimMiningReward)
+  .get('/mining-claims/is-block-winner/:cityname/:blockheight/:address', IsBlockWinner)
   .get('/stacking/get-stacking-stats-at-cycle/:cityname/:cycleid', GetStackingStatsAtCycle)
   .get('/stacking/get-stacker-at-cycle/:cityname/:cycleid/:userid', GetStackerAtCycle)
   .get('/stacking/get-reward-cycle/:cityname/:blockheight', GetRewardCycle)
