@@ -525,7 +525,7 @@ components:
       required: true
       schema:
         type: string
-      description: The Stacks block height to query
+      description: The Stacks block height to query, or `current` for the current block height
     cityname:
       in: path
       name: cityname
@@ -540,7 +540,7 @@ components:
       required: true
       schema:
         type: string
-      description: The reward cycle ID to query
+      description: The reward cycle ID to query, or `current` for the current reward cycle ID
     userid:
       in: path
       name: userid
