@@ -185,16 +185,16 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /mining/get-miner-at-block/{cityname}/{blockheight}/{address}:
+  /mining/get-miner-at-block/{cityname}/{blockheight}/{userid}:
     get:
       summary: Get Miner Info
-      description: Get the miner details for a given CityCoin, Stacks block height, and Stacks address
+      description: Get the miner details for a given CityCoin, Stacks block height, and user ID.
       tags:
         - Mining
       parameters:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
-        - $ref: '#/components/parameters/address'
+        - $ref: '#/components/parameters/userid'
       responses:
         "200":
           description: Success
