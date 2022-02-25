@@ -20,7 +20,7 @@ tags:
       description: Contract Functions Reference
       url: https://docs.citycoins.co/contract-functions/mining
   - name: Mining Claims
-    description: Endpoints for interacting with [CityCoins mining claims](https://docs.citycoins.co/core-protocol/mining-citycoins)
+    description: Endpoints for interacting with [CityCoins mining claims data](https://docs.citycoins.co/core-protocol/mining-citycoins)
     externalDocs:
       description: Contract Functions Reference
       url: https://docs.citycoins.co/contract-functions/mining-claims
@@ -29,6 +29,11 @@ tags:
     externalDocs:
       description: Contract Functions Reference
       url: https://docs.citycoins.co/contract-functions/stacking
+  - name: Stacking Claims
+    description: Endpoints for interacting with [CityCoins stacking claims data](https://docs.citycoins.co/core-protocol/stacking-citycoins)
+    externalDocs:
+      description: Contract Functions Reference
+      url: https://docs.citycoins.co/contract-functions/stacking-claims
   - name: Token
     description: Endpoints for interacting with [CityCoins token data](https://docs.citycoins.co/core-protocol/token-configuration)
     externalDocs:
@@ -425,6 +430,28 @@ paths:
       responses:
         "200":
           $ref: '#/components/responses/200SuccessJsonBoolean'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /stacking-claims/get-stacking-reward/{cityname}/{cycleid}/{userid}:
+    get:
+      summary: Get Stacking Reward
+      description: |
+        Gets the amount of STX a user can claim in a given reward cycle in uSTX. This method will only return a positive value if
+        - the current block height is in a subsequent reward cycle
+        - the Stacker locked up CityCoins in the target reward cycle
+        - the Stacker locked up enough CityCoins to receive at least one uSTX
+      tags:
+        - Stacking Claims
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cycleid'
+        - $ref: '#/components/parameters/userid'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonNumber'
         "400":
           $ref: '#/components/responses/400BadRequest'
         "404":

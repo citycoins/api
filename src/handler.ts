@@ -29,6 +29,7 @@ import GetBlockWinnerId from './handlers/mining/getblockwinnerid'
 import StackingActiveAtCycle from './handlers/stacking/stackingactiveatcycle'
 import IsBlockWinner from './handlers/miningclaims/isblockwinner'
 import CanClaimMiningReward from './handlers/miningclaims/canclaimminingreward'
+import GetStackingReward from './handlers/stacking-claims/getstackingreward'
 
 const router = Router()
 
@@ -54,6 +55,7 @@ router
   .get('/stacking/get-reward-cycle/:cityname/:blockheight', GetRewardCycle)
   .get('/stacking/get-first-stacks-block-in-reward-cycle/:cityname/:cycleid', GetFirstStacksBlockInRewardCycle)
   .get('/stacking/stacking-active-at-cycle/:cityname/:cycleid', StackingActiveAtCycle)
+  .get('/stacking-claims/get-stacking-reward/:cityname/:cycleid/:userid', GetStackingReward)
   .get('/token/get-coinbase-amount/:cityname/:blockheight', GetCoinbaseAmount)
   .get('/token/get-coinbase-thresholds/:cityname', GetCoinbaseThresholds)
   .get('/token/get-name/:cityname', GetName)

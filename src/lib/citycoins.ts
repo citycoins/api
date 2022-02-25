@@ -199,6 +199,21 @@ export async function stackingActiveAtCycle(cityConfig: CityConfig, cycleId: str
 }
 
 //////////////////////////////////////////////////
+// STACKING CLAIM FUNCTIONS
+//////////////////////////////////////////////////
+
+export async function getStackingReward(cityConfig: CityConfig, cycleId: string, userId: string): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'get-stacking-reward',
+    functionArgs: [uintCV(userId), uintCV(cycleId)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+//////////////////////////////////////////////////
 // TOKEN FUNCTIONS
 //////////////////////////////////////////////////
 
