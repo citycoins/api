@@ -1,13 +1,14 @@
 import { Request as IttyRequest } from 'itty-router'
-import { getFirstStacksBlockInRewardCycle } from "../../lib/citycoins"
-import { createSingleValue, isStringAllDigits } from '../../lib/common';
-import { getCityConfig } from '../../types/cities';
-import { SingleValue } from '../../types/common';
+import { getFirstStacksBlockInRewardCycle, getRewardCycle } from '../../lib/citycoins'
+import { createSingleValue, isStringAllDigits } from '../../lib/common'
+import { getStacksBlockHeight } from '../../lib/stacks'
+import { getCityConfig } from '../../types/cities'
+import { SingleValue } from '../../types/common'
 
 const GetFirstStacksBlockInRewardCycle = async (request: IttyRequest): Promise<Response> => {
   // check inputs
   const city = request.params?.cityname ?? undefined
-  const cycle = request.params?.cycleid ?? undefined
+  let cycle = request.params?.cycleid ?? undefined
   if (city === undefined || cycle === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
@@ -16,12 +17,18 @@ const GetFirstStacksBlockInRewardCycle = async (request: IttyRequest): Promise<R
   if (cityConfig.deployer === '') {
     return new Response(`City name not found: ${city}`, { status: 404 })
   }
-  // verify target cycle is valid
-  if (!isStringAllDigits(cycle)) {
-    return new Response(`Target cycle not specified or invalid`, { status: 400 })
+  // get current reward cycle if specified
+  if (cycle === 'current') {
+    const blockHeight = await getStacksBlockHeight()
+    cycle = await getRewardCycle(cityConfig, blockHeight)
+  } else {
+    // verify target cycle is valid
+    if (!isStringAllDigits(cycle)) {
+      return new Response(`Target cycle not specified or invalid`, { status: 400 })
+    }
   }
   // get first stacks block in reward cycle
-  const firstBlockInCycle: string = await getFirstStacksBlockInRewardCycle(cityConfig, cycle);
+  const firstBlockInCycle: string = await getFirstStacksBlockInRewardCycle(cityConfig, cycle)
   if (firstBlockInCycle === null) {
     return new Response(`Reward cycle not found: ${cycle}`, { status: 404 })
   }

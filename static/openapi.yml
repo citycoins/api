@@ -19,11 +19,21 @@ tags:
     externalDocs:
       description: Contract Functions Reference
       url: https://docs.citycoins.co/contract-functions/mining
+  - name: Mining Claims
+    description: Endpoints for interacting with [CityCoins mining claims data](https://docs.citycoins.co/core-protocol/mining-citycoins)
+    externalDocs:
+      description: Contract Functions Reference
+      url: https://docs.citycoins.co/contract-functions/mining-claims
   - name: Stacking
     description: Endpoints for interacting with [CityCoins stacking data](https://docs.citycoins.co/core-protocol/stacking-citycoins)
     externalDocs:
       description: Contract Functions Reference
       url: https://docs.citycoins.co/contract-functions/stacking
+  - name: Stacking Claims
+    description: Endpoints for interacting with [CityCoins stacking claims data](https://docs.citycoins.co/core-protocol/stacking-citycoins)
+    externalDocs:
+      description: Contract Functions Reference
+      url: https://docs.citycoins.co/contract-functions/stacking-claims
   - name: Token
     description: Endpoints for interacting with [CityCoins token data](https://docs.citycoins.co/core-protocol/token-configuration)
     externalDocs:
@@ -145,6 +155,23 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
+  /mining/get-block-winner-id/{cityname}/{blockheight}:
+    get:
+      summary: Get Block Winner ID
+      description: Gets the winning user ID for a given blockheight only *after the miner claims the reward*
+      tags:
+        - Mining
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
   /mining/get-mining-stats-at-block/{cityname}/{blockheight}:
     get:
       summary: Get Mining Stats
@@ -185,16 +212,16 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /mining/get-miner-at-block/{cityname}/{blockheight}/{address}:
+  /mining/get-miner-at-block/{cityname}/{blockheight}/{userid}:
     get:
       summary: Get Miner Info
-      description: Get the miner details for a given CityCoin, Stacks block height, and Stacks address
+      description: Get the miner details for a given CityCoin, Stacks block height, and user ID.
       tags:
         - Mining
       parameters:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
-        - $ref: '#/components/parameters/address'
+        - $ref: '#/components/parameters/userid'
       responses:
         "200":
           description: Success
@@ -218,6 +245,77 @@ paths:
                     highValue: "41000000"
                     ustx: "40000000"
                     winner: true
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /mining/get-last-high-value-at-block/{cityname}/{blockheight}:
+    get:
+      summary: Get Last High Value at Block
+      description: Gets the last high value at the specified block used to determine the winner by the VRF, and increases with each miner commitment.
+      tags:
+        - Mining
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonBoolean'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /mining/has-mined-at-block/{cityname}/{blockheight}/{userid}:
+    get:
+      summary: Has Mined at Block
+      description: Check if a the user has mined with a given CityCoin, Stacks block height, and user ID.
+      tags:
+        - Mining
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
+        - $ref: '#/components/parameters/userid'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonBoolean'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /mining-claims/can-claim-mining-reward/{cityname}/{blockheight}/{address}:
+    get:
+      summary: Can Claim Mining Reward
+      description: Returns a boolean value indicating if the user's principal won and is eligible to claim the block reward at a given block height.
+      tags:
+        - Mining Claims
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
+        - $ref: '#/components/parameters/address'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonBoolean'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /mining-claims/is-block-winner/{cityname}/{blockheight}/{address}:
+    get:
+      summary: Is Block Winner
+      description: Returns a boolean value indicating if the user's principal won at a given block height.
+      tags:
+        - Mining Claims
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
+        - $ref: '#/components/parameters/address'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonBoolean'
         "400":
           $ref: '#/components/responses/400BadRequest'
         "404":
@@ -312,6 +410,45 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/cycleid'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /stacking/stacking-active-at-cycle/{cityname}/{cycleid}:
+    get:
+      summary: Stacking Active at Cycle
+      description: Returns a boolean value indicating if stacking is active at a given reward cycle, meaning a positive number of CityCoins are Stacked for that cycle.
+      tags:
+        - Stacking
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cycleid'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonBoolean'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /stacking-claims/get-stacking-reward/{cityname}/{cycleid}/{userid}:
+    get:
+      summary: Get Stacking Reward
+      description: |
+        Gets the amount of STX a user can claim in a given reward cycle in uSTX. This method will only return a positive value if
+        - the current block height is in a subsequent reward cycle
+        - the Stacker locked up CityCoins in the target reward cycle
+        - the Stacker locked up enough CityCoins to receive at least one uSTX
+      tags:
+        - Stacking Claims
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cycleid'
+        - $ref: '#/components/parameters/userid'
       responses:
         "200":
           $ref: '#/components/responses/200SuccessJsonNumber'
@@ -525,7 +662,7 @@ components:
       required: true
       schema:
         type: string
-      description: The Stacks block height to query
+      description: The Stacks block height to query, or `current` for the current block height
     cityname:
       in: path
       name: cityname
@@ -540,7 +677,7 @@ components:
       required: true
       schema:
         type: string
-      description: The reward cycle ID to query
+      description: The reward cycle ID to query, or `current` for the current reward cycle ID
     userid:
       in: path
       name: userid
@@ -570,6 +707,15 @@ components:
             properties:
               value:
                 type: string
+    200SuccessJsonBoolean:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              value:
+                type: boolean
     400BadRequest:
       description: Bad Request
       content:

@@ -1,11 +1,11 @@
 import { Request as IttyRequest } from 'itty-router'
-import { getRewardCycle, getStackingStatsAtCycle } from '../../lib/citycoins'
-import { isStringAllDigits } from '../../lib/common'
+import { getRewardCycle, stackingActiveAtCycle } from '../../lib/citycoins'
+import { createSingleValue, isStringAllDigits } from '../../lib/common'
 import { getStacksBlockHeight } from '../../lib/stacks'
 import { getCityConfig } from '../../types/cities'
-import { StackingStatsAtCycle } from '../../types/stacking'
+import { SingleValue } from '../../types/common'
 
-const GetStackingStatsAtCycle = async (request: IttyRequest): Promise<Response> => {
+const StackingActiveAtCycle = async (request: IttyRequest): Promise<Response> => {
   // check inputs
   const city = request.params?.cityname ?? undefined
   let cycle = request.params?.cycleid ?? undefined
@@ -27,17 +27,18 @@ const GetStackingStatsAtCycle = async (request: IttyRequest): Promise<Response> 
       return new Response(`Target cycle not specified or invalid`, { status: 400 })
     }
   }
-  // get stacking stats at cycle
-  const stackingStatsAtCycle: StackingStatsAtCycle = await getStackingStatsAtCycle(cityConfig, cycle)
-  if (stackingStatsAtCycle === null) {
-    return new Response(`Stacking stats not found at reward cycle: ${cycle}`, { status: 404 })
+  // check if stacking is active at cycle
+  const activeAtCycle = await stackingActiveAtCycle(cityConfig, cycle)
+  if (activeAtCycle === null) {
+    return new Response(`Stacking info not found at cycle: ${cycle}`, { status: 404 })
   }
   // return response
+  const response: SingleValue = await createSingleValue(activeAtCycle)
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
   }
-  return new Response(JSON.stringify(stackingStatsAtCycle), { headers })
+  return new Response(JSON.stringify(response), { headers })
 }
 
-export default GetStackingStatsAtCycle
+export default StackingActiveAtCycle

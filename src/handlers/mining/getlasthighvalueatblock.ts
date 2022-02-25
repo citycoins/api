@@ -1,11 +1,11 @@
 import { Request as IttyRequest } from 'itty-router'
-import { getCoinbaseAmount } from '../../lib/citycoins'
+import { getLastHighValueAtBlock } from '../../lib/citycoins'
 import { createSingleValue, isStringAllDigits } from '../../lib/common'
 import { getStacksBlockHeight } from '../../lib/stacks'
 import { getCityConfig } from '../../types/cities'
 import { SingleValue } from '../../types/common'
 
-const GetCoinbaseAmount = async (request: IttyRequest): Promise<Response> => {
+const GetLastHighValueAtBlock = async (request: IttyRequest): Promise<Response> => {
   // check inputs
   const city = request.params?.cityname ?? undefined
   let blockHeight = request.params?.blockheight ?? undefined
@@ -26,13 +26,13 @@ const GetCoinbaseAmount = async (request: IttyRequest): Promise<Response> => {
       return new Response(`Block height not specified or invalid`, { status: 400 })
     }
   }
-  // get coinbase thresholds
-  const coinbaseAmount: string = await getCoinbaseAmount(cityConfig, blockHeight)
-  if (coinbaseAmount === null) {
-    return new Response(`Coinbase amount not found at block height: ${blockHeight}`, { status: 404 })
+  // get last high value at block height
+  const highValue = await getLastHighValueAtBlock(cityConfig, blockHeight)
+  if (highValue === null) {
+    return new Response(`High value not found at block height: ${blockHeight}`, { status: 404 })
   }
   // return response
-  const response: SingleValue = await createSingleValue(coinbaseAmount)
+  const response: SingleValue = await createSingleValue(highValue)
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
@@ -40,4 +40,4 @@ const GetCoinbaseAmount = async (request: IttyRequest): Promise<Response> => {
   return new Response(JSON.stringify(response), { headers })
 }
 
-export default GetCoinbaseAmount
+export default GetLastHighValueAtBlock

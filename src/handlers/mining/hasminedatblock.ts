@@ -1,15 +1,16 @@
 import { Request as IttyRequest } from 'itty-router'
-import { getCoinbaseAmount } from '../../lib/citycoins'
+import { hasMinedAtBlock } from '../../lib/citycoins'
 import { createSingleValue, isStringAllDigits } from '../../lib/common'
 import { getStacksBlockHeight } from '../../lib/stacks'
 import { getCityConfig } from '../../types/cities'
 import { SingleValue } from '../../types/common'
 
-const GetCoinbaseAmount = async (request: IttyRequest): Promise<Response> => {
+const HasMinedAtBlock = async (request: IttyRequest): Promise<Response> => {
   // check inputs
   const city = request.params?.cityname ?? undefined
   let blockHeight = request.params?.blockheight ?? undefined
-  if (city === undefined || blockHeight === undefined) {
+  const userId = request.params?.userid ?? undefined
+  if (city === undefined || blockHeight === undefined || userId === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
   // get city configuration object
@@ -26,13 +27,17 @@ const GetCoinbaseAmount = async (request: IttyRequest): Promise<Response> => {
       return new Response(`Block height not specified or invalid`, { status: 400 })
     }
   }
-  // get coinbase thresholds
-  const coinbaseAmount: string = await getCoinbaseAmount(cityConfig, blockHeight)
-  if (coinbaseAmount === null) {
-    return new Response(`Coinbase amount not found at block height: ${blockHeight}`, { status: 404 })
+  // verify user ID is valid
+  if (!isStringAllDigits(userId)) {
+    return new Response(`User ID not specified or invalid`, { status: 400 })
+  }
+  // check if user mined at block
+  const minedAtBlock = await hasMinedAtBlock(cityConfig, blockHeight, userId)
+  if (minedAtBlock === null) {
+    return new Response(`Mining record for ${userId} not found at block height: ${blockHeight}`, { status: 404 })
   }
   // return response
-  const response: SingleValue = await createSingleValue(coinbaseAmount)
+  const response: SingleValue = await createSingleValue(minedAtBlock)
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
@@ -40,4 +45,4 @@ const GetCoinbaseAmount = async (request: IttyRequest): Promise<Response> => {
   return new Response(JSON.stringify(response), { headers })
 }
 
-export default GetCoinbaseAmount
+export default HasMinedAtBlock

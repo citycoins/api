@@ -58,6 +58,17 @@ export async function getUserId(cityConfig: CityConfig, address: string): Promis
 // MINING FUNCTIONS
 //////////////////////////////////////////////////
 
+export async function getBlockWinnerId(cityConfig: CityConfig, blockHeight: string): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'get-block-winner-id',
+    functionArgs: [uintCV(blockHeight)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
 export async function getMiningStatsAtBlock(cityConfig: CityConfig, blockHeight: string): Promise<MiningStatsAtBlock> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
@@ -75,6 +86,54 @@ export async function getMinerAtBlock(cityConfig: CityConfig, blockHeight: strin
     contractName: cityConfig.coreContract,
     functionName: 'get-miner-at-block',
     functionArgs: [uintCV(blockHeight), uintCV(userId)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+export async function getLastHighValueAtBlock(cityConfig: CityConfig, blockHeight: string): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'get-last-high-value-at-block',
+    functionArgs: [uintCV(blockHeight)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+export async function hasMinedAtBlock(cityConfig: CityConfig, blockHeight: string, userId: string): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'has-mined-at-block',
+    functionArgs: [uintCV(blockHeight), uintCV(userId)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+//////////////////////////////////////////////////
+// MINING CLAIM FUNCTIONS
+//////////////////////////////////////////////////
+
+export async function canClaimMiningReward(cityConfig: CityConfig, address: string, blockHeight: string): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'can-claim-mining-reward',
+    functionArgs: [standardPrincipalCV(address), uintCV(blockHeight)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+export async function isBlockWinner(cityConfig: CityConfig, address: string, blockHeight: string): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'is-block-winner',
+    functionArgs: [standardPrincipalCV(address), uintCV(blockHeight)],
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer,
   }, true)
@@ -123,6 +182,32 @@ export async function getFirstStacksBlockInRewardCycle(cityConfig: CityConfig, c
     contractName: cityConfig.coreContract,
     functionName: 'get-first-stacks-block-in-reward-cycle',
     functionArgs: [uintCV(cycleId)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+export async function stackingActiveAtCycle(cityConfig: CityConfig, cycleId: string): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'stacking-active-at-cycle',
+    functionArgs: [uintCV(cycleId)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
+//////////////////////////////////////////////////
+// STACKING CLAIM FUNCTIONS
+//////////////////////////////////////////////////
+
+export async function getStackingReward(cityConfig: CityConfig, cycleId: string, userId: string): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'get-stacking-reward',
+    functionArgs: [uintCV(userId), uintCV(cycleId)],
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer,
   }, true)
