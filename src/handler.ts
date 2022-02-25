@@ -26,6 +26,7 @@ import GetStxBalance from './handlers/stacks/getstxbalance'
 import HasMinedAtBlock from './handlers/mining/hasminedatblock'
 import GetLastHighValueAtBlock from './handlers/mining/getlasthighvalueatblock'
 import GetBlockWinnerId from './handlers/mining/getblockwinnerid'
+import StackingActiveAtCycle from './handlers/stacking/stackingactiveatcycle'
 
 const router = Router()
 
@@ -48,6 +49,7 @@ router
   .get('/stacking/get-stacker-at-cycle/:cityname/:cycleid/:userid', GetStackerAtCycle)
   .get('/stacking/get-reward-cycle/:cityname/:blockheight', GetRewardCycle)
   .get('/stacking/get-first-stacks-block-in-reward-cycle/:cityname/:cycleid', GetFirstStacksBlockInRewardCycle)
+  .get('/stacking/stacking-active-at-cycle/:cityname/:cycleid', StackingActiveAtCycle)
   .get('/token/get-coinbase-amount/:cityname/:blockheight', GetCoinbaseAmount)
   .get('/token/get-coinbase-thresholds/:cityname', GetCoinbaseThresholds)
   .get('/token/get-name/:cityname', GetName)

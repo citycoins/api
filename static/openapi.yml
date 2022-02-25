@@ -372,6 +372,23 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
+  /stacking/stacking-active-at-cycle/{cityname}/{cycleid}:
+    get:
+      summary: Stacking Active at Cycle
+      description: Returns a boolean value indicating if stacking is active at a given reward cycle, meaning a positive number of CityCoins are Stacked for that cycle.
+      tags:
+        - Stacking
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/cycleid'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonBoolean'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
   /token/get-coinbase-amount/{cityname}/{blockheight}:
     get:
       summary: Get Coinbase Amount

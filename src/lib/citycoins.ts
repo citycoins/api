@@ -161,6 +161,17 @@ export async function getFirstStacksBlockInRewardCycle(cityConfig: CityConfig, c
   }, true)
 }
 
+export async function stackingActiveAtCycle(cityConfig: CityConfig, cycleId: string): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'stacking-active-at-cycle',
+    functionArgs: [uintCV(cycleId)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
 //////////////////////////////////////////////////
 // TOKEN FUNCTIONS
 //////////////////////////////////////////////////
