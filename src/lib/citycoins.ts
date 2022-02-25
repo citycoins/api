@@ -1,5 +1,6 @@
 import { fetchReadOnlyFunction } from 'micro-stacks/api'
 import { standardPrincipalCV, uintCV } from 'micro-stacks/clarity'
+import { Transaction, ContractCallTransaction } from '@stacks/stacks-blockchain-api-types';
 import { CityConfig } from '../types/cities'
 import { MinerAtBlock, MiningStatsAtBlock } from '../types/mining'
 import { StackerAtCycle, StackingStatsAtCycle } from '../types/stacking'
@@ -218,4 +219,22 @@ export async function getTokenUri(cityConfig: CityConfig): Promise<string> {
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer,
   }, true)
+}
+
+//////////////////////////////////////////////////
+// TOOLS / UTILITIES
+//////////////////////////////////////////////////
+
+export async function filterMiningTxs(cityConfig: CityConfig, txs: Transaction[]): Promise<ContractCallTransaction[]> {
+  const miningTxs: ContractCallTransaction[] = []
+  Object.entries(txs).forEach(([, tx]) => {
+    if ("contract_call" in tx) {
+      if (tx.contract_call.contract_id === `${cityConfig.deployer}.${cityConfig.coreContract}` && tx.tx_status === 'success') {
+        if (tx.contract_call.function_name === 'mine-tokens' || tx.contract_call.function_name === 'mine-many') {
+          miningTxs.push(tx);
+        }
+      }
+    }
+  })
+  return miningTxs
 }

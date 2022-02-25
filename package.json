@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@cloudflare/kv-asset-handler": "^0.2.0",
+    "@stacks/stacks-blockchain-api-types": "^2.1.1",
     "itty-router": "^2.4.10",
     "micro-stacks": "^0.2.2"
   }

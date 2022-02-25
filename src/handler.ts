@@ -23,6 +23,7 @@ import GetBalance from './handlers/token/getbalance'
 import GetTokenUriJson from './handlers/token/gettokenurijson'
 import GetBnsName from './handlers/stacks/getbnsname'
 import GetStxBalance from './handlers/stacks/getstxbalance'
+import GetMiningDataAtBlock from './handlers/mining/getminingdataatblock'
 
 const router = Router()
 
@@ -51,6 +52,7 @@ router
   .get('/token/get-total-supply/:cityname', GetTotalSupply)
   .get('/token/get-token-uri/:cityname', GetTokenUri)
   .get('/token/get-token-uri-json/:cityname', GetTokenUriJson)
+  .get('/tools/get-mining-data-at-block/:cityname/:blockheight', GetMiningDataAtBlock)
   .get('*', () => new Response("Resource not found, please check the URL.", { status: 404 }))
 
 export const handleRequest = (request: Request):Response => router.handle(request)
