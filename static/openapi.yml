@@ -223,6 +223,23 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
+  /mining/get-last-high-value-at-block/{cityname}/{blockheight}:
+    get:
+      summary: Get Last High Value at Block
+      description: Gets the last high value at the specified block used to determine the winner by the VRF, and increases with each miner commitment.
+      tags:
+        - Mining
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonBoolean'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
   /mining/has-mined-at-block/{cityname}/{blockheight}/{userid}:
     get:
       summary: Has Mined at Block
