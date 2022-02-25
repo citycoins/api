@@ -25,6 +25,7 @@ import GetBnsName from './handlers/stacks/getbnsname'
 import GetStxBalance from './handlers/stacks/getstxbalance'
 import HasMinedAtBlock from './handlers/mining/hasminedatblock'
 import GetLastHighValueAtBlock from './handlers/mining/getlasthighvalueatblock'
+import GetBlockWinnerId from './handlers/mining/getblockwinnerid'
 
 const router = Router()
 
@@ -38,6 +39,7 @@ router
   .get('/activation/get-registered-users-nonce/:cityname', GetRegisteredUsersNonce)
   .get('/activation/get-user/:cityname/:userid', GetUser)
   .get('/activation/get-user-id/:cityname/:address', GetUserId)
+  .get('/mining/get-block-winner-id/:cityname/:blockheight', GetBlockWinnerId)
   .get('/mining/get-mining-stats-at-block/:cityname/:blockheight', GetMiningStatsAtBlock)
   .get('/mining/get-miner-at-block/:cityname/:blockheight/:userid', GetMinerAtBlock)
   .get('/mining/get-last-high-value-at-block/:cityname/:blockheight', GetLastHighValueAtBlock)

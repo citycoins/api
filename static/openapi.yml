@@ -145,6 +145,23 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
+  /mining/get-block-winner-id/{cityname}/{blockheight}:
+    get:
+      summary: Get Block Winner ID
+      description: Gets the winning user ID for a given blockheight only *after the miner claims the reward*
+      tags:
+        - Mining
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/blockheight'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
   /mining/get-mining-stats-at-block/{cityname}/{blockheight}:
     get:
       summary: Get Mining Stats

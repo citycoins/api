@@ -58,6 +58,17 @@ export async function getUserId(cityConfig: CityConfig, address: string): Promis
 // MINING FUNCTIONS
 //////////////////////////////////////////////////
 
+export async function getBlockWinnerId(cityConfig: CityConfig, blockHeight: string): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.coreContract,
+    functionName: 'get-block-winner-id',
+    functionArgs: [uintCV(blockHeight)],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
+
 export async function getMiningStatsAtBlock(cityConfig: CityConfig, blockHeight: string): Promise<MiningStatsAtBlock> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
