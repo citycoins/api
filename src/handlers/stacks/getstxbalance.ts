@@ -1,6 +1,6 @@
 import { Request as IttyRequest } from 'itty-router'
 import { createSingleValue } from '../../lib/common'
-import { getStxBalance } from "../../lib/stacks"
+import { getStxBalance } from '../../lib/stacks'
 import { SingleValue } from '../../types/common'
 
 const GetStxBalance = async (request: IttyRequest): Promise<Response> => {

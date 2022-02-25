@@ -1,5 +1,5 @@
 import { Request as IttyRequest } from 'itty-router'
-import { getCoinbaseThresholds } from "../../lib/citycoins"
+import { getCoinbaseThresholds } from '../../lib/citycoins'
 import { getCityConfig } from '../../types/cities'
 import { CoinbaseThresholds } from '../../types/token'
 

@@ -1,5 +1,5 @@
 import { Request as IttyRequest } from 'itty-router'
-import { getSymbol } from "../../lib/citycoins"
+import { getSymbol } from '../../lib/citycoins'
 import { createSingleValue } from '../../lib/common'
 import { getCityConfig } from '../../types/cities'
 import { SingleValue } from '../../types/common'

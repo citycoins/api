@@ -1,6 +1,6 @@
-import { createSingleValue } from "../../lib/common"
-import { getStacksBlockHeight } from "../../lib/stacks"
-import { SingleValue } from "../../types/common"
+import { createSingleValue } from '../../lib/common'
+import { getStacksBlockHeight } from '../../lib/stacks'
+import { SingleValue } from '../../types/common'
 
 const GetStacksBlockHeight = async (): Promise<Response> => {
   // get Stacks block height from API

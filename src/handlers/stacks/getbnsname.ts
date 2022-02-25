@@ -1,6 +1,6 @@
 import { Request as IttyRequest } from 'itty-router'
 import { createSingleValue } from '../../lib/common'
-import { getBnsName } from "../../lib/stacks"
+import { getBnsName } from '../../lib/stacks'
 import { SingleValue } from '../../types/common'
 
 const GetBnsName = async (request: IttyRequest): Promise<Response> => {

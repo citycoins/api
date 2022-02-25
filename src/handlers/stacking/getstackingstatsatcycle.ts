@@ -1,13 +1,14 @@
 import { Request as IttyRequest } from 'itty-router'
-import { getStackingStatsAtCycle } from "../../lib/citycoins"
-import { isStringAllDigits } from '../../lib/common';
-import { getCityConfig } from '../../types/cities';
-import { StackingStatsAtCycle } from "../../types/stacking";
+import { getRewardCycle, getStackingStatsAtCycle } from '../../lib/citycoins'
+import { isStringAllDigits } from '../../lib/common'
+import { getStacksBlockHeight } from '../../lib/stacks'
+import { getCityConfig } from '../../types/cities'
+import { StackingStatsAtCycle } from '../../types/stacking'
 
 const GetStackingStatsAtCycle = async (request: IttyRequest): Promise<Response> => {
   // check inputs
   const city = request.params?.cityname ?? undefined
-  const cycle = request.params?.cycleid ?? undefined
+  let cycle = request.params?.cycleid ?? undefined
   if (city === undefined || cycle === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
@@ -16,12 +17,18 @@ const GetStackingStatsAtCycle = async (request: IttyRequest): Promise<Response> 
   if (cityConfig.deployer === '') {
     return new Response(`City name not found: ${city}`, { status: 404 })
   }
-  // verify target cycle is valid
-  if (!isStringAllDigits(cycle)) {
-    return new Response(`Target cycle not specified or invalid`, { status: 400 })
+  // get current reward cycle if specified
+  if (cycle === 'current') {
+    const blockHeight = await getStacksBlockHeight()
+    cycle = await getRewardCycle(cityConfig, blockHeight)
+  } else {
+    // verify target cycle is valid
+    if (!isStringAllDigits(cycle)) {
+      return new Response(`Target cycle not specified or invalid`, { status: 400 })
+    }
   }
   // get stacking stats at cycle
-  const stackingStatsAtCycle: StackingStatsAtCycle = await getStackingStatsAtCycle(cityConfig, cycle);
+  const stackingStatsAtCycle: StackingStatsAtCycle = await getStackingStatsAtCycle(cityConfig, cycle)
   if (stackingStatsAtCycle === null) {
     return new Response(`Stacking stats not found at reward cycle: ${cycle}`, { status: 404 })
   }
