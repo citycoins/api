@@ -1,6 +1,6 @@
 
 export interface SingleValue {
-  value: string
+  value: string | boolean
 }
 
 export interface Prices {

@@ -677,6 +677,23 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
+  /tools/proof-of-hodl/{cityname}/{address}:
+    get:
+      summary: Check Proof of Hodl
+      description: Check whether the user is holding or stacking a given CityCoin at a given address
+      tags:
+        - Tools
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/address'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonBoolean'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
 components:
   #-------------------------------
   # Reusable operation parameters
