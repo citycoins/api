@@ -30,6 +30,7 @@ import GetName from './handlers/token/getname'
 import GetSymbol from './handlers/token/getsymbol'
 import GetTokenUri from './handlers/token/gettokenuri'
 import GetTokenUriJson from './handlers/token/gettokenurijson'
+import GetPrices from './handlers/tools/getprices'
 
 const router = Router()
 
@@ -73,6 +74,8 @@ router
   .get('/token/get-token-uri/:cityname', GetTokenUri)
   .get('/token/get-token-uri-json/:cityname', GetTokenUriJson)
   .get('/token/get-total-supply/:cityname', GetTotalSupply)
+  // Tools
+  .get('/tools/prices/:cityname/:currency?', GetPrices)
   // Default route
   .get('*', () => new Response("Resource not found, please check the URL.", { status: 404 }))
 

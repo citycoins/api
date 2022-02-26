@@ -44,6 +44,8 @@ tags:
     externalDocs:
       description: Hiro Documentation Reference
       url: https://docs.hiro.so/get-started/stacks-blockchain-api
+  - name: Tools
+    description: Wrappers for complex contract interactions and external data
 paths:
   /stacks/get-block-height:
     get:
@@ -644,6 +646,37 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
+  /tools/prices/{cityname}/{currency}:
+    get:
+      summary: Get Prices
+      description: |
+        Get the prices for STX or a given CityCoin, optionally specifying the currency
+        - if no currency is specified, the default currency is `usd`
+        - for this tool, the `:cityname` endpoint also accepts `stx` to show the current STX price
+      tags:
+        - Tools
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+        - $ref: '#/components/parameters/currency'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coingecko:
+                    type: number
+              examples:
+                "0":
+                  value:
+                    coingecko: "0.1234"
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
 components:
   #-------------------------------
   # Reusable operation parameters
@@ -671,6 +704,14 @@ components:
         type: string
         enum: [mia, nyc]
       description: The CityCoin symbol to query
+    currency:
+      in: path
+      name: currency
+      required: true
+      schema:
+        type: string
+        enum: [usd, eur, btc, sats]
+      description: The currency to query, defaults to `usd` if left blank, full list of supported currencies can be found at https://api.coingecko.com/api/v3/simple/supported_vs_currencies
     cycleid:
       in: path
       name: cycleid
