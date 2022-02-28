@@ -3,13 +3,31 @@ const docsHtml = `
 <html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta charset="utf-8" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <!-- Title and Description -->
+  <title>CityCoins API Documentation</title>
   <meta name="title" content="CityCoins API Documentation" />
   <meta name="description" content="The OpenAPI specification and documentation for the CityCoins API." />
   <meta name="keywords" content="API, Cloudflare, Stacks" />
+  <!-- Google / Search Engine Meta Tags -->
+  <meta itemprop="name" content="CityCoins API Documentation" />
+  <meta itemprop="description" content="The OpenAPI specification and documentation for the CityCoins API." />
+  <meta itemprop="image" content="/citycoins-api-logo.png" />
+  <!-- Facebook Meta Tags -->
+  <meta property="og:url" content="https://api.citycoins.co" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="CityCoins API Documentation" />
+  <meta property="og:description" content="The OpenAPI specification and documentation for the CityCoins API." />
+  <meta property="og:image" content="/citycoins-api-logo.png" />
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CityCoins API Documentation" />
+  <meta name="twitter:description" content="The OpenAPI specification and documentation for the CityCoins API." />
+  <meta name="twitter:image" content="/citycoins-api-logo.png" />
+  <!-- Meta Tags Above Generated via http://heymeta.com -->
   <meta name="robots" content="index, follow" />
   <meta name="language" content="English" />
+  <!-- Favicons and code below from https://favicon-generator.org -->
   <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
   <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
   <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
@@ -28,7 +46,6 @@ const docsHtml = `
   <meta name="msapplication-TileColor" content="#ffffff" />
   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
   <meta name="theme-color" content="#ffffff" />
-  <title>CityCoins API Documentation</title>
 </head>
 <body style="margin: 0; padding: 0;">
 <redoc spec-url='/openapi.yml'></redoc>

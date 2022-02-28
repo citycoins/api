@@ -4,13 +4,31 @@ const landingHtml = `
 <html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta charset="utf-8" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <!-- Title and Description -->
+  <title>CityCoins API</title>
   <meta name="title" content="CityCoins API" />
   <meta name="description" content="A simple API to interact with Stacks and CityCoins data." />
   <meta name="keywords" content="API, Cloudflare, Stacks" />
+  <!-- Google / Search Engine Meta Tags -->
+  <meta itemprop="name" content="CityCoins API" />
+  <meta itemprop="description" content="A simple API to interact with Stacks and CityCoins data." />
+  <meta itemprop="image" content="/citycoins-api-logo.png" />
+  <!-- Facebook Meta Tags -->
+  <meta property="og:url" content="https://api.citycoins.co" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="CityCoins API" />
+  <meta property="og:description" content="A simple API to interact with Stacks and CityCoins data." />
+  <meta property="og:image" content="/citycoins-api-logo.png" />
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CityCoins API" />
+  <meta name="twitter:description" content="A simple API to interact with Stacks and CityCoins data." />
+  <meta name="twitter:image" content="/citycoins-api-logo.png" />
+  <!-- Meta Tags Above Generated via http://heymeta.com -->
   <meta name="robots" content="index, follow" />
   <meta name="language" content="English" />
+  <!-- Favicons and code below from https://favicon-generator.org -->
   <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
   <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
   <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
@@ -29,7 +47,6 @@ const landingHtml = `
   <meta name="msapplication-TileColor" content="#ffffff" />
   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
   <meta name="theme-color" content="#ffffff" />
-  <title>CityCoins API</title>
 </head>
 <body style="text-align: center; max-width: 600px; margin: 0 auto; padding: 1em">
 <img src="/citycoins-api-logo.png" alt="CityCoins API Logo" style="width: 100%; max-width: 300px; margin: 0 auto;">
