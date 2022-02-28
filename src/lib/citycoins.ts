@@ -322,8 +322,9 @@ export async function getProofOfHodl(cityConfig: CityConfig, address: string): P
     // check if the user is stacking in the current cycle
     // if so, return true
     const userId = await getUserId(cityConfig, address)
+      .catch(() => { return '' })
     console.log(`userId: ${userId}`)
-    if (userId === null) { return false}
+    if (userId === null || userId === '') { return false}
     const currentBlock = await getStacksBlockHeight()
     console.log(`currentBlock: ${currentBlock}`)
     const currentCycle = await getRewardCycle(cityConfig, currentBlock)
