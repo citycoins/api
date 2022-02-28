@@ -2,9 +2,8 @@ import { handleRequest } from './handler'
 import { getAssetFromKV, MethodNotAllowedError, NotFoundError } from '@cloudflare/kv-asset-handler'
 
 addEventListener('fetch', (event) => {
-  // check if item should be downloaded from KV
   if (matchDownload(event.request.url)) {
-    console.log(event.request.url)
+    // check if item should be downloaded from KV
     event.respondWith(returnDownload(event))
   } else {
     // otherwise route the request to itty-router
