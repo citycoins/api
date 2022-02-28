@@ -315,21 +315,17 @@ export async function getProofOfHodl(cityConfig: CityConfig, address: string): P
   // if so, return true
   const balance = await getBalance(cityConfig, address)
     .catch(() => { return '' })
-  console.log(`balance: ${balance}`)
   if (+balance > 0) {
     return true
   } else {
     // check if the user is stacking in the current cycle
     // if so, return true
     const userId = await getUserId(cityConfig, address)
-    console.log(`userId: ${userId}`)
-    if (userId === null) { return false}
+      .catch(() => { return '' })
+    if (userId === null || userId === '') { return false }
     const currentBlock = await getStacksBlockHeight()
-    console.log(`currentBlock: ${currentBlock}`)
     const currentCycle = await getRewardCycle(cityConfig, currentBlock)
-    console.log(`currentCycle: ${currentCycle}`)
     const stacker = await getStackerAtCycle(cityConfig, currentCycle, userId)
-    console.log(`stacker: ${JSON.stringify(stacker)}`)
     if (stacker === null) { return false } else { return true }
   }
 }
