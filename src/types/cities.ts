@@ -1,11 +1,11 @@
 export interface CityConfig {
-  deployer: string;
-  authContract: string;
-  coreContract: string;
-  tokenContract: string;
-  tokenDisplayName: string;
-  tokenName: string;
-  tokenSymbol: string;
+  deployer: string,
+  authContract: string,
+  coreContract: string,
+  tokenContract: string,
+  tokenDisplayName: string,
+  tokenName: string,
+  tokenSymbol: string,
 }
 
 const emptyConfig: CityConfig = {
@@ -41,19 +41,15 @@ const nycConfig: CityConfig = {
 export async function getCityConfig(city: string): Promise<CityConfig> {
   switch (city.toLowerCase()) {
     case "mia":
-      return miaConfig;
+      return miaConfig
     case "nyc":
-      return nycConfig;
+      return nycConfig
     default:
-      return emptyConfig;
+      return emptyConfig
   }
 }
 
 /* IDEAS
-
-interface CityPrices {
-  [key: string]: number;
-}
 
 interface CitySettings {
   config: CityConfig,

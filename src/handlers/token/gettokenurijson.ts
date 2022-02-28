@@ -1,5 +1,5 @@
 import { Request as IttyRequest } from 'itty-router'
-import { getTokenUri } from "../../lib/citycoins"
+import { getTokenUri } from '../../lib/citycoins'
 import { getCityConfig } from '../../types/cities'
 import { TokenUri } from '../../types/token'
 

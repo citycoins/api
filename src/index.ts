@@ -2,9 +2,8 @@ import { handleRequest } from './handler'
 import { getAssetFromKV, MethodNotAllowedError, NotFoundError } from '@cloudflare/kv-asset-handler'
 
 addEventListener('fetch', (event) => {
-  // check if item should be downloaded from KV
   if (matchDownload(event.request.url)) {
-    console.log(event.request.url)
+    // check if item should be downloaded from KV
     event.respondWith(returnDownload(event))
   } else {
     // otherwise route the request to itty-router
@@ -15,13 +14,16 @@ addEventListener('fetch', (event) => {
 // returns true if the URL matches a given string
 function matchDownload(target: string): boolean {
   const url = new URL(target)
-  switch (url.pathname) {
-    case '/openapi.yml':
-    case '/citycoins-api-logo.png':
-      return true
-    default:
-      return false
+  const validExt = ['.png', '.xml', '.ico', '.yml', '.json']
+  let isDownload = false
+  // check if the URL is at the base path
+  if (url.pathname.split('/').length === 2) {
+    // check if the file extension matches
+    isDownload = validExt.some((value) => {
+      return url.pathname.endsWith(value)
+    })
   }
+  return isDownload
 }
 
 // returns the response from KV for the asset
