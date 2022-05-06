@@ -18,6 +18,7 @@ const emptyConfig: CityConfig = {
   tokenSymbol: '',
 }
 
+/*
 const miaConfig: CityConfig = {
   deployer: "SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27",
   authContract: "miamicoin-auth",
@@ -27,12 +28,35 @@ const miaConfig: CityConfig = {
   tokenName: "miamicoin",
   tokenSymbol: "MIA",
 };
+*/
 
+const miaConfig: CityConfig = {
+  deployer: "SP1H1733V5MZ3SZ9XRW9FKYGEZT0JDGEB8Y634C7R",
+  authContract: "miamicoin-auth-v2",
+  coreContract: "miamicoin-core-v2",
+  tokenContract: "miamicoin-token-v2",
+  tokenDisplayName: "MiamiCoin",
+  tokenName: "miamicoin",
+  tokenSymbol: "MIA",
+};
+
+/*
 const nycConfig: CityConfig = {
   deployer: "SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5",
   authContract: "newyorkcitycoin-auth",
   coreContract: "newyorkcitycoin-core-v1",
   tokenContract: "newyorkcitycoin-token",
+  tokenDisplayName: "NewYorkCityCoin",
+  tokenName: "newyorkcitycoin",
+  tokenSymbol: "NYC",
+};
+*/
+
+const nycConfig: CityConfig = {
+  deployer: "SPSCWDV3RKV5ZRN1FQD84YE1NQFEDJ9R1F4DYQ11",
+  authContract: "newyorkcitycoin-auth-v2",
+  coreContract: "newyorkcitycoin-core-v2",
+  tokenContract: "newyorkcitycoin-token-v2",
   tokenDisplayName: "NewYorkCityCoin",
   tokenName: "newyorkcitycoin",
   tokenSymbol: "NYC",
