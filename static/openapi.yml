@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: CityCoins API
   description: A simple API to interact with Stacks and CityCoins data. See the [CityCoins documentation site](https://docs.citycoins.co/developer-resources/api) or [GitHub for more info.](https://github.com/citycoins/api)
-  version: 1.1.0
+  version: 2.0.0
 servers:
   - url: https://api.citycoins.co
     description: Main
@@ -91,13 +91,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /activation/get-activation-block/{cityname}:
+  /{version}/{cityname}/activation/get-activation-block:
     get:
       summary: Get Activation Block
       description: Get the Stacks block height the core contract was activated at for a given CityCoin
       tags:
         - Activation
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
@@ -107,13 +108,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /activation/get-registered-users-nonce/{cityname}:
+  /{version}/{cityname}/activation/get-registered-users-nonce:
     get:
       summary: Get Registered Users
       description: Get the total number of users assigned an ID from the core contract for a given CityCoin
       tags:
         - Activation
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
@@ -123,13 +125,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /activation/get-user/{cityname}/{userid}:
+  /{version}/{cityname}/activation/get-user/{userid}:
     get:
       summary: Get User
       description: Get the Stacks address for a given CityCoin and user ID
       tags:
         - Activation
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/userid'
       responses:
@@ -140,13 +143,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /activation/get-user-id/{cityname}/{address}:
+  /{version}/{cityname}/activation/get-user-id/{address}:
     get:
       summary: Get User ID
       description: Get the CityCoins user ID from the core contract for a given CityCoin and Stacks address
       tags:
         - Activation
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/address'
       responses:
@@ -157,13 +161,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /mining/get-block-winner-id/{cityname}/{blockheight}:
+  /{version}/{cityname}/mining/get-block-winner-id/{blockheight}:
     get:
       summary: Get Block Winner ID
       description: Gets the winning user ID for a given blockheight only *after the miner claims the reward*
       tags:
         - Mining
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
       responses:
@@ -174,13 +179,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /mining/get-mining-stats-at-block/{cityname}/{blockheight}:
+  /{version}/{cityname}/mining/get-mining-stats-at-block/{blockheight}:
     get:
       summary: Get Mining Stats
       description: Get the mining stats for a given CityCoin and Stacks block height
       tags:
         - Mining
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
       responses:
@@ -214,13 +220,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /mining/get-miner-at-block/{cityname}/{blockheight}/{userid}:
+  /{version}/{cityname}/mining/get-miner-at-block/{blockheight}/{userid}:
     get:
       summary: Get Miner Info
       description: Get the miner details for a given CityCoin, Stacks block height, and user ID.
       tags:
         - Mining
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
         - $ref: '#/components/parameters/userid'
@@ -252,13 +259,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /mining/get-last-high-value-at-block/{cityname}/{blockheight}:
+  /{version}/{cityname}/mining/get-last-high-value-at-block//{blockheight}:
     get:
       summary: Get Last High Value at Block
       description: Gets the last high value at the specified block used to determine the winner by the VRF, and increases with each miner commitment.
       tags:
         - Mining
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
       responses:
@@ -269,13 +277,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /mining/has-mined-at-block/{cityname}/{blockheight}/{userid}:
+  /{version}/{cityname}/mining/has-mined-at-block/{blockheight}/{userid}:
     get:
       summary: Has Mined at Block
       description: Check if a the user has mined with a given CityCoin, Stacks block height, and user ID.
       tags:
         - Mining
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
         - $ref: '#/components/parameters/userid'
@@ -287,13 +296,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /mining-claims/can-claim-mining-reward/{cityname}/{blockheight}/{address}:
+  /{version}/{cityname}/mining-claims/can-claim-mining-reward/{blockheight}/{address}:
     get:
       summary: Can Claim Mining Reward
       description: Returns a boolean value indicating if the user's principal won and is eligible to claim the block reward at a given block height.
       tags:
         - Mining Claims
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
         - $ref: '#/components/parameters/address'
@@ -305,13 +315,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /mining-claims/is-block-winner/{cityname}/{blockheight}/{address}:
+  /{version}/{cityname}/mining-claims/is-block-winner/{blockheight}/{address}:
     get:
       summary: Is Block Winner
       description: Returns a boolean value indicating if the user's principal won at a given block height.
       tags:
         - Mining Claims
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
         - $ref: '#/components/parameters/address'
@@ -323,13 +334,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /stacking/get-stacking-stats-at-cycle/{cityname}/{cycleid}:
+  /{version}/{cityname}/stacking/get-stacking-stats-at-cycle/{cycleid}:
     get:
       summary: Get Stacking Stats
       description: Get the stacking stats for a given CityCoin and reward cycle ID
       tags:
         - Stacking
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/cycleid'
       responses:
@@ -354,13 +366,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /stacking/get-stacker-at-cycle/{cityname}/{cycleid}/{userid}:
+  /{version}/{cityname}/stacking/get-stacker-at-cycle/{cycleid}/{userid}:
     get:
       summary: Get Stacker Info
       description: Get the amount stacked and amount to return for a given CityCoin, reward cycle ID, and user ID.
       tags:
         - Stacking
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/cycleid'
         - $ref: '#/components/parameters/userid'
@@ -386,13 +399,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /stacking/get-reward-cycle/{cityname}/{blockheight}:
+  /{version}/{cityname}/stacking/get-reward-cycle/{blockheight}:
     get:
       summary: Get Reward Cycle
       description: Get the reward cycle for a given CityCoin and Stacks block height
       tags:
         - Stacking
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
       responses:
@@ -403,13 +417,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /stacking/get-first-stacks-block-in-reward-cycle/{cityname}/{cycleid}:
+  /{version}/{cityname}/stacking/get-first-stacks-block-in-reward-cycle/{cycleid}:
     get:
       summary: Get First Block In Reward Cycle
       description: Get the first Stacks block in a reward cycle for the given CityCoin and reward cycle ID
       tags:
         - Stacking
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/cycleid'
       responses:
@@ -420,13 +435,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /stacking/stacking-active-at-cycle/{cityname}/{cycleid}:
+  /{version}/{cityname}/stacking/stacking-active-at-cycle/{cycleid}:
     get:
       summary: Stacking Active at Cycle
       description: Returns a boolean value indicating if stacking is active at a given reward cycle, meaning a positive number of CityCoins are Stacked for that cycle.
       tags:
         - Stacking
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/cycleid'
       responses:
@@ -437,7 +453,7 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /stacking-claims/get-stacking-reward/{cityname}/{cycleid}/{userid}:
+  /{version}/{cityname}/stacking-claims/get-stacking-reward/{cycleid}/{userid}:
     get:
       summary: Get Stacking Reward
       description: |
@@ -448,6 +464,7 @@ paths:
       tags:
         - Stacking Claims
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/cycleid'
         - $ref: '#/components/parameters/userid'
@@ -459,13 +476,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /token/get-coinbase-amount/{cityname}/{blockheight}:
+  /{version}/{cityname}/token/get-coinbase-amount/{blockheight}:
     get:
       summary: Get Coinbase Amount
       description: Get the coinbase amount for a given CityCoin and Stacks block height
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
       responses:
@@ -476,13 +494,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /token/get-coinbase-thresholds/{cityname}:
+  /{version}/{cityname}/token/get-coinbase-thresholds:
     get:
       summary: Get Coinbase Thresholds
       description: Get the coinbase thresholds (Stacks block heights) for a given CityCoin
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
       responses:
@@ -516,13 +535,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /token/get-name/{cityname}:
+  /{version}/{cityname}/token/get-name:
     get:
       summary: Get Token Name
       description: Get the SIP-010 name for a given CityCoin
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
@@ -532,13 +552,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /token/get-symbol/{cityname}:
+  /{versions}/{cityname}/token/get-symbol:
     get:
       summary: Get Token Symbol
       description: Get the SIP-010 symbol for a given CityCoin
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
@@ -548,13 +569,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /token/get-decimals/{cityname}:
+  /{version}/{cityname}/token/get-decimals:
     get:
       summary: Get Token Decimals
       description: Get the SIP-010 decimals for a given CityCoin
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
@@ -564,13 +586,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /token/get-balance/{cityname}/{address}:
+  /{version}/{cityname}/token/get-balance/{address}:
     get:
       summary: Get Token Balance
       description: Get the token balance for a given CityCoin and Stacks address
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/address'
       responses:
@@ -581,13 +604,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /token/get-total-supply/{cityname}:
+  /{version}/{cityname}/token/get-total-supply:
     get:
       summary: Get Total Supply
       description: Get the SIP-010 total supply for a given CityCoin
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
@@ -597,13 +621,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /token/get-token-uri/{cityname}:
+  /{version}/{cityname}/token/get-token-uri:
     get:
       summary: Get Token URI
       description: Get the token URI URL for a given CityCoin
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
@@ -613,13 +638,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /token/get-token-uri-json/{cityname}:
+  /{version}/{cityname}/token/get-token-uri-json:
     get:
       summary: Get Token URI JSON
       description: Get the contents of the token URI URL for a given CityCoin
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
@@ -646,7 +672,7 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /tools/prices/{cityname}/{currency}:
+  /{version}/{cityname}/tools/prices/{currency}:
     get:
       summary: Get Prices
       description: |
@@ -656,6 +682,7 @@ paths:
       tags:
         - Tools
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/currency'
       responses:
@@ -677,13 +704,14 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /tools/proof-of-hodl/{cityname}/{address}:
+  /{version}/{cityname}/tools/proof-of-hodl/{address}:
     get:
       summary: Check Proof of Hodl
       description: Check whether the user is holding or stacking a given CityCoin at a given address
       tags:
         - Tools
       parameters:
+        - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/address'
       responses:
@@ -743,6 +771,13 @@ components:
       schema:
         type: string
       description: The user ID stored in a CityCoins core contract for a Stacks address
+    version:
+      in: path
+      name: version
+      required: true
+      schema:
+        type: string
+      description: The major CityCoins contract version, e.g. v1, v2
   #-------------------------------
   # Reusable responses
   #-------------------------------
