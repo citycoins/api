@@ -4,6 +4,7 @@ import Documentation from './handlers/documentation'
 import GetStacksBlockHeight from './handlers/stacks/getstacksblockheight'
 import GetBnsName from './handlers/stacks/getbnsname'
 import GetStxBalance from './handlers/stacks/getstxbalance'
+import GetDateAtBlock from './handlers/stacks/getdateatblock'
 import GetActivationBlock from './handlers/activation/getactivationblock'
 import GetRegisteredUsersNonce from './handlers/activation/getregisteredusersnonce'
 import GetUser from './handlers/activation/getuser'
@@ -44,6 +45,7 @@ router
   .get('/stacks/get-block-height', GetStacksBlockHeight)
   .get('/stacks/get-bns-name/:address', GetBnsName)
   .get('/stacks/get-stx-balance/:address', GetStxBalance)
+  .get('/stacks/get-date-at-block/:blockHeight', GetDateAtBlock)
   // Activation functions
   .get('/:version/:cityname/activation/get-activation-block', GetActivationBlock)
   .get('/:version/:cityname/activation/get-registered-users-nonce', GetRegisteredUsersNonce)

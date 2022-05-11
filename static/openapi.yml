@@ -91,6 +91,22 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
+  /stacks/get-date-at-block/{blockheight}:
+    get:
+      summary: Get Date at Block Height
+      description: Get the ISO-formatted date for a given Stacks block height
+      tags:
+        - Stacks
+      parameters:
+        - $ref: '#/components/parameters/blockheight'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
   /{version}/{cityname}/activation/get-activation-block:
     get:
       summary: Get Activation Block

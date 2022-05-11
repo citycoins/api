@@ -35,3 +35,15 @@ export async function getBnsName(address: string): Promise<string> {
     })
     .then(data => { return String(data.names[0]) })
 }
+
+export async function getDateAtBlock(blockHeight: string): Promise<string> {
+  const url = `${STACKS_NETWORK.getCoreApiUrl()}/extended/v1/block/by_height/${blockHeight}`
+  return fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`)
+      }
+      return response.json() as Promise<{ burn_block_time_iso: string }>
+    })
+    .then(data => { return data.burn_block_time_iso })
+}
