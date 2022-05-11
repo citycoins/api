@@ -1,91 +1,176 @@
+// CONFIGURATION
+
 export interface CityConfig {
-  deployer: string,
-  authContract: string,
-  coreContract: string,
-  tokenContract: string,
-  tokenDisplayName: string,
-  tokenName: string,
-  tokenSymbol: string,
+  [version: string]: CityVersion
 }
+
+export interface CityVersion {
+  cityName: string,
+  contracts: CityContracts,
+  status: CityStatus,
+  token: CityToken,
+}
+
+export interface CityContracts {
+  auth: string,
+  core: string,
+  token: string,
+  deployer: string,
+}
+
+export interface CityStatus {
+  activated: boolean,
+  startBlock?: number,
+  deployed: boolean,
+  shutdown: boolean,
+  shutdownBlock?: number,
+}
+
+export interface CityToken {
+  activationBlock?: number,
+  displayName: string,
+  name: string,
+  symbol: string,
+  decimals: number,
+  logo: string,
+  uri: string,
+}
+
+// EMPTY CONFIGURATION
 
 const emptyConfig: CityConfig = {
-  deployer: '',
-  authContract: '',
-  coreContract: '',
-  tokenContract: '',
-  tokenDisplayName: '',
-  tokenName: '',
-  tokenSymbol: '',
-}
-
-/*
-const miaConfig: CityConfig = {
-  deployer: "SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27",
-  authContract: "miamicoin-auth",
-  coreContract: "miamicoin-core-v1",
-  tokenContract: "miamicoin-token",
-  tokenDisplayName: "MiamiCoin",
-  tokenName: "miamicoin",
-  tokenSymbol: "MIA",
-};
-*/
-
-const miaConfig: CityConfig = {
-  deployer: "SP1H1733V5MZ3SZ9XRW9FKYGEZT0JDGEB8Y634C7R",
-  authContract: "miamicoin-auth-v2",
-  coreContract: "miamicoin-core-v2",
-  tokenContract: "miamicoin-token-v2",
-  tokenDisplayName: "MiamiCoin",
-  tokenName: "miamicoin",
-  tokenSymbol: "MIA",
-};
-
-/*
-const nycConfig: CityConfig = {
-  deployer: "SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5",
-  authContract: "newyorkcitycoin-auth",
-  coreContract: "newyorkcitycoin-core-v1",
-  tokenContract: "newyorkcitycoin-token",
-  tokenDisplayName: "NewYorkCityCoin",
-  tokenName: "newyorkcitycoin",
-  tokenSymbol: "NYC",
-};
-*/
-
-const nycConfig: CityConfig = {
-  deployer: "SPSCWDV3RKV5ZRN1FQD84YE1NQFEDJ9R1F4DYQ11",
-  authContract: "newyorkcitycoin-auth-v2",
-  coreContract: "newyorkcitycoin-core-v2",
-  tokenContract: "newyorkcitycoin-token-v2",
-  tokenDisplayName: "NewYorkCityCoin",
-  tokenName: "newyorkcitycoin",
-  tokenSymbol: "NYC",
-};
-
-export async function getCityConfig(city: string): Promise<CityConfig> {
-  switch (city.toLowerCase()) {
-    case "mia":
-      return miaConfig
-    case "nyc":
-      return nycConfig
-    default:
-      return emptyConfig
+  'v0': {
+    cityName: '',
+    contracts: {
+      auth: '',
+      core: '',
+      token: '',
+      deployer: '',
+    },
+    status: {
+      activated: false,
+      deployed: false,
+      shutdown: false,
+    },
+    token: {
+      displayName: '',
+      name: '',
+      symbol: '',
+      decimals: 0,
+      logo: '',
+      uri: '',
+    }
   }
 }
 
-/* IDEAS
+// MIAMICOIN
 
-interface CitySettings {
-  config: CityConfig,
-  cityName: string;
-  cityWallet: string;
-  deployed: boolean;
-  activated: boolean;
-  startBlock?: number;
+const miaConfig: CityConfig = {
+  'v1': {
+    cityName: 'Miami',
+    contracts: {
+      auth: 'miamicoin-auth',
+      core: 'miamicoin-core-v1',
+      token: 'miamicoin-token',
+      deployer: 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27',
+    },
+    status: {
+      activated: false,
+      deployed: false,
+      shutdown: false,
+    },
+    token: {
+      displayName: 'MiamiCoin',
+      name: 'miamicoin',
+      symbol: 'MIA',
+      decimals: 0,
+      logo: 'https://cdn.citycoins.co/logos/miamicoin.png',
+      uri: 'https://cdn.citycoins.co/metadata/miamicoin.json',
+    }
+  },
+  'v2': {
+    cityName: 'Miami',
+    contracts: {
+      auth: 'miamicoin-auth-v2',
+      core: 'miamicoin-core-v2',
+      token: 'miamicoin-token-v2',
+      deployer: 'SP1H1733V5MZ3SZ9XRW9FKYGEZT0JDGEB8Y634C7R',
+    },
+    status: {
+      activated: false,
+      deployed: false,
+      shutdown: false,
+    },
+    token: {
+      displayName: 'MiamiCoin',
+      name: 'miamicoin',
+      symbol: 'MIA',
+      decimals: 6,
+      logo: 'https://cdn.citycoins.co/logos/miamicoin.png',
+      uri: 'https://cdn.citycoins.co/metadata/miamicoin.json',
+    }
+  }
 }
-// cityLogo: imported SVG?
-// https://stackoverflow.com/questions/44717164/unable-to-import-svg-files-in-typescript
 
-// another name: CityDetails
+// NEWYORKCITYCOIN
 
-*/
+const nycConfig: CityConfig = {
+  'v1': {
+    cityName: 'New York City',
+    contracts: {
+      auth: 'newyorkcitycoin-auth',
+      core: 'newyorkcitycoin-core-v1',
+      token: 'newyorkcitycoin-token',
+      deployer: 'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5',
+    },
+    status: {
+      activated: false,
+      deployed: false,
+      shutdown: false,
+    },
+    token: {
+      displayName: 'NewYorkCityCoin',
+      name: 'newyorkcitycoin',
+      symbol: 'NYC',
+      decimals: 0,
+      logo: '',
+      uri: '',
+    }
+  },
+  'v2': {
+    cityName: 'New York City',
+    contracts: {
+      auth: 'newyorkcitycoin-auth-v2',
+      core: 'newyorkcitycoin-core-v2',
+      token: 'newyorkcitycoin-token-v2',
+      deployer: 'SPSCWDV3RKV5ZRN1FQD84YE1NQFEDJ9R1F4DYQ11',
+    },
+    status: {
+      activated: false,
+      deployed: false,
+      shutdown: false,
+    },
+    token: {
+      displayName: 'NewYorkCityCoin',
+      name: 'newyorkcitycoin',
+      symbol: 'NYC',
+      decimals: 6,
+      logo: '',
+      uri: '',
+    }
+  }
+}
+
+export async function getCityConfig(city: string, version: string): Promise<CityVersion> {
+  version = version.toLowerCase()
+  switch (city.toLowerCase()) {
+    case "mia":
+      if (Object.prototype.hasOwnProperty.call(miaConfig, version)) return miaConfig[version]
+      throw new Error(`Invalid city name or version ${city} ${version}`)
+    case "nyc":
+      if (Object.prototype.hasOwnProperty.call(nycConfig, version)) return nycConfig[version]
+      throw new Error(`Invalid city name or version ${city} ${version}`)
+    default:
+      throw new Error(`Invalid city name or version ${city} ${version}`)
+  }
+}
