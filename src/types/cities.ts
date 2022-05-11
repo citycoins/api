@@ -1,20 +1,5 @@
 // CONFIGURATION
 
-// cityName: New York City
-// status: ContractStatus
-  // deployed: true
-  // deployer: SPSCWDV3RKV5ZRN1FQD84YE1NQFEDJ9R1F4DYQ11
-// auth: AuthContract
-  // name: newyorkcitycoin-auth-v2
-  // initialized: boolean
-// core: CoreContract
-  // name: newyorkcitycoin-core-v2
-  // activated
-  // shutdown
-// token: TokenContract
-  // name: newyorkcitycoin-token-v2
-  // activated: boolean
-
 export interface CityVersions {
   [version: string]: CityConfig
 }
@@ -168,7 +153,6 @@ const nycConfig: CityVersions = {
     },
   }
 }
-
 
 export async function getCityConfig(city: string, version: string): Promise<CityConfig> {
   version = version.toLowerCase()
