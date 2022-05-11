@@ -672,6 +672,100 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
+  /{version}/{cityname}/tools/get-city-configuration:
+    get:
+      summary: Get City Configuration
+      description: Get the city configuration file depending on the select version and city name.
+      tags:
+        - Tools
+      parameters:
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cityName:
+                    type: string
+                  deployed:
+                    type: boolean
+                  deployer:
+                    type: string
+                  auth:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      initialized:
+                        type: boolean
+                  core:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      activated:
+                        type: boolean
+                      startBlock:
+                        type: number
+                      shutdown:
+                        type: boolean
+                      shutdownBlock:
+                        type: number
+                  token:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      activated:
+                        type: boolean
+                      activationBlock:
+                        type: number
+                      displayName:
+                        type: string
+                      tokenName:
+                        type: string
+                      symbol:
+                        type: string
+                      decimals:
+                        type: number
+                      logo:
+                        type: string
+                      uri:
+                        type: string
+              examples:
+                "0":
+                  value:
+                    cityName: "Miami"
+                    deployed: true
+                    deployer: "SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27"
+                    auth:
+                      name: "miamicoin-auth"
+                      initialized: true
+                    core:
+                      name: "miamicoin-core-v1"
+                      activated: false
+                      startBlock: 24497
+                      shutdown: true
+                      shutdownBlock: 58917
+                    token:
+                      name: "miamicoin-token"
+                      activated: true
+                      activationBlock: 24497
+                      displayName: "MiamiCoin"
+                      tokenName: "miamicoin"
+                      symbol: "MIA"
+                      decimals: 0
+                      logo: "https://cdn.citycoins.co/logos/miamicoin.png"
+                      uri: "https://cdn.citycoins.co/metadata/miamicoin.json"
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
   /{version}/{cityname}/tools/prices/{currency}:
     get:
       summary: Get Prices

@@ -30,6 +30,7 @@ import GetName from './handlers/token/getname'
 import GetSymbol from './handlers/token/getsymbol'
 import GetTokenUri from './handlers/token/gettokenuri'
 import GetTokenUriJson from './handlers/token/gettokenurijson'
+import GetCityConfiguration from './handlers/tools/getcityconfiguration'
 import GetPrices from './handlers/tools/getprices'
 import ProofOfHodl from './handlers/tools/proofofhodl'
 
@@ -76,6 +77,7 @@ router
   .get('/:version/:cityname/token/get-token-uri-json', GetTokenUriJson)
   .get('/:version/:cityname/token/get-total-supply', GetTotalSupply)
   // Tools
+  .get('/:version/:cityname/tools/get-city-configuration', GetCityConfiguration)
   .get('/:version/:cityname/tools/prices/:currency?', GetPrices)
   .get('/:version/:cityname/tools/proof-of-hodl/:address', ProofOfHodl)
   .get('/:version/:cityname/tools/proof-of-hold/:address', ProofOfHodl)
