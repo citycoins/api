@@ -1,15 +1,15 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getCGPrice } from '../../lib/prices'
 import { getCityConfig } from '../../types/cities'
-import { Prices } from '../../types/common'
 
 const GetPrices = async (request: IttyRequest): Promise<Response> => {
-  // check inputs
-  const city = request.params?.cityname ?? undefined
-  const currency = request.params?.currency ?? undefined
   let cityConfig
   let tokenName
-  if (city === undefined) {
+  // check inputs
+  const version = request.params?.version ?? undefined
+  const city = request.params?.cityname ?? undefined
+  const currency = request.params?.currency ?? undefined
+  if (version === undefined || city === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
   // hack to allow for stx
@@ -17,14 +17,16 @@ const GetPrices = async (request: IttyRequest): Promise<Response> => {
     tokenName = 'blockstack'
   } else {
     // get city configuration object
-    cityConfig = await getCityConfig(city)
-    if (cityConfig.deployer === '') {
-      return new Response(`City name not found: ${city}`, { status: 404 })
+    try {
+      cityConfig = await getCityConfig(city, version)
+    } catch (err) {
+      if (err instanceof Error) return new Response(err.message, { status: 404 })
+      return new Response(String(err), { status: 404 })
     }
-    tokenName = cityConfig.tokenName
+    tokenName = cityConfig.token.tokenName
   }
   // get CoinGecko price
-  const prices: Prices = await getCGPrice(tokenName, currency)
+  const prices = await getCGPrice(tokenName, currency)
     .catch(() => { return {
       "coingecko": 0,
     }})

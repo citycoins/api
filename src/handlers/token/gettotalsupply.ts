@@ -2,7 +2,6 @@ import { Request as IttyRequest } from 'itty-router'
 import { getTotalSupply } from '../../lib/citycoins'
 import { createSingleValue } from '../../lib/common'
 import { getCityConfig } from '../../types/cities'
-import { SingleValue } from '../../types/common'
 
 const GetTotalSupply = async (request: IttyRequest): Promise<Response> => {
   let cityConfig
@@ -20,9 +19,9 @@ const GetTotalSupply = async (request: IttyRequest): Promise<Response> => {
     return new Response(String(err), { status: 404 })
   }
   // get total supply
-  const totalSupply: string = await getTotalSupply(cityConfig)
+  const totalSupply = await getTotalSupply(cityConfig)
   // return response
-  const response: SingleValue = await createSingleValue(totalSupply)
+  const response = await createSingleValue(totalSupply)
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',

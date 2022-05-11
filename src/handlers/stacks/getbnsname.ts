@@ -1,7 +1,6 @@
 import { Request as IttyRequest } from 'itty-router'
 import { createSingleValue } from '../../lib/common'
 import { getBnsName } from '../../lib/stacks'
-import { SingleValue } from '../../types/common'
 
 const GetBnsName = async (request: IttyRequest): Promise<Response> => {
   // check inputs
@@ -10,13 +9,13 @@ const GetBnsName = async (request: IttyRequest): Promise<Response> => {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
   // get Stacks block height from API
-  const bnsNames: string = await getBnsName(address)
+  const bnsNames = await getBnsName(address)
     .catch(() => { return '' })
   if (bnsNames === '' || bnsNames === 'undefined') {
     return new Response(`BNS name(s) not found for address: ${address}`, { status: 404 })
   }
   // return response
-  const response: SingleValue = await createSingleValue(bnsNames)
+  const response = await createSingleValue(bnsNames)
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',

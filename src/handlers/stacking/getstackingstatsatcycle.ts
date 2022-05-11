@@ -3,19 +3,22 @@ import { getRewardCycle, getStackingStatsAtCycle } from '../../lib/citycoins'
 import { isStringAllDigits } from '../../lib/common'
 import { getStacksBlockHeight } from '../../lib/stacks'
 import { getCityConfig } from '../../types/cities'
-import { StackingStatsAtCycle } from '../../types/stacking'
 
 const GetStackingStatsAtCycle = async (request: IttyRequest): Promise<Response> => {
+  let cityConfig
   // check inputs
+  const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
   let cycle = request.params?.cycleid ?? undefined
-  if (city === undefined || cycle === undefined) {
+  if (version === undefined || city === undefined || cycle === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
   // get city configuration object
-  const cityConfig = await getCityConfig(city)
-  if (cityConfig.deployer === '') {
-    return new Response(`City name not found: ${city}`, { status: 404 })
+  try {
+    cityConfig = await getCityConfig(city, version)
+  } catch (err) {
+    if (err instanceof Error) return new Response(err.message, { status: 404 })
+    return new Response(String(err), { status: 404 })
   }
   // get current reward cycle if specified
   if (cycle === 'current') {
@@ -28,7 +31,7 @@ const GetStackingStatsAtCycle = async (request: IttyRequest): Promise<Response> 
     }
   }
   // get stacking stats at cycle
-  const stackingStatsAtCycle: StackingStatsAtCycle = await getStackingStatsAtCycle(cityConfig, cycle)
+  const stackingStatsAtCycle = await getStackingStatsAtCycle(cityConfig, cycle)
   if (stackingStatsAtCycle === null) {
     return new Response(`Stacking stats not found at reward cycle: ${cycle}`, { status: 404 })
   }

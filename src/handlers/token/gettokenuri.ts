@@ -2,23 +2,26 @@ import { Request as IttyRequest } from 'itty-router'
 import { getTokenUri } from '../../lib/citycoins'
 import { createSingleValue } from '../../lib/common'
 import { getCityConfig } from '../../types/cities'
-import { SingleValue } from '../../types/common'
 
 const GetTokenUri = async (request: IttyRequest): Promise<Response> => {
+  let cityConfig
   // check inputs
+  const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
-  if (city === undefined) {
+  if (version === undefined || city === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
   // get city configuration object
-  const cityConfig = await getCityConfig(city)
-  if (cityConfig.deployer === '') {
-    return new Response(`City name not found: ${city}`, { status: 404 })
+  try {
+    cityConfig = await getCityConfig(city, version)
+  } catch (err) {
+    if (err instanceof Error) return new Response(err.message, { status: 404 })
+    return new Response(String(err), { status: 404 })
   }
   // get SIP-010 token uri
-  const tokenUri: string = await getTokenUri(cityConfig)
+  const tokenUri = await getTokenUri(cityConfig)
   // return response
-  const response: SingleValue = await createSingleValue(tokenUri)
+  const response = await createSingleValue(tokenUri)
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
