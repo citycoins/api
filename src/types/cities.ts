@@ -22,7 +22,7 @@ export interface CityVersions {
 export interface CityConfig {
   cityName: string,
   deployed: boolean,
-  deployer?: string,
+  deployer: string,
   auth: AuthContract,
   core: CoreContract,
   token: TokenContract,
@@ -170,7 +170,7 @@ const nycConfig: CityVersions = {
 }
 
 
-export async function getCityConfig(city: string, version: string): Promise<CityVersion> {
+export async function getCityConfig(city: string, version: string): Promise<CityConfig> {
   version = version.toLowerCase()
   switch (city.toLowerCase()) {
     case "mia":
