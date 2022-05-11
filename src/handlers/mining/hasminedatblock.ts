@@ -3,20 +3,23 @@ import { hasMinedAtBlock } from '../../lib/citycoins'
 import { createSingleValue, isStringAllDigits } from '../../lib/common'
 import { getStacksBlockHeight } from '../../lib/stacks'
 import { getCityConfig } from '../../types/cities'
-import { SingleValue } from '../../types/common'
 
 const HasMinedAtBlock = async (request: IttyRequest): Promise<Response> => {
+  let cityConfig
   // check inputs
+  const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
   let blockHeight = request.params?.blockheight ?? undefined
   const userId = request.params?.userid ?? undefined
-  if (city === undefined || blockHeight === undefined || userId === undefined) {
+  if (version === undefined || city === undefined || blockHeight === undefined || userId === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
   // get city configuration object
-  const cityConfig = await getCityConfig(city)
-  if (cityConfig.deployer === '') {
-    return new Response(`City name not found: ${city}`, { status: 404 })
+  try {
+    cityConfig = await getCityConfig(city, version)
+  } catch (err) {
+    if (err instanceof Error) return new Response(err.message, { status: 404 })
+    return new Response(String(err), { status: 404 })
   }
   // get current block height if specified
   if (blockHeight === 'current') {
@@ -37,7 +40,7 @@ const HasMinedAtBlock = async (request: IttyRequest): Promise<Response> => {
     return new Response(`Mining record for ${userId} not found at block height: ${blockHeight}`, { status: 404 })
   }
   // return response
-  const response: SingleValue = await createSingleValue(minedAtBlock)
+  const response = await createSingleValue(minedAtBlock)
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',

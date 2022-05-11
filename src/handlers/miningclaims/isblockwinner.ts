@@ -3,20 +3,23 @@ import { isBlockWinner } from '../../lib/citycoins'
 import { createSingleValue, isStringAllDigits } from '../../lib/common'
 import { getStacksBlockHeight } from '../../lib/stacks'
 import { getCityConfig } from '../../types/cities'
-import { SingleValue } from '../../types/common'
 
 const IsBlockWinner = async (request: IttyRequest): Promise<Response> => {
+  let cityConfig
   // check inputs
+  const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
   const blockHeight = request.params?.blockheight ?? undefined
   const user = request.params?.address ?? undefined
-  if (city === undefined || blockHeight === undefined || user === undefined) {
+  if (version === undefined || city === undefined || blockHeight === undefined || user === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
   // get city configuration object
-  const cityConfig = await getCityConfig(city)
-  if (cityConfig.deployer === '') {
-    return new Response(`City name not found: ${city}`, { status: 404 })
+  try {
+    cityConfig = await getCityConfig(city, version)
+  } catch (err) {
+    if (err instanceof Error) return new Response(err.message, { status: 404 })
+    return new Response(String(err), { status: 404 })
   }
   // verify block height is valid value
   if (!isStringAllDigits(blockHeight) && blockHeight !== 'current') {
@@ -32,7 +35,7 @@ const IsBlockWinner = async (request: IttyRequest): Promise<Response> => {
   // check if user won at given block height
   const blockWinner = await isBlockWinner(cityConfig, user, blockHeight)
   // return response
-  const response: SingleValue = await createSingleValue(blockWinner)
+  const response = await createSingleValue(blockWinner)
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',

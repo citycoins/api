@@ -3,20 +3,23 @@ import { getRewardCycle, getStackingReward } from '../../lib/citycoins'
 import { createSingleValue, isStringAllDigits } from '../../lib/common'
 import { getStacksBlockHeight } from '../../lib/stacks'
 import { getCityConfig } from '../../types/cities'
-import { SingleValue } from '../../types/common'
 
 const GetStackingReward = async (request: IttyRequest): Promise<Response> => {
+  let cityConfig
   // check inputs
+  const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
   const cycle = request.params?.cycleid ?? undefined
   const userId = request.params?.userid ?? undefined
-  if (city === undefined || cycle === undefined || userId === undefined) {
+  if (version === undefined || city === undefined || cycle === undefined || userId === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
   // get city configuration object
-  const cityConfig = await getCityConfig(city)
-  if (cityConfig.deployer === '') {
-    return new Response(`City name not found: ${city}`, { status: 404 })
+  try {
+    cityConfig = await getCityConfig(city, version)
+  } catch (err) {
+    if (err instanceof Error) return new Response(err.message, { status: 404 })
+    return new Response(String(err), { status: 404 })
   }
   // verify target cycle is a valid value
   if (!isStringAllDigits(cycle) && cycle !== 'current') {
@@ -36,7 +39,7 @@ const GetStackingReward = async (request: IttyRequest): Promise<Response> => {
   // get stacking reward for user at cycle
   const stackingReward = await getStackingReward(cityConfig, cycle, userId)
   // return response
-  const response: SingleValue = await createSingleValue(stackingReward)
+  const response = await createSingleValue(stackingReward)
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',

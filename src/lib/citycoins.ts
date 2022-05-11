@@ -14,7 +14,7 @@ import { getStacksBlockHeight } from './stacks'
 export async function getActivationBlock(cityConfig: CityConfig): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'get-activation-block',
     functionArgs: [],
     network: STACKS_NETWORK,
@@ -25,7 +25,7 @@ export async function getActivationBlock(cityConfig: CityConfig): Promise<string
 export async function getRegisteredUsersNonce(cityConfig: CityConfig): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'get-registered-users-nonce',
     functionArgs: [],
     network: STACKS_NETWORK,
@@ -36,7 +36,7 @@ export async function getRegisteredUsersNonce(cityConfig: CityConfig): Promise<s
 export async function getUser(cityConfig: CityConfig, id: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'get-user',
     functionArgs: [uintCV(id)],
     network: STACKS_NETWORK,
@@ -47,7 +47,7 @@ export async function getUser(cityConfig: CityConfig, id: string): Promise<strin
 export async function getUserId(cityConfig: CityConfig, address: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'get-user-id',
     functionArgs: [standardPrincipalCV(address)],
     network: STACKS_NETWORK,
@@ -62,7 +62,7 @@ export async function getUserId(cityConfig: CityConfig, address: string): Promis
 export async function getBlockWinnerId(cityConfig: CityConfig, blockHeight: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'get-block-winner-id',
     functionArgs: [uintCV(blockHeight)],
     network: STACKS_NETWORK,
@@ -73,7 +73,7 @@ export async function getBlockWinnerId(cityConfig: CityConfig, blockHeight: stri
 export async function getMiningStatsAtBlock(cityConfig: CityConfig, blockHeight: string): Promise<MiningStatsAtBlock> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'get-mining-stats-at-block',
     functionArgs: [uintCV(blockHeight)],
     network: STACKS_NETWORK,
@@ -84,7 +84,7 @@ export async function getMiningStatsAtBlock(cityConfig: CityConfig, blockHeight:
 export async function getMinerAtBlock(cityConfig: CityConfig, blockHeight: string, userId: string): Promise<MinerAtBlock> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'get-miner-at-block',
     functionArgs: [uintCV(blockHeight), uintCV(userId)],
     network: STACKS_NETWORK,
@@ -95,7 +95,7 @@ export async function getMinerAtBlock(cityConfig: CityConfig, blockHeight: strin
 export async function getLastHighValueAtBlock(cityConfig: CityConfig, blockHeight: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'get-last-high-value-at-block',
     functionArgs: [uintCV(blockHeight)],
     network: STACKS_NETWORK,
@@ -106,7 +106,7 @@ export async function getLastHighValueAtBlock(cityConfig: CityConfig, blockHeigh
 export async function hasMinedAtBlock(cityConfig: CityConfig, blockHeight: string, userId: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'has-mined-at-block',
     functionArgs: [uintCV(blockHeight), uintCV(userId)],
     network: STACKS_NETWORK,
@@ -121,7 +121,7 @@ export async function hasMinedAtBlock(cityConfig: CityConfig, blockHeight: strin
 export async function canClaimMiningReward(cityConfig: CityConfig, address: string, blockHeight: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'can-claim-mining-reward',
     functionArgs: [standardPrincipalCV(address), uintCV(blockHeight)],
     network: STACKS_NETWORK,
@@ -132,7 +132,7 @@ export async function canClaimMiningReward(cityConfig: CityConfig, address: stri
 export async function isBlockWinner(cityConfig: CityConfig, address: string, blockHeight: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'is-block-winner',
     functionArgs: [standardPrincipalCV(address), uintCV(blockHeight)],
     network: STACKS_NETWORK,
@@ -147,7 +147,7 @@ export async function isBlockWinner(cityConfig: CityConfig, address: string, blo
 export async function getStackingStatsAtCycle(cityConfig: CityConfig, cycleId: string): Promise<StackingStatsAtCycle> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'get-stacking-stats-at-cycle',
     functionArgs: [uintCV(cycleId)],
     network: STACKS_NETWORK,
@@ -158,7 +158,7 @@ export async function getStackingStatsAtCycle(cityConfig: CityConfig, cycleId: s
 export async function getStackerAtCycle(cityConfig: CityConfig, cycleId: string, userId: string): Promise<StackerAtCycle> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'get-stacker-at-cycle',
     functionArgs: [uintCV(cycleId), uintCV(userId)],
     network: STACKS_NETWORK,
@@ -169,7 +169,7 @@ export async function getStackerAtCycle(cityConfig: CityConfig, cycleId: string,
 export async function getRewardCycle(cityConfig: CityConfig, blockHeight: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'get-reward-cycle',
     functionArgs: [uintCV(blockHeight)],
     network: STACKS_NETWORK,
@@ -180,7 +180,7 @@ export async function getRewardCycle(cityConfig: CityConfig, blockHeight: string
 export async function getFirstStacksBlockInRewardCycle(cityConfig: CityConfig, cycleId: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'get-first-stacks-block-in-reward-cycle',
     functionArgs: [uintCV(cycleId)],
     network: STACKS_NETWORK,
@@ -191,7 +191,7 @@ export async function getFirstStacksBlockInRewardCycle(cityConfig: CityConfig, c
 export async function stackingActiveAtCycle(cityConfig: CityConfig, cycleId: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'stacking-active-at-cycle',
     functionArgs: [uintCV(cycleId)],
     network: STACKS_NETWORK,
@@ -206,7 +206,7 @@ export async function stackingActiveAtCycle(cityConfig: CityConfig, cycleId: str
 export async function getStackingReward(cityConfig: CityConfig, cycleId: string, userId: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'get-stacking-reward',
     functionArgs: [uintCV(userId), uintCV(cycleId)],
     network: STACKS_NETWORK,
@@ -221,7 +221,7 @@ export async function getStackingReward(cityConfig: CityConfig, cycleId: string,
 export async function getCoinbaseThresholds(cityConfig: CityConfig): Promise<CoinbaseThresholds> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.tokenContract,
+    contractName: cityConfig.token.name,
     functionName: 'get-coinbase-thresholds',
     functionArgs: [],
     network: STACKS_NETWORK,
@@ -232,7 +232,7 @@ export async function getCoinbaseThresholds(cityConfig: CityConfig): Promise<Coi
 export async function getCoinbaseAmount(cityConfig: CityConfig, blockHeight: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.coreContract,
+    contractName: cityConfig.core.name,
     functionName: 'get-coinbase-amount',
     functionArgs: [uintCV(blockHeight)],
     network: STACKS_NETWORK,
@@ -243,7 +243,7 @@ export async function getCoinbaseAmount(cityConfig: CityConfig, blockHeight: str
 export async function getName(cityConfig: CityConfig): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.tokenContract,
+    contractName: cityConfig.token.name,
     functionName: 'get-name',
     functionArgs: [],
     network: STACKS_NETWORK,
@@ -254,7 +254,7 @@ export async function getName(cityConfig: CityConfig): Promise<string> {
 export async function getSymbol(cityConfig: CityConfig): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.tokenContract,
+    contractName: cityConfig.token.name,
     functionName: 'get-symbol',
     functionArgs: [],
     network: STACKS_NETWORK,
@@ -265,7 +265,7 @@ export async function getSymbol(cityConfig: CityConfig): Promise<string> {
 export async function getDecimals(cityConfig: CityConfig): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.tokenContract,
+    contractName: cityConfig.token.name,
     functionName: 'get-decimals',
     functionArgs: [],
     network: STACKS_NETWORK,
@@ -276,7 +276,7 @@ export async function getDecimals(cityConfig: CityConfig): Promise<string> {
 export async function getBalance(cityConfig: CityConfig, address: string): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.tokenContract,
+    contractName: cityConfig.token.name,
     functionName: 'get-balance',
     functionArgs: [standardPrincipalCV(address)],
     network: STACKS_NETWORK,
@@ -287,7 +287,7 @@ export async function getBalance(cityConfig: CityConfig, address: string): Promi
 export async function getTotalSupply(cityConfig: CityConfig): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.tokenContract,
+    contractName: cityConfig.token.name,
     functionName: 'get-total-supply',
     functionArgs: [],
     network: STACKS_NETWORK,
@@ -298,7 +298,7 @@ export async function getTotalSupply(cityConfig: CityConfig): Promise<string> {
 export async function getTokenUri(cityConfig: CityConfig): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
-    contractName: cityConfig.tokenContract,
+    contractName: cityConfig.token.name,
     functionName: 'get-token-uri',
     functionArgs: [],
     network: STACKS_NETWORK,
