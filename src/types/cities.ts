@@ -36,33 +36,6 @@ export interface CityToken {
   uri: string,
 }
 
-// EMPTY CONFIGURATION
-
-const emptyConfig: CityConfig = {
-  'v0': {
-    cityName: '',
-    contracts: {
-      auth: '',
-      core: '',
-      token: '',
-      deployer: '',
-    },
-    status: {
-      activated: false,
-      deployed: false,
-      shutdown: false,
-    },
-    token: {
-      displayName: '',
-      name: '',
-      symbol: '',
-      decimals: 0,
-      logo: '',
-      uri: '',
-    }
-  }
-}
-
 // MIAMICOIN
 
 const miaConfig: CityConfig = {
