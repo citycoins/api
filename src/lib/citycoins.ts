@@ -22,6 +22,17 @@ export async function getActivationBlock(cityConfig: CityConfig): Promise<string
   }, true)
 }
 
+export async function getActivationTarget(cityConfig: CityConfig): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.core.name,
+    functionName: 'get-activation-target',
+    functionArgs: [],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer
+  }, true)
+}
+
 export async function getRegisteredUsersNonce(cityConfig: CityConfig): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,

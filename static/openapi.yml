@@ -110,6 +110,23 @@ paths:
   /{version}/{cityname}/activation/get-activation-block:
     get:
       summary: Get Activation Block
+      description: Get the Stacks block height the token contract was activated at for a given CityCoin
+      tags:
+        - Activation
+      parameters:
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /{version}/{cityname}/activation/get-activation-target:
+    get:
+      summary: Get Activation Target
       description: Get the Stacks block height the core contract was activated at for a given CityCoin
       tags:
         - Activation
