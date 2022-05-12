@@ -91,9 +91,42 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
+  /stacks/get-date-at-block/{blockheight}:
+    get:
+      summary: Get Date at Block Height
+      description: Get the ISO-formatted date for a given Stacks block height
+      tags:
+        - Stacks
+      parameters:
+        - $ref: '#/components/parameters/blockheight'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
   /{version}/{cityname}/activation/get-activation-block:
     get:
       summary: Get Activation Block
+      description: Get the Stacks block height the token contract was activated at for a given CityCoin
+      tags:
+        - Activation
+      parameters:
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /{version}/{cityname}/activation/get-activation-target:
+    get:
+      summary: Get Activation Target
       description: Get the Stacks block height the core contract was activated at for a given CityCoin
       tags:
         - Activation
@@ -494,6 +527,52 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
+  /{version}/{cityname}/token/get-coinbase-amounts:
+    get:
+      summary: Get Coinbase Amounts
+      description: Gets the coinbase amounts for each coinbase threshold for a given CityCoin
+      tags:
+        - Token
+      parameters:
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coinbaseAmount1:
+                    type: string
+                  coinbaseAmount2:
+                    type: string
+                  coinbaseAmount3:
+                    type: string
+                  coinbaseAmount4:
+                    type: string
+                  coinbaseAmount5:
+                    type: string
+                  coinbaseAmountBonus:
+                    type: string
+                  coinbaseAmountDefault:
+                    type: string
+              examples:
+                "0":
+                  value: 
+                    coinbaseAmount1: "100000000000"
+                    coinbaseAmount2: "50000000000"
+                    coinbaseAmount3: "25000000000"
+                    coinbaseAmount4: "12500000000"
+                    coinbaseAmount5: "6250000000"
+                    coinbaseAmountBonus: "250000000000"
+                    coinbaseAmountDefault: "3125000000"
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
   /{version}/{cityname}/token/get-coinbase-thresholds:
     get:
       summary: Get Coinbase Thresholds
@@ -525,11 +604,11 @@ paths:
               examples:
                 "0":
                   value: 
-                    coinbaseThreshold1: "234497"
-                    coinbaseThreshold2: "444497"
-                    coinbaseThreshold3: "654497"
-                    coinbaseThreshold4: "864497"
-                    coinbaseThreshold5: "1074497"
+                    coinbaseThreshold1: "59497"
+                    coinbaseThreshold2: "109497"
+                    coinbaseThreshold3: "209497"
+                    coinbaseThreshold4: "409497"
+                    coinbaseThreshold5: "809497"
         "400":
           $ref: '#/components/responses/400BadRequest'
         "404":
@@ -672,7 +751,101 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /{version}/{cityname}/tools/prices/{currency}:
+  /{version}/{cityname}/tools/get-city-configuration:
+    get:
+      summary: Get City Configuration
+      description: Get the city configuration file depending on the select version and city name.
+      tags:
+        - Tools
+      parameters:
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cityName:
+                    type: string
+                  deployed:
+                    type: boolean
+                  deployer:
+                    type: string
+                  auth:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      initialized:
+                        type: boolean
+                  core:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      activated:
+                        type: boolean
+                      startBlock:
+                        type: number
+                      shutdown:
+                        type: boolean
+                      shutdownBlock:
+                        type: number
+                  token:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      activated:
+                        type: boolean
+                      activationBlock:
+                        type: number
+                      displayName:
+                        type: string
+                      tokenName:
+                        type: string
+                      symbol:
+                        type: string
+                      decimals:
+                        type: number
+                      logo:
+                        type: string
+                      uri:
+                        type: string
+              examples:
+                "0":
+                  value:
+                    cityName: "Miami"
+                    deployed: true
+                    deployer: "SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27"
+                    auth:
+                      name: "miamicoin-auth"
+                      initialized: true
+                    core:
+                      name: "miamicoin-core-v1"
+                      activated: false
+                      startBlock: 24497
+                      shutdown: true
+                      shutdownBlock: 58917
+                    token:
+                      name: "miamicoin-token"
+                      activated: true
+                      activationBlock: 24497
+                      displayName: "MiamiCoin"
+                      tokenName: "miamicoin"
+                      symbol: "MIA"
+                      decimals: 0
+                      logo: "https://cdn.citycoins.co/logos/miamicoin.png"
+                      uri: "https://cdn.citycoins.co/metadata/miamicoin.json"
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /{version}/{cityname}/tools/get-prices/{currency}:
     get:
       summary: Get Prices
       description: |

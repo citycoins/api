@@ -4,7 +4,9 @@ import Documentation from './handlers/documentation'
 import GetStacksBlockHeight from './handlers/stacks/getstacksblockheight'
 import GetBnsName from './handlers/stacks/getbnsname'
 import GetStxBalance from './handlers/stacks/getstxbalance'
+import GetDateAtBlock from './handlers/stacks/getdateatblock'
 import GetActivationBlock from './handlers/activation/getactivationblock'
+import GetActivationTarget from './handlers/activation/getactivationtarget'
 import GetRegisteredUsersNonce from './handlers/activation/getregisteredusersnonce'
 import GetUser from './handlers/activation/getuser'
 import GetUserId from './handlers/activation/getuserid'
@@ -23,6 +25,7 @@ import StackingActiveAtCycle from './handlers/stacking/stackingactiveatcycle'
 import GetStackingReward from './handlers/stackingclaims/getstackingreward'
 import GetBalance from './handlers/token/getbalance'
 import GetCoinbaseAmount from './handlers/token/getcoinbaseamount'
+import GetCoinbaseAmounts from './handlers/token/getcoinbaseamounts'
 import GetCoinbaseThresholds from './handlers/token/getcoinbasethresholds'
 import GetTotalSupply from './handlers/token/gettotalsupply'
 import GetDecimals from './handlers/token/getdecimals'
@@ -30,6 +33,7 @@ import GetName from './handlers/token/getname'
 import GetSymbol from './handlers/token/getsymbol'
 import GetTokenUri from './handlers/token/gettokenuri'
 import GetTokenUriJson from './handlers/token/gettokenurijson'
+import GetCityConfiguration from './handlers/tools/getcityconfiguration'
 import GetPrices from './handlers/tools/getprices'
 import ProofOfHodl from './handlers/tools/proofofhodl'
 
@@ -43,8 +47,10 @@ router
   .get('/stacks/get-block-height', GetStacksBlockHeight)
   .get('/stacks/get-bns-name/:address', GetBnsName)
   .get('/stacks/get-stx-balance/:address', GetStxBalance)
+  .get('/stacks/get-date-at-block/:blockHeight', GetDateAtBlock)
   // Activation functions
   .get('/:version/:cityname/activation/get-activation-block', GetActivationBlock)
+  .get('/:version/:cityname/activation/get-activation-target', GetActivationTarget)
   .get('/:version/:cityname/activation/get-registered-users-nonce', GetRegisteredUsersNonce)
   .get('/:version/:cityname/activation/get-user/:userid', GetUser)
   .get('/:version/:cityname/activation/get-user-id/:address', GetUserId)
@@ -68,6 +74,7 @@ router
   // Token functions
   .get('/:version/:cityname/token/get-balance/:address', GetBalance)
   .get('/:version/:cityname/token/get-coinbase-amount/:blockheight', GetCoinbaseAmount)
+  .get('/:version/:cityname/token/get-coinbase-amounts', GetCoinbaseAmounts)
   .get('/:version/:cityname/token/get-coinbase-thresholds', GetCoinbaseThresholds)
   .get('/:version/:cityname/token/get-decimals', GetDecimals)
   .get('/:version/:cityname/token/get-name', GetName)
@@ -76,7 +83,8 @@ router
   .get('/:version/:cityname/token/get-token-uri-json', GetTokenUriJson)
   .get('/:version/:cityname/token/get-total-supply', GetTotalSupply)
   // Tools
-  .get('/:version/:cityname/tools/prices/:currency?', GetPrices)
+  .get('/:version/:cityname/tools/get-city-configuration', GetCityConfiguration)
+  .get('/:version/:cityname/tools/get-prices/:currency?', GetPrices)
   .get('/:version/:cityname/tools/proof-of-hodl/:address', ProofOfHodl)
   .get('/:version/:cityname/tools/proof-of-hold/:address', ProofOfHodl)
   // Default route

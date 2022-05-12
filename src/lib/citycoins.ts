@@ -3,7 +3,7 @@ import { standardPrincipalCV, uintCV } from 'micro-stacks/clarity'
 import { CityConfig } from '../types/cities'
 import { MinerAtBlock, MiningStatsAtBlock } from '../types/mining'
 import { StackerAtCycle, StackingStatsAtCycle } from '../types/stacking'
-import { CoinbaseThresholds } from '../types/token'
+import { CoinbaseAmounts, CoinbaseThresholds } from '../types/token'
 import { STACKS_NETWORK } from './common'
 import { getStacksBlockHeight } from './stacks'
 
@@ -16,6 +16,17 @@ export async function getActivationBlock(cityConfig: CityConfig): Promise<string
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.core.name,
     functionName: 'get-activation-block',
+    functionArgs: [],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer
+  }, true)
+}
+
+export async function getActivationTarget(cityConfig: CityConfig): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.core.name,
+    functionName: 'get-activation-target',
     functionArgs: [],
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer
@@ -217,6 +228,17 @@ export async function getStackingReward(cityConfig: CityConfig, cycleId: string,
 //////////////////////////////////////////////////
 // TOKEN FUNCTIONS
 //////////////////////////////////////////////////
+
+export async function getCoinbaseAmounts(cityConfig: CityConfig): Promise<CoinbaseAmounts> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.core.name,
+    functionName: 'get-coinbase-amounts',
+    functionArgs: [],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer,
+  }, true)
+}
 
 export async function getCoinbaseThresholds(cityConfig: CityConfig): Promise<CoinbaseThresholds> {
   return fetchReadOnlyFunction({
