@@ -5,6 +5,7 @@ import { getCityConfig } from '../../types/cities'
 
 const ProofOfHodl = async (request: IttyRequest): Promise<Response> => {
   let cityConfig
+  let hodl
   // check inputs
   const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
@@ -12,15 +13,15 @@ const ProofOfHodl = async (request: IttyRequest): Promise<Response> => {
   if (version === undefined || city === undefined || user === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
-  // get city configuration object
   try {
+    // get city configuration object
     cityConfig = await getCityConfig(city, version)
+    // check if user is hodling
+    hodl = await getProofOfHodl(cityConfig, user)
   } catch (err) {
     if (err instanceof Error) return new Response(err.message, { status: 404 })
     return new Response(String(err), { status: 404 })
   }
-  // check if user is hodling
-  const hodl = await getProofOfHodl(cityConfig, user)
   // return response
   const response = await createSingleValue(hodl)
   const headers = {

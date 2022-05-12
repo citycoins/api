@@ -57,7 +57,6 @@ export async function getUser(cityConfig: CityConfig, id: string): Promise<strin
 }
 
 export async function getUserId(cityConfig: CityConfig, address: string): Promise<string> {
-  console.log(`getUserId: ${address}`)
   if (!validateStacksAddress(address)) {
     throw new Error(`Invalid Stacks address: ${address}`)
   }
@@ -135,6 +134,9 @@ export async function hasMinedAtBlock(cityConfig: CityConfig, blockHeight: strin
 //////////////////////////////////////////////////
 
 export async function canClaimMiningReward(cityConfig: CityConfig, address: string, blockHeight: string): Promise<string> {
+  if (!validateStacksAddress(address)) {
+    throw new Error(`Invalid Stacks address: ${address}`)
+  }
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.core.name,
@@ -146,6 +148,9 @@ export async function canClaimMiningReward(cityConfig: CityConfig, address: stri
 }
 
 export async function isBlockWinner(cityConfig: CityConfig, address: string, blockHeight: string): Promise<string> {
+  if (!validateStacksAddress(address)) {
+    throw new Error(`Invalid Stacks address: ${address}`)
+  }
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.core.name,
@@ -301,6 +306,9 @@ export async function getDecimals(cityConfig: CityConfig): Promise<string> {
 }
 
 export async function getBalance(cityConfig: CityConfig, address: string): Promise<string> {
+  if (!validateStacksAddress(address)) {
+    throw new Error(`Invalid Stacks address: ${address}`)
+  }
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.token.name,
@@ -338,6 +346,9 @@ export async function getTokenUri(cityConfig: CityConfig): Promise<string> {
 //////////////////////////////////////////////////
 
 export async function getProofOfHodl(cityConfig: CityConfig, address: string): Promise<boolean> {
+  if (!validateStacksAddress(address)) {
+    throw new Error(`Invalid Stacks address: ${address}`)
+  }
   // check if the user has a balance
   // if so, return true
   const balance = await getBalance(cityConfig, address)

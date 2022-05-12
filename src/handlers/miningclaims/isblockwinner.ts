@@ -6,6 +6,7 @@ import { getCityConfig } from '../../types/cities'
 
 const IsBlockWinner = async (request: IttyRequest): Promise<Response> => {
   let cityConfig
+  let blockWinner
   // check inputs
   const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
@@ -33,7 +34,12 @@ const IsBlockWinner = async (request: IttyRequest): Promise<Response> => {
     return new Response(`Invalid request, maturity window of 100 blocks has not passed`, { status: 400 })
   }
   // check if user won at given block height
-  const blockWinner = await isBlockWinner(cityConfig, user, blockHeight)
+  try {
+    blockWinner = await isBlockWinner(cityConfig, user, blockHeight)
+  } catch (err) {
+    if (err instanceof Error) return new Response(err.message, { status: 404 })
+    return new Response(String(err), { status: 404 })
+  }
   // return response
   const response = await createSingleValue(blockWinner)
   const headers = {
