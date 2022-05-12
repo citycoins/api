@@ -510,6 +510,52 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
+  /{version}/{cityname}/token/get-coinbase-amounts:
+    get:
+      summary: Get Coinbase Amounts
+      description: Gets the coinbase amounts for each coinbase threshold for a given CityCoin
+      tags:
+        - Token
+      parameters:
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coinbaseAmount1:
+                    type: string
+                  coinbaseAmount2:
+                    type: string
+                  coinbaseAmount3:
+                    type: string
+                  coinbaseAmount4:
+                    type: string
+                  coinbaseAmount5:
+                    type: string
+                  coinbaseAmountBonus:
+                    type: string
+                  coinbaseAmountDefault:
+                    type: string
+              examples:
+                "0":
+                  value: 
+                    coinbaseAmount1: "100000000000"
+                    coinbaseAmount2: "50000000000"
+                    coinbaseAmount3: "25000000000"
+                    coinbaseAmount4: "12500000000"
+                    coinbaseAmount5: "6250000000"
+                    coinbaseAmountBonus: "250000000000"
+                    coinbaseAmountDefault: "3125000000"
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
   /{version}/{cityname}/token/get-coinbase-thresholds:
     get:
       summary: Get Coinbase Thresholds

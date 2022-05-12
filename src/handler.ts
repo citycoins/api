@@ -24,6 +24,7 @@ import StackingActiveAtCycle from './handlers/stacking/stackingactiveatcycle'
 import GetStackingReward from './handlers/stackingclaims/getstackingreward'
 import GetBalance from './handlers/token/getbalance'
 import GetCoinbaseAmount from './handlers/token/getcoinbaseamount'
+import GetCoinbaseAmounts from './handlers/token/getcoinbaseamounts'
 import GetCoinbaseThresholds from './handlers/token/getcoinbasethresholds'
 import GetTotalSupply from './handlers/token/gettotalsupply'
 import GetDecimals from './handlers/token/getdecimals'
@@ -71,6 +72,7 @@ router
   // Token functions
   .get('/:version/:cityname/token/get-balance/:address', GetBalance)
   .get('/:version/:cityname/token/get-coinbase-amount/:blockheight', GetCoinbaseAmount)
+  .get('/:version/:cityname/token/get-coinbase-amounts', GetCoinbaseAmounts)
   .get('/:version/:cityname/token/get-coinbase-thresholds', GetCoinbaseThresholds)
   .get('/:version/:cityname/token/get-decimals', GetDecimals)
   .get('/:version/:cityname/token/get-name', GetName)
