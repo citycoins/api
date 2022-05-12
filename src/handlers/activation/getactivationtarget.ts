@@ -1,17 +1,18 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getActivationTarget } from '../../lib/citycoins'
 import { createSingleValue } from '../../lib/common'
-import { getCityConfig } from '../../types/cities'
+import { CityConfig, getCityConfig } from '../../types/cities'
 
 const GetActivationTarget = async (request: IttyRequest): Promise<Response> => {
-  let cityConfig
-  let activationTarget
+  let cityConfig: CityConfig
+  let activationTarget: string
   // check inputs
   const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
   if (version === undefined || city === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
+  // get/calculate response
   try {
     cityConfig = await getCityConfig(city, version)
     activationTarget = await getActivationTarget(cityConfig)

@@ -1,11 +1,11 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getBalance } from '../../lib/citycoins'
 import { createSingleValue } from '../../lib/common'
-import { getCityConfig } from '../../types/cities'
+import { CityConfig, getCityConfig } from '../../types/cities'
 
 const GetBalance = async (request: IttyRequest): Promise<Response> => {
-  let cityConfig
-  let balance
+  let cityConfig: CityConfig
+  let balance: string
   // check inputs
   const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
@@ -13,10 +13,9 @@ const GetBalance = async (request: IttyRequest): Promise<Response> => {
   if (version === undefined || city === undefined || user === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
+  // get/calculate response
   try {
-    // get city configuration object
     cityConfig = await getCityConfig(city, version)
-    // get CityCoin balance
     balance = await getBalance(cityConfig, user)
   } catch (err) {
     if (err instanceof Error) return new Response(err.message, { status: 404 })

@@ -13,6 +13,7 @@ const ProofOfHodl = async (request: IttyRequest): Promise<Response> => {
   if (version === undefined || city === undefined || user === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
+  // get/calculate response
   try {
     // get city configuration object
     cityConfig = await getCityConfig(city, version)

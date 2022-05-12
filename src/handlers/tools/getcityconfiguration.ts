@@ -9,7 +9,7 @@ const GetCityConfiguration = async (request: IttyRequest): Promise<Response> => 
   if (version === undefined || city === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
-  // get city configuration object
+  // get/calculate response
   try {
     cityConfig = await getCityConfig(city, version)
   } catch (err) {

@@ -346,24 +346,27 @@ export async function getTokenUri(cityConfig: CityConfig): Promise<string> {
 //////////////////////////////////////////////////
 
 export async function getProofOfHodl(cityConfig: CityConfig, address: string): Promise<boolean> {
+  let userId: string
+  let balance: string
+  let stacker: StackerAtCycle
   if (!validateStacksAddress(address)) {
     throw new Error(`Invalid Stacks address: ${address}`)
   }
-  // check if the user has a balance
-  // if so, return true
-  const balance = await getBalance(cityConfig, address)
-    .catch(() => { return '' })
-  if (+balance > 0) {
-    return true
-  } else {
-    // check if the user is stacking in the current cycle
-    // if so, return true
-    const userId = await getUserId(cityConfig, address)
-      .catch(() => { return '' })
-    if (userId === null || userId === '') { return false }
+  try {
+    // check if user has a balance
+    userId = await getUserId(cityConfig, address)
+    if (userId === null) {
+      throw new Error(`Address not found: ${address}`)
+    }
+    balance = await getBalance(cityConfig, address)
+    if (+balance > 0) return true
     const currentBlock = await getStacksBlockHeight()
     const currentCycle = await getRewardCycle(cityConfig, currentBlock)
-    const stacker = await getStackerAtCycle(cityConfig, currentCycle, userId)
+    // check if user is stacking at current cycle
+    stacker = await getStackerAtCycle(cityConfig, currentCycle, userId)
     if (stacker === null) { return false } else { return true }
+  } catch (err) {
+    if (err instanceof Error) throw new Error(err.message)
+    throw new Error(String(err))
   }
 }
