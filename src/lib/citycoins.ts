@@ -1,4 +1,5 @@
 import { fetchReadOnlyFunction } from 'micro-stacks/api'
+import { validateStacksAddress } from "micro-stacks/crypto"
 import { standardPrincipalCV, uintCV } from 'micro-stacks/clarity'
 import { CityConfig } from '../types/cities'
 import { MinerAtBlock, MiningStatsAtBlock } from '../types/mining'
@@ -56,6 +57,10 @@ export async function getUser(cityConfig: CityConfig, id: string): Promise<strin
 }
 
 export async function getUserId(cityConfig: CityConfig, address: string): Promise<string> {
+  console.log(`getUserId: ${address}`)
+  if (!validateStacksAddress(address)) {
+    throw new Error(`Invalid Stacks address: ${address}`)
+  }
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.core.name,

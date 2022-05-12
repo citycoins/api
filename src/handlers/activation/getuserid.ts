@@ -5,6 +5,7 @@ import { getCityConfig } from '../../types/cities'
 
 const GetUserId = async (request: IttyRequest): Promise<Response> => {
   let cityConfig
+  let userId
   // check inputs
   const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
@@ -12,17 +13,12 @@ const GetUserId = async (request: IttyRequest): Promise<Response> => {
   if (version === undefined || city === undefined || user === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
-  // get city configuration object
   try {
     cityConfig = await getCityConfig(city, version)
+    userId = await getUserId(cityConfig, user)
   } catch (err) {
     if (err instanceof Error) return new Response(err.message, { status: 404 })
     return new Response(String(err), { status: 404 })
-  }
-  // get user ID
-  const userId = await getUserId(cityConfig, user)
-  if (userId === null) {
-    return new Response(`User not found: ${user}`, { status: 404 })
   }
   // return response
   const response = await createSingleValue(userId)
