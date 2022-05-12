@@ -587,11 +587,11 @@ paths:
               examples:
                 "0":
                   value: 
-                    coinbaseThreshold1: "234497"
-                    coinbaseThreshold2: "444497"
-                    coinbaseThreshold3: "654497"
-                    coinbaseThreshold4: "864497"
-                    coinbaseThreshold5: "1074497"
+                    coinbaseThreshold1: "59497"
+                    coinbaseThreshold2: "109497"
+                    coinbaseThreshold3: "209497"
+                    coinbaseThreshold4: "409497"
+                    coinbaseThreshold5: "809497"
         "400":
           $ref: '#/components/responses/400BadRequest'
         "404":
