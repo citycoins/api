@@ -5,6 +5,7 @@ import { getCityConfig } from '../../types/cities'
 const GetPrices = async (request: IttyRequest): Promise<Response> => {
   let cityConfig
   let tokenName
+  let prices
   // check inputs
   const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
@@ -26,12 +27,11 @@ const GetPrices = async (request: IttyRequest): Promise<Response> => {
     tokenName = cityConfig.token.tokenName
   }
   // get CoinGecko price
-  const prices = await getCGPrice(tokenName, currency)
-    .catch(() => { return {
-      "coingecko": 0,
-    }})
-  if (prices.coingecko === 0 || prices.coingecko === undefined) {
-    return new Response(`CoinGecko price not found for city: ${city} and currency: ${currency}`, { status: 404 })
+  try {
+    prices = await getCGPrice(tokenName, currency)
+  } catch (err) {
+    if (err instanceof Error) return new Response(err.message, { status: 404 })
+    return new Response(String(err), { status: 404 })
   }
   // return response
   const headers = {

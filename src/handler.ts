@@ -84,7 +84,7 @@ router
   .get('/:version/:cityname/token/get-total-supply', GetTotalSupply)
   // Tools
   .get('/:version/:cityname/tools/get-city-configuration', GetCityConfiguration)
-  .get('/:version/:cityname/tools/prices/:currency?', GetPrices)
+  .get('/:version/:cityname/tools/get-prices/:currency?', GetPrices)
   .get('/:version/:cityname/tools/proof-of-hodl/:address', ProofOfHodl)
   .get('/:version/:cityname/tools/proof-of-hold/:address', ProofOfHodl)
   // Default route

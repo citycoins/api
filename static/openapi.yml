@@ -845,7 +845,7 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /{version}/{cityname}/tools/prices/{currency}:
+  /{version}/{cityname}/tools/get-prices/{currency}:
     get:
       summary: Get Prices
       description: |
