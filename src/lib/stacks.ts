@@ -1,4 +1,5 @@
 import { STACKS_NETWORK } from './common'
+import { validateStacksAddress } from "micro-stacks/crypto"
 
 export async function getStacksBlockHeight(): Promise<string> {
   const url = `${STACKS_NETWORK.getCoreApiUrl()}/v2/info`
@@ -13,6 +14,9 @@ export async function getStacksBlockHeight(): Promise<string> {
 }
 
 export async function getStxBalance(address: string): Promise<string> {
+  if (!validateStacksAddress(address)) {
+    throw new Error(`Invalid Stacks address: ${address}`)
+  }
   const url = `${STACKS_NETWORK.getCoreApiUrl()}/extended/v1/address/${address}/stx`
   return fetch(url)
     .then(response => {
@@ -25,6 +29,9 @@ export async function getStxBalance(address: string): Promise<string> {
 }
 
 export async function getBnsName(address: string): Promise<string> {
+  if (!validateStacksAddress(address)) {
+    throw new Error(`Invalid Stacks address: ${address}`)
+  }
   const url = `${STACKS_NETWORK.getCoreApiUrl()}/v1/addresses/stacks/${address}`
   return fetch(url)
     .then(response => {

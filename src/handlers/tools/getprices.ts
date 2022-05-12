@@ -1,11 +1,12 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getCGPrice } from '../../lib/prices'
-import { getCityConfig } from '../../types/cities'
+import { CityConfig, getCityConfig } from '../../types/cities'
+import { Prices } from '../../types/common'
 
 const GetPrices = async (request: IttyRequest): Promise<Response> => {
-  let cityConfig
-  let tokenName
-  let prices
+  let cityConfig: CityConfig
+  let tokenName: string
+  let prices: Prices
   // check inputs
   const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
@@ -13,21 +14,14 @@ const GetPrices = async (request: IttyRequest): Promise<Response> => {
   if (version === undefined || city === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
-  // hack to allow for stx
-  if (city === 'stx') {
-    tokenName = 'blockstack'
-  } else {
-    // get city configuration object
-    try {
-      cityConfig = await getCityConfig(city, version)
-    } catch (err) {
-      if (err instanceof Error) return new Response(err.message, { status: 404 })
-      return new Response(String(err), { status: 404 })
-    }
-    tokenName = cityConfig.token.tokenName
-  }
-  // get CoinGecko price
+  // get/calculate response
   try {
+    if (city === 'stx') {
+      tokenName = 'blockstack'
+    } else {
+      cityConfig = await getCityConfig(city, version)
+      tokenName = cityConfig.token.tokenName
+    }
     prices = await getCGPrice(tokenName, currency)
   } catch (err) {
     if (err instanceof Error) return new Response(err.message, { status: 404 })

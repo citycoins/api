@@ -1,4 +1,5 @@
 import { fetchReadOnlyFunction } from 'micro-stacks/api'
+import { validateStacksAddress } from "micro-stacks/crypto"
 import { standardPrincipalCV, uintCV } from 'micro-stacks/clarity'
 import { CityConfig } from '../types/cities'
 import { MinerAtBlock, MiningStatsAtBlock } from '../types/mining'
@@ -56,6 +57,9 @@ export async function getUser(cityConfig: CityConfig, id: string): Promise<strin
 }
 
 export async function getUserId(cityConfig: CityConfig, address: string): Promise<string> {
+  if (!validateStacksAddress(address)) {
+    throw new Error(`Invalid Stacks address: ${address}`)
+  }
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.core.name,
@@ -130,6 +134,9 @@ export async function hasMinedAtBlock(cityConfig: CityConfig, blockHeight: strin
 //////////////////////////////////////////////////
 
 export async function canClaimMiningReward(cityConfig: CityConfig, address: string, blockHeight: string): Promise<string> {
+  if (!validateStacksAddress(address)) {
+    throw new Error(`Invalid Stacks address: ${address}`)
+  }
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.core.name,
@@ -141,6 +148,9 @@ export async function canClaimMiningReward(cityConfig: CityConfig, address: stri
 }
 
 export async function isBlockWinner(cityConfig: CityConfig, address: string, blockHeight: string): Promise<string> {
+  if (!validateStacksAddress(address)) {
+    throw new Error(`Invalid Stacks address: ${address}`)
+  }
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.core.name,
@@ -296,6 +306,9 @@ export async function getDecimals(cityConfig: CityConfig): Promise<string> {
 }
 
 export async function getBalance(cityConfig: CityConfig, address: string): Promise<string> {
+  if (!validateStacksAddress(address)) {
+    throw new Error(`Invalid Stacks address: ${address}`)
+  }
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.token.name,
@@ -333,21 +346,27 @@ export async function getTokenUri(cityConfig: CityConfig): Promise<string> {
 //////////////////////////////////////////////////
 
 export async function getProofOfHodl(cityConfig: CityConfig, address: string): Promise<boolean> {
-  // check if the user has a balance
-  // if so, return true
-  const balance = await getBalance(cityConfig, address)
-    .catch(() => { return '' })
-  if (+balance > 0) {
-    return true
-  } else {
-    // check if the user is stacking in the current cycle
-    // if so, return true
-    const userId = await getUserId(cityConfig, address)
-      .catch(() => { return '' })
-    if (userId === null || userId === '') { return false }
+  let userId: string
+  let balance: string
+  let stacker: StackerAtCycle
+  if (!validateStacksAddress(address)) {
+    throw new Error(`Invalid Stacks address: ${address}`)
+  }
+  try {
+    // check if user has a balance
+    userId = await getUserId(cityConfig, address)
+    if (userId === null) {
+      throw new Error(`Address not found: ${address}`)
+    }
+    balance = await getBalance(cityConfig, address)
+    if (+balance > 0) return true
     const currentBlock = await getStacksBlockHeight()
     const currentCycle = await getRewardCycle(cityConfig, currentBlock)
-    const stacker = await getStackerAtCycle(cityConfig, currentCycle, userId)
+    // check if user is stacking at current cycle
+    stacker = await getStackerAtCycle(cityConfig, currentCycle, userId)
     if (stacker === null) { return false } else { return true }
+  } catch (err) {
+    if (err instanceof Error) throw new Error(err.message)
+    throw new Error(String(err))
   }
 }

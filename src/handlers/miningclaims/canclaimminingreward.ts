@@ -2,10 +2,11 @@ import { Request as IttyRequest } from 'itty-router'
 import { canClaimMiningReward } from '../../lib/citycoins'
 import { createSingleValue, isStringAllDigits } from '../../lib/common'
 import { getStacksBlockHeight } from '../../lib/stacks'
-import { getCityConfig } from '../../types/cities'
+import { CityConfig, getCityConfig } from '../../types/cities'
 
 const CanClaimMiningReward = async (request: IttyRequest): Promise<Response> => {
-  let cityConfig
+  let cityConfig: CityConfig
+  let canClaimReward: string
   // check inputs
   const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
@@ -14,26 +15,23 @@ const CanClaimMiningReward = async (request: IttyRequest): Promise<Response> => 
   if (version === undefined || city === undefined || blockHeight === undefined || user === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
-  // get city configuration object
+  // get/calculate response
   try {
     cityConfig = await getCityConfig(city, version)
+    if (!isStringAllDigits(blockHeight) && blockHeight !== 'current') {
+      return new Response(`Block height not specified or invalid`, { status: 400 })
+    }
+    const currentBlockHeight = await getStacksBlockHeight()
+    // check that maturity window has passed
+    // or will default to false regardless of status
+    if (+blockHeight > +currentBlockHeight - 100 || blockHeight === 'current') {
+      return new Response(`Invalid request, maturity window of 100 blocks has not passed`, { status: 400 })
+    }
+    canClaimReward = await canClaimMiningReward(cityConfig, user, blockHeight)
   } catch (err) {
     if (err instanceof Error) return new Response(err.message, { status: 404 })
     return new Response(String(err), { status: 404 })
   }
-  // verify block height is valid value
-  if (!isStringAllDigits(blockHeight) && blockHeight !== 'current') {
-    return new Response(`Block height not specified or invalid`, { status: 400 })
-  }
-  // get current block height
-  const currentBlockHeight = await getStacksBlockHeight()
-  // check that maturity window has passed
-  // or will default to false regardless of status
-  if (+blockHeight > +currentBlockHeight - 100 || blockHeight === 'current') {
-    return new Response(`Invalid request, maturity window of 100 blocks has not passed`, { status: 400 })
-  }
-  // check if user won at given block height and can claim reward
-  const canClaimReward = await canClaimMiningReward(cityConfig, user, blockHeight)
   // return response
   const response = await createSingleValue(canClaimReward)
   const headers = {

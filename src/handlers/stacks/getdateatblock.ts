@@ -9,17 +9,15 @@ const GetDateAtBlock = async (request: IttyRequest): Promise<Response> => {
   if (blockHeight === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
-  // get current block height if specified
-  if (blockHeight === 'current') {
-    blockHeight = await getStacksBlockHeight()
-  } else {
-    // verify block height is valid number
-    if (!isStringAllDigits(blockHeight)) {
-      return new Response(`Block height not specified or invalid`, { status: 400 })
-    }
-  }
-  // get date at block height
+  // get/calculate response
   try {
+    if (blockHeight === 'current') {
+      blockHeight = await getStacksBlockHeight()
+    } else {
+      if (!isStringAllDigits(blockHeight)) {
+        return new Response(`Block height not specified or invalid`, { status: 400 })
+      }
+    }
     dateAtBlock = await getDateAtBlock(blockHeight)
   } catch (err) {
     if (err instanceof Error) return new Response(err.message, { status: 404 })
