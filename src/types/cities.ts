@@ -1,5 +1,16 @@
 // CONFIGURATION
 
+export interface CityList {
+  [name: string]: CityInfo
+}
+
+export interface CityInfo {
+  fullName: string,
+  logo: string,
+  versions: string[],
+  currentVersion: string
+}
+
 export interface CityVersions {
   [version: string]: CityConfig
 }
@@ -39,6 +50,13 @@ export interface TokenContract {
 }
 
 // MIAMICOIN
+
+const miaInfo: CityInfo = {
+  fullName: 'Miami',
+  logo: 'https://cdn.citycoins.co/brand/MIA_Miami/Coins/SVG/MiamiCoin_StandAlone_Coin.svg',
+  versions: ['v1', 'v2'],
+  currentVersion: 'v2'
+}
 
 const miaConfig: CityVersions = {
   'v1': {
@@ -98,6 +116,13 @@ const miaConfig: CityVersions = {
 
 // NEWYORKCITYCOIN
 
+const nycInfo: CityInfo = {
+  fullName: 'New York City',
+  logo: 'https://cdn.citycoins.co/brand/NYC_NewYorkCity/Coins/SVG/CC_NYCCoin_StandAloneCoin.svg',
+  versions: ['v1', 'v2'],
+  currentVersion: 'v2'
+}
+
 const nycConfig: CityVersions = {
   'v1': {
     cityName: 'New York City',
@@ -154,16 +179,52 @@ const nycConfig: CityVersions = {
   }
 }
 
+// GETTERS
+
+export const cityList = ["mia", "nyc"];
+
+export async function getCityList(): Promise<string[]> {
+  return cityList;
+}
+
+export async function getCityInfo(city: string): Promise<CityInfo> {
+  switch (city) {
+    case 'mia':
+      return miaInfo;
+    case 'nyc':
+      return nycInfo;
+    default:
+      throw new Error(`Invalid city name: ${city}`);
+  }
+}
+
+export async function getFullCityInfo(): Promise<CityList> {
+  return {
+    'mia': miaInfo,
+    'nyc': nycInfo,
+  };
+}
+
 export async function getCityConfig(city: string, version: string): Promise<CityConfig> {
   version = version.toLowerCase()
   switch (city.toLowerCase()) {
     case "mia":
       if (Object.prototype.hasOwnProperty.call(miaConfig, version)) return miaConfig[version]
-      throw new Error(`Invalid city name or version ${city} ${version}`)
+      break;
     case "nyc":
       if (Object.prototype.hasOwnProperty.call(nycConfig, version)) return nycConfig[version]
-      throw new Error(`Invalid city name or version ${city} ${version}`)
+      break;
+  }
+  throw new Error(`Invalid city name or version: ${city} ${version}`)
+}
+
+export async function getFullCityConfig(city: string): Promise<CityVersions> {
+  switch (city.toLowerCase()) {
+    case "mia":
+      return miaConfig
+    case "nyc":
+      return nycConfig
     default:
-      throw new Error(`Invalid city name or version ${city} ${version}`)
+      throw new Error(`Invalid city name: ${city}`)
   }
 }

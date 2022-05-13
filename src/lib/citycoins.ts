@@ -34,6 +34,17 @@ export async function getActivationTarget(cityConfig: CityConfig): Promise<strin
   }, true)
 }
 
+export async function getCityWallet(cityConfig: CityConfig): Promise<string> {
+  return fetchReadOnlyFunction({
+    contractAddress: cityConfig.deployer,
+    contractName: cityConfig.auth.name,
+    functionName: 'get-city-wallet',
+    functionArgs: [],
+    network: STACKS_NETWORK,
+    senderAddress: cityConfig.deployer
+  }, true)
+}
+
 export async function getRegisteredUsersNonce(cityConfig: CityConfig): Promise<string> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,

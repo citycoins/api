@@ -49,6 +49,8 @@ The API is divided into three main sections:
   - returns successful response
 - (optional) add new getters in `/lib`
 - (optional) add new types in `/types`
+- add new handler file to top-level export in `/src/handlers`
+  - e.g. `export { default as GetDateAtBlock } from './stacks/getdateatblock'`
 - add new handler file and route to `/src/handler.ts`
   - if querying city data, starts with: `:version/:cityname/`
   - order of operations: `:blockheight > :cycleid > :userid > :address`
@@ -56,7 +58,7 @@ The API is divided into three main sections:
   - routes get added to the corresponding section
     - routes get tagged by their category (matches directory)
     - routes always use ref for parameters and responses
-  - reusable parameters and responses are at the bottom of the file
+  - reusable parameters, schemas and responses are at the bottom of the file
 
 **Special case:** if the response is a custom type, e.g. `MiningStatsAtBlock`, an example for the responses must be added manually to `/static/openapi.yml`
 
