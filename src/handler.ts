@@ -57,6 +57,9 @@ router
   .get('/:version/:cityname/token/get-token-uri-json', Token.GetTokenUriJson)
   .get('/:version/:cityname/token/get-total-supply', Token.GetTotalSupply)
   // Tools
+  .get('/tools/get-city-list', Tools.GetCityList)
+  .get('/:cityname/tools/get-city-info', Tools.GetCityInfo)
+  .get('/tools/get-full-city-info', Tools.GetFullCityInfo)
   .get('/:version/:cityname/tools/get-city-configuration', Tools.GetCityConfiguration)
   .get('/:cityname/tools/get-full-city-configuration', Tools.GetFullCityConfiguration)
   .get('/:version/:cityname/tools/get-prices/:currency?', Tools.GetPrices)

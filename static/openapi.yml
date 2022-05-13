@@ -768,10 +768,89 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
+  /tools/get-city-list:
+    get:
+      summary: Get City List
+      description: Get the list of city short names supported by the API.
+      tags:
+        - Tools
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/citylist'
+              examples:
+                "0":
+                  value: ["mia", "nyc"]
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /{cityname}/tools/get-city-info:
+    get:
+      summary: Get City Info
+      description: Gets the basic info about a city including available and current contract versions.
+      tags:
+        - Tools
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cityinfo'
+              examples:
+                "0":
+                  value:
+                    fullName: "Miami"
+                    logo: "https://cdn.citycoins.co/brand/MIA_Miami/Coins/SVG/MiamiCoin_StandAlone_Coin.svg"
+                    versions: ["v1", "v2"]
+                    currentVersion: "v2"
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /tools/get-full-city-info:
+    get:
+      summary: Get Full City Info
+      description: Gets the full city information data for all known cities supported by the API.
+      tags:
+        - Tools
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cityinfolist'
+              examples:
+                "0":
+                  value:
+                    "mia":
+                      fullName: "Miami"
+                      logo: "https://cdn.citycoins.co/brand/MIA_Miami/Coins/SVG/MiamiCoin_StandAlone_Coin.svg"
+                      versions: ["v1", "v2"]
+                      currentVersion: "v2"
+                    "nyc":
+                      fullName: "New York City"
+                      logo: "https://cdn.citycoins.co/brand/NYC_NewYorkCity/Coins/SVG/CC_NYCCoin_StandAloneCoin.svg"
+                      versions: ["v1", "v2"]
+                      currentVersion: "v2"
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+                
   /{version}/{cityname}/tools/get-city-configuration:
     get:
       summary: Get City Configuration
-      description: Get the city configuration file depending on the select version and city name.
+      description: Get the city configuration data depending on the select version and city name.
       tags:
         - Tools
       parameters:
@@ -819,7 +898,7 @@ paths:
   /{cityname}/tools/get-full-city-configuration:
     get:
       summary: Get Full City Configuration
-      description: Gets the full city configuration file including all versions depending on the select city name.
+      description: Gets the full city configuration data including all versions depending on the select city name.
       tags:
         - Tools
       parameters:
@@ -994,9 +1073,33 @@ components:
       required: true
       schema:
         type: string
-      description: The major CityCoins contract version, e.g. v1, v2
+        enum: [v1, v2]
+      description: The major CityCoins contract version.
   # Reusable objects
   schemas:
+    citylist:
+      type: array
+      items:
+        type: string
+      enum: [mia, nyc]
+    cityinfo:
+      type: object
+      properties:
+        fullName:
+          type: string
+        logo:
+          type: string
+        versions:
+          $ref: '#/components/schemas/citylist'
+        currentVersion:
+          type: string
+    cityinfolist:
+      type: object
+      properties:
+        cityname:
+          $ref: '#/components/schemas/citylist'
+      additionalProperties:
+        $ref: '#/components/schemas/cityinfo'
     cityconfig:
       type: object
       properties:
