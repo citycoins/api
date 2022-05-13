@@ -141,6 +141,23 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
+  /{version}/{cityname}/activation/get-city-wallet:
+    get:
+      summary: Get City Wallet Address
+      description: Get the city wallet address set in the auth contract for a given CityCoin and version.
+      tags:
+        - Activation
+      parameters:
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+  
   /{version}/{cityname}/activation/get-registered-users-nonce:
     get:
       summary: Get Registered Users
