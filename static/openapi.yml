@@ -767,54 +767,8 @@ paths:
             application/json:
               schema:
                 type: object
-                properties:
-                  cityName:
-                    type: string
-                  deployed:
-                    type: boolean
-                  deployer:
-                    type: string
-                  auth:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      initialized:
-                        type: boolean
-                  core:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      activated:
-                        type: boolean
-                      startBlock:
-                        type: number
-                      shutdown:
-                        type: boolean
-                      shutdownBlock:
-                        type: number
-                  token:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      activated:
-                        type: boolean
-                      activationBlock:
-                        type: number
-                      displayName:
-                        type: string
-                      tokenName:
-                        type: string
-                      symbol:
-                        type: string
-                      decimals:
-                        type: number
-                      logo:
-                        type: string
-                      uri:
-                        type: string
+                items:
+                  $ref: '#/components/schemas/cityconfig'
               examples:
                 "0":
                   value:
@@ -840,6 +794,79 @@ paths:
                       decimals: 0
                       logo: "https://cdn.citycoins.co/logos/miamicoin.png"
                       uri: "https://cdn.citycoins.co/metadata/miamicoin.json"
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /{cityname}/tools/get-full-city-configuration:
+    get:
+      summary: Get Full City Configuration
+      description: Gets the full city configuration file including all versions depending on the select city name.
+      tags:
+        - Tools
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                additionalProperties:
+                  $ref: '#/components/schemas/cityconfig'
+              examples:
+                "0":
+                  value:
+                    "v1":
+                      cityName: "Miami"
+                      deployed: true
+                      deployer: "SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27"
+                      auth:
+                        name: "miamicoin-auth"
+                        initialized: true
+                      core:
+                        name: "miamicoin-core-v1"
+                        activated: false
+                        startBlock: 24497
+                        shutdown: true
+                        shutdownBlock: 58917
+                      token:
+                        name: "miamicoin-token"
+                        activated: true
+                        activationBlock: 24497
+                        displayName: "MiamiCoin"
+                        tokenName: "miamicoin"
+                        symbol: "MIA"
+                        decimals: 0
+                        logo: "https://cdn.citycoins.co/logos/miamicoin.png"
+                        uri: "https://cdn.citycoins.co/metadata/miamicoin.json"
+                    "v2":
+                      cityName: "Miami"
+                      deployed: true
+                      deployer: "SP1H1733V5MZ3SZ9XRW9FKYGEZT0JDGEB8Y634C7R"
+                      auth:
+                        name: "miamicoin-auth-v2"
+                        initialized: true
+                      core:
+                        name: "miamicoin-core-v2"
+                        activated: false
+                        startBlock: 58921
+                        shutdown: false
+                      token:
+                        name: "miamicoin-token-v2"
+                        activated: true
+                        activationBlock: 24497
+                        displayName: "MiamiCoin"
+                        tokenName: "miamicoin"
+                        symbol: "MIA"
+                        decimals: 6
+                        logo: "https://cdn.citycoins.co/logos/miamicoin.png"
+                        uri: "https://cdn.citycoins.co/metadata/miamicoin.json"
         "400":
           $ref: '#/components/responses/400BadRequest'
         "404":
@@ -951,6 +978,58 @@ components:
       schema:
         type: string
       description: The major CityCoins contract version, e.g. v1, v2
+  # Reusable objects
+  schemas:
+    cityconfig:
+      type: object
+      properties:
+        cityName:
+          type: string
+        deployed:
+          type: boolean
+        deployer:
+          type: string
+        auth:
+          type: object
+          properties:
+            name:
+              type: string
+            initialized:
+              type: boolean
+        core:
+          type: object
+          properties:
+            name:
+              type: string
+            activated:
+              type: boolean
+            startBlock:
+              type: number
+            shutdown:
+              type: boolean
+            shutdownBlock:
+              type: number
+        token:
+          type: object
+          properties:
+            name:
+              type: string
+            activated:
+              type: boolean
+            activationBlock:
+              type: number
+            displayName:
+              type: string
+            tokenName:
+              type: string
+            symbol:
+              type: string
+            decimals:
+              type: number
+            logo:
+              type: string
+            uri:
+              type: string
   #-------------------------------
   # Reusable responses
   #-------------------------------

@@ -159,11 +159,21 @@ export async function getCityConfig(city: string, version: string): Promise<City
   switch (city.toLowerCase()) {
     case "mia":
       if (Object.prototype.hasOwnProperty.call(miaConfig, version)) return miaConfig[version]
-      throw new Error(`Invalid city name or version ${city} ${version}`)
+      break;
     case "nyc":
       if (Object.prototype.hasOwnProperty.call(nycConfig, version)) return nycConfig[version]
-      throw new Error(`Invalid city name or version ${city} ${version}`)
+      break;
+  }
+  throw new Error(`Invalid city name or version: ${city} ${version}`)
+}
+
+export async function getFullCityConfig(city: string): Promise<CityVersions> {
+  switch (city.toLowerCase()) {
+    case "mia":
+      return miaConfig
+    case "nyc":
+      return nycConfig
     default:
-      throw new Error(`Invalid city name or version ${city} ${version}`)
+      throw new Error(`Invalid city name ${city}`)
   }
 }
