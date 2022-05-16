@@ -17,11 +17,7 @@ const GetCityConfiguration = async (request: IttyRequest): Promise<Response> => 
     return new Response(String(err), { status: 404 })
   }
   // return response
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
-  }
-  return new Response(JSON.stringify(cityConfig), { headers })
+  return new Response(JSON.stringify(cityConfig))
 }
 
 export default GetCityConfiguration
