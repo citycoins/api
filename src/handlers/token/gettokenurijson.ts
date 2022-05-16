@@ -22,11 +22,7 @@ const GetTokenUriJson = async (request: IttyRequest): Promise<Response> => {
     return new Response(String(err), { status: 404 })
   }
   // return response
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
-  }
-  return new Response(JSON.stringify(tokenUriJson), { headers })
+  return new Response(JSON.stringify(tokenUriJson))
 }
 
 export default GetTokenUriJson

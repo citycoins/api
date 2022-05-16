@@ -34,11 +34,7 @@ const IsBlockWinner = async (request: IttyRequest): Promise<Response> => {
   }
   // return response
   const response = await createSingleValue(blockWinner)
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
-  }
-  return new Response(JSON.stringify(response), { headers })
+  return new Response(JSON.stringify(response))
 }
 
 export default IsBlockWinner

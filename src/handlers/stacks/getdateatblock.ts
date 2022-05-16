@@ -25,11 +25,7 @@ const GetDateAtBlock = async (request: IttyRequest): Promise<Response> => {
   }
   // return response
   const response = await createSingleValue(dateAtBlock)
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
-  }
-  return new Response(JSON.stringify(response), { headers })
+  return new Response(JSON.stringify(response))
 }
 
 export default GetDateAtBlock
