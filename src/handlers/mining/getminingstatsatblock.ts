@@ -12,6 +12,7 @@ const GetMiningStatsAtBlock = async (request: IttyRequest): Promise<Response> =>
   const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
   let blockHeight = request.params?.blockheight ?? undefined
+  const defaultStats = request.params?.default === 'true' ? true : false
   if (version === undefined || city === undefined || blockHeight === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
@@ -25,7 +26,7 @@ const GetMiningStatsAtBlock = async (request: IttyRequest): Promise<Response> =>
         return new Response(`Block height not specified or invalid`, { status: 400 })
       }
     }
-    miningStatsAtBlock = await getMiningStatsAtBlock(cityConfig, blockHeight)
+    miningStatsAtBlock = await getMiningStatsAtBlock(cityConfig, blockHeight, defaultStats)
     if (miningStatsAtBlock === null) {
       return new Response(`Mining stats not found at block height: ${blockHeight}`, { status: 404 })
     }

@@ -32,8 +32,8 @@ router
   // Mining functions
   .get('/:version/:cityname/mining/get-block-winner-id/:blockheight', Mining.GetBlockWinnerId)
   .get('/:version/:cityname/mining/get-last-high-value-at-block/:blockheight', Mining.GetLastHighValueAtBlock)
-  .get('/:version/:cityname/mining/get-miner-at-block/:blockheight/:userid', Mining.GetMinerAtBlock)
-  .get('/:version/:cityname/mining/get-mining-stats-at-block/:blockheight', Mining.GetMiningStatsAtBlock)
+  .get('/:version/:cityname/mining/get-miner-at-block/:blockheight/:userid/:default?', Mining.GetMinerAtBlock)
+  .get('/:version/:cityname/mining/get-mining-stats-at-block/:blockheight/:default?', Mining.GetMiningStatsAtBlock)
   .get('/:version/:cityname/mining/has-mined-at-block/:blockheight/:userid', Mining.HasMinedAtBlock)
   // Mining claim functions
   .get('/:version/:cityname/mining-claims/can-claim-mining-reward/:blockheight/:address', MiningClaims.CanClaimMiningReward)
@@ -41,8 +41,8 @@ router
   // Stacking functions
   .get('/:version/:cityname/stacking/get-first-stacks-block-in-reward-cycle/:cycleid', Stacking.GetFirstStacksBlockInRewardCycle)
   .get('/:version/:cityname/stacking/get-reward-cycle/:blockheight', Stacking.GetRewardCycle)
-  .get('/:version/:cityname/stacking/get-stacker-at-cycle/:cycleid/:userid', Stacking.GetStackerAtCycle)
-  .get('/:version/:cityname/stacking/get-stacking-stats-at-cycle/:cycleid', Stacking.GetStackingStatsAtCycle)
+  .get('/:version/:cityname/stacking/get-stacker-at-cycle/:cycleid/:userid/:default?', Stacking.GetStackerAtCycle)
+  .get('/:version/:cityname/stacking/get-stacking-stats-at-cycle/:cycleid/:default?', Stacking.GetStackingStatsAtCycle)
   .get('/:version/:cityname/stacking/stacking-active-at-cycle/:cycleid', Stacking.StackingActiveAtCycle)
   // Stacking claim functions
   .get('/:version/:cityname/stacking-claims/get-stacking-reward/:cycleid/:userid', StackingClaims.GetStackingReward)

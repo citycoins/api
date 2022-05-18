@@ -13,6 +13,7 @@ const GetStackerAtCycle = async (request: IttyRequest): Promise<Response> => {
   const city = request.params?.cityname ?? undefined
   let cycle = request.params?.cycleid ?? undefined
   const userId = request.params?.userid ?? undefined
+  const defaultStats = request.params?.default === 'true' ? true : false
   if (version === undefined || city === undefined || cycle === undefined || userId === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
@@ -30,7 +31,7 @@ const GetStackerAtCycle = async (request: IttyRequest): Promise<Response> => {
     if (!isStringAllDigits(userId)) {
       return new Response(`User ID not specified or invalid`, { status: 400 })
     }
-    stackerAtCycle = await getStackerAtCycle(cityConfig, cycle, userId)
+    stackerAtCycle = await getStackerAtCycle(cityConfig, cycle, userId, defaultStats)
     if (stackerAtCycle === null) {
       return new Response(`Stacker ${userId} not found at reward cycle: ${cycle}`, { status: 404 })
     }

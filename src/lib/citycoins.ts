@@ -96,22 +96,22 @@ export async function getBlockWinnerId(cityConfig: CityConfig, blockHeight: stri
   }, true)
 }
 
-export async function getMiningStatsAtBlock(cityConfig: CityConfig, blockHeight: string): Promise<MiningStatsAtBlock> {
+export async function getMiningStatsAtBlock(cityConfig: CityConfig, blockHeight: string, defaultStats = false): Promise<MiningStatsAtBlock> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.core.name,
-    functionName: 'get-mining-stats-at-block',
+    functionName: defaultStats ? 'get-mining-stats-at-block-or-default' : 'get-mining-stats-at-block',
     functionArgs: [uintCV(blockHeight)],
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer,
   }, true)
 }
 
-export async function getMinerAtBlock(cityConfig: CityConfig, blockHeight: string, userId: string): Promise<MinerAtBlock> {
+export async function getMinerAtBlock(cityConfig: CityConfig, blockHeight: string, userId: string, defaultStats = false): Promise<MinerAtBlock> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.core.name,
-    functionName: 'get-miner-at-block',
+    functionName: defaultStats ? 'get-miner-at-block-or-default' : 'get-miner-at-block',
     functionArgs: [uintCV(blockHeight), uintCV(userId)],
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer,
@@ -176,22 +176,22 @@ export async function isBlockWinner(cityConfig: CityConfig, address: string, blo
 // STACKING FUNCTIONS
 //////////////////////////////////////////////////
 
-export async function getStackingStatsAtCycle(cityConfig: CityConfig, cycleId: string): Promise<StackingStatsAtCycle> {
+export async function getStackingStatsAtCycle(cityConfig: CityConfig, cycleId: string, defaultStats = false): Promise<StackingStatsAtCycle> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.core.name,
-    functionName: 'get-stacking-stats-at-cycle',
+    functionName: defaultStats ? 'get-stacking-stats-at-cycle-or-default' : 'get-stacking-stats-at-cycle',
     functionArgs: [uintCV(cycleId)],
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer,
   }, true)
 }
 
-export async function getStackerAtCycle(cityConfig: CityConfig, cycleId: string, userId: string): Promise<StackerAtCycle> {
+export async function getStackerAtCycle(cityConfig: CityConfig, cycleId: string, userId: string, defaultStats = false): Promise<StackerAtCycle> {
   return fetchReadOnlyFunction({
     contractAddress: cityConfig.deployer,
     contractName: cityConfig.core.name,
-    functionName: 'get-stacker-at-cycle',
+    functionName: defaultStats ? 'get-stacker-at-cycle-or-default' : 'get-stacker-at-cycle',
     functionArgs: [uintCV(cycleId), uintCV(userId)],
     network: STACKS_NETWORK,
     senderAddress: cityConfig.deployer,
