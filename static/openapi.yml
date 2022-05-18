@@ -229,7 +229,7 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /{version}/{cityname}/mining/get-mining-stats-at-block/{blockheight}:
+  /{version}/{cityname}/mining/get-mining-stats-at-block/{blockheight}/{default}:
     get:
       summary: Get Mining Stats
       description: Get the mining stats for a given CityCoin and Stacks block height
@@ -239,6 +239,7 @@ paths:
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
+        - $ref: '#/components/parameters/default'
       responses:
         "200":
           description: Success
@@ -270,7 +271,7 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /{version}/{cityname}/mining/get-miner-at-block/{blockheight}/{userid}:
+  /{version}/{cityname}/mining/get-miner-at-block/{blockheight}/{userid}/{default}:
     get:
       summary: Get Miner Info
       description: Get the miner details for a given CityCoin, Stacks block height, and user ID.
@@ -281,6 +282,7 @@ paths:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
         - $ref: '#/components/parameters/userid'
+        - $ref: '#/components/parameters/default'
       responses:
         "200":
           description: Success
@@ -384,7 +386,7 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /{version}/{cityname}/stacking/get-stacking-stats-at-cycle/{cycleid}:
+  /{version}/{cityname}/stacking/get-stacking-stats-at-cycle/{cycleid}/{default}:
     get:
       summary: Get Stacking Stats
       description: Get the stacking stats for a given CityCoin and reward cycle ID
@@ -394,6 +396,7 @@ paths:
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/cycleid'
+        - $ref: '#/components/parameters/default'
       responses:
         "200":
           description: Success
@@ -416,7 +419,7 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
-  /{version}/{cityname}/stacking/get-stacker-at-cycle/{cycleid}/{userid}:
+  /{version}/{cityname}/stacking/get-stacker-at-cycle/{cycleid}/{userid}/{default}:
     get:
       summary: Get Stacker Info
       description: Get the amount stacked and amount to return for a given CityCoin, reward cycle ID, and user ID.
@@ -427,6 +430,7 @@ paths:
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/cycleid'
         - $ref: '#/components/parameters/userid'
+        - $ref: '#/components/parameters/default'
       responses:
         "200":
           description: Success
@@ -1075,6 +1079,14 @@ components:
         type: string
         enum: [v1, v2]
       description: The major CityCoins contract version.
+    default:
+      in: path
+      name: default
+      required: true
+      schema:
+        type: string
+        enum: ["true", "false"]
+      description: (Optional) Toggle calling the `or-default` version of the function which returns an empty value instead of an error. Defaults to `false`.
   # Reusable objects
   schemas:
     citylist:

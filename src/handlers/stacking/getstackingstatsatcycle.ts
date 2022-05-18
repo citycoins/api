@@ -12,6 +12,7 @@ const GetStackingStatsAtCycle = async (request: IttyRequest): Promise<Response> 
   const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
   let cycle = request.params?.cycleid ?? undefined
+  const defaultStats = request.params?.default === 'true' ? true : false
   if (version === undefined || city === undefined || cycle === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
   }
@@ -26,7 +27,7 @@ const GetStackingStatsAtCycle = async (request: IttyRequest): Promise<Response> 
         return new Response(`Target cycle not specified or invalid`, { status: 400 })
       }
     }
-    stackingStatsAtCycle = await getStackingStatsAtCycle(cityConfig, cycle)
+    stackingStatsAtCycle = await getStackingStatsAtCycle(cityConfig, cycle, defaultStats)
     if (stackingStatsAtCycle === null) {
       return new Response(`Stacking stats not found at reward cycle: ${cycle}`, { status: 404 })
     }
