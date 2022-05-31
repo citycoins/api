@@ -10,13 +10,15 @@ const GetTokenUriJson = async (request: IttyRequest): Promise<Response> => {
   const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
   if (version === undefined || city === undefined) {
-    return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
+    return new Response(`Invalid request, missing parameter(s)`, {
+      status: 400,
+    })
   }
   // get/calculate response
   try {
     cityConfig = await getCityConfig(city, version)
     tokenUri = await getTokenUri(cityConfig)
-    tokenUriJson = await fetch(tokenUri).then(res => res.json())
+    tokenUriJson = await fetch(tokenUri).then((res) => res.json())
   } catch (err) {
     if (err instanceof Error) return new Response(err.message, { status: 404 })
     return new Response(String(err), { status: 404 })

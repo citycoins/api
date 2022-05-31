@@ -1,16 +1,24 @@
 import { Request as IttyRequest } from 'itty-router'
 import { getTotalSupply } from '../../lib/citycoins'
-import { createSingleValue, MICRO_UNITS } from '../../lib/common'
+import { createResponse, MICRO_UNITS } from '../../lib/common'
 import { getCityConfig, getCityInfo } from '../../types/cities'
+import { SingleValue } from '../../types/common'
 
 const GetFullTotalSupply = async (request: IttyRequest): Promise<Response> => {
   let totalSupply = 0
+  let response: SingleValue | boolean | number | string
   // check inputs
   const city = request.params?.cityname ?? undefined
   if (city === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, {
       status: 400,
     })
+  }
+  // check response output format
+  let format = 'json'
+  const { query } = request
+  if (Object.prototype.hasOwnProperty.call(query, 'format')) {
+    if (query?.format !== undefined) format = query.format
   }
   // get/calculate response
   try {
@@ -21,15 +29,15 @@ const GetFullTotalSupply = async (request: IttyRequest): Promise<Response> => {
       console.log(city, version, supply)
       totalSupply += version === 'v1' ? +supply * MICRO_UNITS : +supply
     }
-    console.log(`totalSupply: ${totalSupply}`)
+    response = await createResponse(
+      (totalSupply / MICRO_UNITS).toFixed(6),
+      format,
+    )
   } catch (err) {
     if (err instanceof Error) return new Response(err.message, { status: 404 })
     return new Response(String(err), { status: 404 })
   }
   // return response
-  const response = await createSingleValue(
-    (totalSupply / MICRO_UNITS).toFixed(6),
-  )
   return new Response(JSON.stringify(response))
 }
 
