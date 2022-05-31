@@ -3,7 +3,6 @@ import { getMiningStatsAtBlock } from '../../lib/citycoins'
 import { isStringAllDigits } from '../../lib/common'
 import { getStacksBlockHeight } from '../../lib/stacks'
 import { CityConfig, getCityConfig } from '../../types/cities'
-import { SingleValue } from '../../types/common'
 import { MiningStatsAtBlock } from '../../types/mining'
 
 const GetMiningStatsAtBlock = async (
