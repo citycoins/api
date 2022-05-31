@@ -9,9 +9,12 @@ CF Workers + IttyRouter + micro-stacks + TypeScript
 ## Things to Note
 
 - uses simple typed responses and provides detailed error messages
-- all `:cityname` routes accept three letter city names, e.g. mia, nyc
-- all `:blockheight` routes always follow `:cityname` routes when required
-- all additional parameters follow `:cityname` and `:blockheight` routes
+- all CityCoin contract routes start with `:version` and `:cityname`
+  - e.g. `/v1/mia/mining/get-mining-stats-at-block/57934`
+- `:version` accepts the major CityCoins contract version, e.g. v1, v2
+- `:cityname` routes accept three letter city names, e.g. mia, nyc
+- all additional parameters follow the order of operations below
+  - `:blockheight > :cycleid > :userid > :address`
 - routes are structured the same as the contract functions and documentation
 
 ## Implementation
@@ -24,17 +27,22 @@ Static assets in the `/static` folder are pushed to Cloudflare Workers KV store 
 
 All other paths are passed to the IttyRouter in `handler.ts`.
 
-The API is divided into three main sections:
+The API is divided into three main folders:
 
-- handlers: individual endpoints that get/caculate a value and return the result
+- handlers: individual endpoints that get/calculate a value and return the result
 - lib: libraries to get or calculate data for handlers
 - types: type definitions for utilities and responses
 
 ### How to Add a City
 
-- add new city config as constant in `/src/types/cities.ts`
-- update getCityConfig in `cities.ts` with case for new city
-- update enum in `/static/openapi.yml` for reusable parameters
+- add new CityInfo constant in `/src/types/cities.ts`
+- add new CityConfig constant in `/src/types/cities.ts`
+- update the functions below in `cities.ts` with case for new city
+  - getCityInfo()
+  - getFullCityInfo()
+  - getCityConfig()
+  - getFullCityConfig()
+- update cityname enum in `/static/openapi.yml` for reusable parameters
 
 ### How to Add an Endpoint
 
@@ -42,17 +50,20 @@ The API is divided into three main sections:
   - all inputs must be checked or 400
   - city config must resolve or 404
   - any integers verified with `isStringAllDigits` or 400
-  - response from getter or calcualation checked or 404
+  - response from getter or calculation checked or 404
   - returns successful response
 - (optional) add new getters in `/lib`
 - (optional) add new types in `/types`
+- add new handler file to top-level export in `/src/handlers`
+  - e.g. `export { default as GetDateAtBlock } from './stacks/getdateatblock'`
 - add new handler file and route to `/src/handler.ts`
-  - Order of Operations: `:cityname > :blockheight > :cycleid > :userid > :address`
+  - if querying city data, starts with: `:version/:cityname/`
+  - order of operations: `:blockheight > :cycleid > :userid > :address`
 - add new endpoint to `/static/openapi.yml`
   - routes get added to the corresponding section
     - routes get tagged by their category (matches directory)
     - routes always use ref for parameters and responses
-  - reusable parameters and responses are at the bottom of the file
+  - reusable parameters, schemas and responses are at the bottom of the file
 
 **Special case:** if the response is a custom type, e.g. `MiningStatsAtBlock`, an example for the responses must be added manually to `/static/openapi.yml`
 
@@ -81,9 +92,9 @@ A full list of routes and responses can be found in the [OpenAPI documentation](
 Some quick examples:
 
 - [Get the current Stacks block height](https://api.citycoins.co/stacks/get-block-height)
-- [Get the activation block height for MIA](https://api.citycoins.co/activation/get-activation-block/mia)
-- [Get the mining stats at block 49000 for MIA](https://api.citycoins.co/mining/get-mining-stats-at-block/mia/49000)
-- [Get the total supply for MIA](https://api.citycoins.co/token/get-total-supply/mia)
+- [Get the activation block height for MIA](https://api.citycoins.co/v1/mia/activation/get-activation-block)
+- [Get the mining stats at block 49000 for MIA](https://api.citycoins.co/v1/mia/mining/get-mining-stats-at-block/49000)
+- [Get the total supply for MIA](https://api.citycoins.co/v2/mia/token/get-total-supply)
 
 > “Continuous effort, not strength or intelligence
 > is the key to unlocking our potential.”
