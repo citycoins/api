@@ -5,7 +5,9 @@ import { getStacksBlockHeight } from '../../lib/stacks'
 import { CityConfig, getCityConfig } from '../../types/cities'
 import { StackingStatsAtCycle } from '../../types/stacking'
 
-const GetStackingStatsAtCycle = async (request: IttyRequest): Promise<Response> => {
+const GetStackingStatsAtCycle = async (
+  request: IttyRequest,
+): Promise<Response> => {
   let cityConfig: CityConfig
   let stackingStatsAtCycle: StackingStatsAtCycle
   // check inputs
@@ -14,7 +16,9 @@ const GetStackingStatsAtCycle = async (request: IttyRequest): Promise<Response> 
   let cycle = request.params?.cycleid ?? undefined
   const defaultStats = request.params?.default === 'true' ? true : false
   if (version === undefined || city === undefined || cycle === undefined) {
-    return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
+    return new Response(`Invalid request, missing parameter(s)`, {
+      status: 400,
+    })
   }
   // get/calculate response
   try {
@@ -24,12 +28,21 @@ const GetStackingStatsAtCycle = async (request: IttyRequest): Promise<Response> 
       cycle = await getRewardCycle(cityConfig, blockHeight)
     } else {
       if (!isStringAllDigits(cycle)) {
-        return new Response(`Target cycle not specified or invalid`, { status: 400 })
+        return new Response(`Target cycle not specified or invalid`, {
+          status: 400,
+        })
       }
     }
-    stackingStatsAtCycle = await getStackingStatsAtCycle(cityConfig, cycle, defaultStats)
+    stackingStatsAtCycle = await getStackingStatsAtCycle(
+      cityConfig,
+      cycle,
+      defaultStats,
+    )
     if (stackingStatsAtCycle === null) {
-      return new Response(`Stacking stats not found at reward cycle: ${cycle}`, { status: 404 })
+      return new Response(
+        `Stacking stats not found at reward cycle: ${cycle}`,
+        { status: 404 },
+      )
     }
   } catch (err) {
     if (err instanceof Error) return new Response(err.message, { status: 404 })

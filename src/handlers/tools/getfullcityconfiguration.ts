@@ -1,12 +1,16 @@
 import { Request as IttyRequest } from 'itty-router'
 import { CityVersions, getFullCityConfig } from '../../types/cities'
 
-const GetFullCityConfiguration = async (request: IttyRequest): Promise<Response> => {
+const GetFullCityConfiguration = async (
+  request: IttyRequest,
+): Promise<Response> => {
   let cityConfig: CityVersions
   // check inputs
   const city = request.params?.cityname ?? undefined
   if (city === undefined) {
-    return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
+    return new Response(`Invalid request, missing parameter(s)`, {
+      status: 400,
+    })
   }
   // get/calculate response
   try {

@@ -27,17 +27,22 @@ Static assets in the `/static` folder are pushed to Cloudflare Workers KV store 
 
 All other paths are passed to the IttyRouter in `handler.ts`.
 
-The API is divided into three main sections:
+The API is divided into three main folders:
 
-- handlers: individual endpoints that get/caculate a value and return the result
+- handlers: individual endpoints that get/calculate a value and return the result
 - lib: libraries to get or calculate data for handlers
 - types: type definitions for utilities and responses
 
 ### How to Add a City
 
-- add new city config as constant in `/src/types/cities.ts`
-- update getCityConfig in `cities.ts` with case for new city
-- update enum in `/static/openapi.yml` for reusable parameters
+- add new CityInfo constant in `/src/types/cities.ts`
+- add new CityConfig constant in `/src/types/cities.ts`
+- update the functions below in `cities.ts` with case for new city
+  - getCityInfo()
+  - getFullCityInfo()
+  - getCityConfig()
+  - getFullCityConfig()
+- update cityname enum in `/static/openapi.yml` for reusable parameters
 
 ### How to Add an Endpoint
 
@@ -45,7 +50,7 @@ The API is divided into three main sections:
   - all inputs must be checked or 400
   - city config must resolve or 404
   - any integers verified with `isStringAllDigits` or 400
-  - response from getter or calcualation checked or 404
+  - response from getter or calculation checked or 404
   - returns successful response
 - (optional) add new getters in `/lib`
 - (optional) add new types in `/types`

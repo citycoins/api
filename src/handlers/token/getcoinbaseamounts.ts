@@ -10,7 +10,9 @@ const GetCoinbaseAmounts = async (request: IttyRequest): Promise<Response> => {
   const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
   if (version === undefined || city === undefined) {
-    return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
+    return new Response(`Invalid request, missing parameter(s)`, {
+      status: 400,
+    })
   }
   // get/calculate response
   try {

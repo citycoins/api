@@ -5,9 +5,9 @@ export interface CityList {
 }
 
 export interface CityInfo {
-  fullName: string,
-  logo: string,
-  versions: string[],
+  fullName: string
+  logo: string
+  versions: string[]
   currentVersion: string
 }
 
@@ -16,37 +16,37 @@ export interface CityVersions {
 }
 
 export interface CityConfig {
-  cityName: string,
-  deployed: boolean,
-  deployer: string,
-  auth: AuthContract,
-  core: CoreContract,
-  token: TokenContract,
+  cityName: string
+  deployed: boolean
+  deployer: string
+  auth: AuthContract
+  core: CoreContract
+  token: TokenContract
 }
 
 export interface AuthContract {
-  name: string,
-  initialized: boolean,
+  name: string
+  initialized: boolean
 }
 
 export interface CoreContract {
-  name: string,
-  activated: boolean,
-  startBlock?: number,
-  shutdown: boolean,
-  shutdownBlock?: number,
+  name: string
+  activated: boolean
+  startBlock?: number
+  shutdown: boolean
+  shutdownBlock?: number
 }
 
 export interface TokenContract {
-  name: string,
-  activated: true,
-  activationBlock?: number,
-  displayName: string,
-  tokenName: string,
-  symbol: string,
-  decimals: number,
-  logo: string,
-  uri: string,
+  name: string
+  activated: true
+  activationBlock?: number
+  displayName: string
+  tokenName: string
+  symbol: string
+  decimals: number
+  logo: string
+  uri: string
 }
 
 // MIAMICOIN
@@ -55,11 +55,11 @@ const miaInfo: CityInfo = {
   fullName: 'Miami',
   logo: 'https://cdn.citycoins.co/brand/MIA_Miami/Coins/SVG/MiamiCoin_StandAlone_Coin.svg',
   versions: ['v1', 'v2'],
-  currentVersion: 'v2'
+  currentVersion: 'v2',
 }
 
 const miaConfig: CityVersions = {
-  'v1': {
+  v1: {
     cityName: 'Miami',
     deployed: true,
     deployer: 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27',
@@ -86,7 +86,7 @@ const miaConfig: CityVersions = {
       uri: 'https://cdn.citycoins.co/metadata/miamicoin.json',
     },
   },
-  'v2': {
+  v2: {
     cityName: 'Miami',
     deployed: true,
     deployer: 'SP1H1733V5MZ3SZ9XRW9FKYGEZT0JDGEB8Y634C7R',
@@ -111,7 +111,7 @@ const miaConfig: CityVersions = {
       logo: 'https://cdn.citycoins.co/logos/miamicoin.png',
       uri: 'https://cdn.citycoins.co/metadata/miamicoin.json',
     },
-  }
+  },
 }
 
 // NEWYORKCITYCOIN
@@ -120,11 +120,11 @@ const nycInfo: CityInfo = {
   fullName: 'New York City',
   logo: 'https://cdn.citycoins.co/brand/NYC_NewYorkCity/Coins/SVG/CC_NYCCoin_StandAloneCoin.svg',
   versions: ['v1', 'v2'],
-  currentVersion: 'v2'
+  currentVersion: 'v2',
 }
 
 const nycConfig: CityVersions = {
-  'v1': {
+  v1: {
     cityName: 'New York City',
     deployed: true,
     deployer: 'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5',
@@ -151,7 +151,7 @@ const nycConfig: CityVersions = {
       uri: 'https://cdn.citycoins.co/metadata/newyorkcitycoin.json',
     },
   },
-  'v2': {
+  v2: {
     cityName: 'New York City',
     deployed: true,
     deployer: 'SPSCWDV3RKV5ZRN1FQD84YE1NQFEDJ9R1F4DYQ11',
@@ -176,53 +176,58 @@ const nycConfig: CityVersions = {
       logo: 'https://cdn.citycoins.co/logos/newyorkcitycoin.png',
       uri: 'https://cdn.citycoins.co/metadata/newyorkcitycoin.json',
     },
-  }
+  },
 }
 
 // GETTERS
 
-export const cityList = ["mia", "nyc"];
+export const cityList = ['mia', 'nyc']
 
 export async function getCityList(): Promise<string[]> {
-  return cityList;
+  return cityList
 }
 
 export async function getCityInfo(city: string): Promise<CityInfo> {
   switch (city) {
     case 'mia':
-      return miaInfo;
+      return miaInfo
     case 'nyc':
-      return nycInfo;
+      return nycInfo
     default:
-      throw new Error(`Invalid city name: ${city}`);
+      throw new Error(`Invalid city name: ${city}`)
   }
 }
 
 export async function getFullCityInfo(): Promise<CityList> {
   return {
-    'mia': miaInfo,
-    'nyc': nycInfo,
-  };
+    mia: miaInfo,
+    nyc: nycInfo,
+  }
 }
 
-export async function getCityConfig(city: string, version: string): Promise<CityConfig> {
+export async function getCityConfig(
+  city: string,
+  version: string,
+): Promise<CityConfig> {
   version = version.toLowerCase()
   switch (city.toLowerCase()) {
-    case "mia":
-      if (Object.prototype.hasOwnProperty.call(miaConfig, version)) return miaConfig[version]
-      break;
-    case "nyc":
-      if (Object.prototype.hasOwnProperty.call(nycConfig, version)) return nycConfig[version]
-      break;
+    case 'mia':
+      if (Object.prototype.hasOwnProperty.call(miaConfig, version))
+        return miaConfig[version]
+      break
+    case 'nyc':
+      if (Object.prototype.hasOwnProperty.call(nycConfig, version))
+        return nycConfig[version]
+      break
   }
   throw new Error(`Invalid city name or version: ${city} ${version}`)
 }
 
 export async function getFullCityConfig(city: string): Promise<CityVersions> {
   switch (city.toLowerCase()) {
-    case "mia":
+    case 'mia':
       return miaConfig
-    case "nyc":
+    case 'nyc':
       return nycConfig
     default:
       throw new Error(`Invalid city name: ${city}`)

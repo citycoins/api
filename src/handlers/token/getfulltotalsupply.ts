@@ -1,17 +1,15 @@
 import { Request as IttyRequest } from 'itty-router'
-import { getDecimals } from '../../lib/citycoins'
-import { createResponse } from '../../lib/common'
-import { CityConfig, getCityConfig } from '../../types/cities'
+import { getTotalSupply } from '../../lib/citycoins'
+import { createResponse, MICRO_UNITS } from '../../lib/common'
+import { getCityConfig, getCityInfo } from '../../types/cities'
 import { SingleValue } from '../../types/common'
 
-const GetDecimals = async (request: IttyRequest): Promise<Response> => {
-  let cityConfig: CityConfig
-  let decimals: string
+const GetFullTotalSupply = async (request: IttyRequest): Promise<Response> => {
+  let totalSupply = 0
   let response: SingleValue | boolean | number | string
   // check inputs
-  const version = request.params?.version ?? undefined
   const city = request.params?.cityname ?? undefined
-  if (version === undefined || city === undefined) {
+  if (city === undefined) {
     return new Response(`Invalid request, missing parameter(s)`, {
       status: 400,
     })
@@ -24,9 +22,17 @@ const GetDecimals = async (request: IttyRequest): Promise<Response> => {
   }
   // get/calculate response
   try {
-    cityConfig = await getCityConfig(city, version)
-    decimals = await getDecimals(cityConfig)
-    response = await createResponse(decimals, format)
+    const cityInfo = await getCityInfo(city)
+    for await (const version of cityInfo.versions) {
+      const config = await getCityConfig(city, version)
+      const supply = await getTotalSupply(config)
+      console.log(city, version, supply)
+      totalSupply += version === 'v1' ? +supply * MICRO_UNITS : +supply
+    }
+    response = await createResponse(
+      (totalSupply / MICRO_UNITS).toFixed(6),
+      format,
+    )
   } catch (err) {
     if (err instanceof Error) return new Response(err.message, { status: 404 })
     return new Response(String(err), { status: 404 })
@@ -35,4 +41,4 @@ const GetDecimals = async (request: IttyRequest): Promise<Response> => {
   return new Response(JSON.stringify(response))
 }
 
-export default GetDecimals
+export default GetFullTotalSupply

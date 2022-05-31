@@ -1,5 +1,9 @@
 import { Router } from 'itty-router'
-import { getAssetFromKV, MethodNotAllowedError, NotFoundError } from '@cloudflare/kv-asset-handler'
+import {
+  getAssetFromKV,
+  MethodNotAllowedError,
+  NotFoundError,
+} from '@cloudflare/kv-asset-handler'
 import Landing from './handlers/landing'
 import Documentation from './handlers/documentation'
 import * as Stacks from './handlers/stacks'
@@ -13,6 +17,7 @@ import * as Tools from './handlers/tools'
 
 const router = Router()
 
+// prettier-ignore
 router
   // main landing pages
   .get('/', Landing)
@@ -57,6 +62,8 @@ router
   .get('/:version/:cityname/token/get-token-uri', Token.GetTokenUri)
   .get('/:version/:cityname/token/get-token-uri-json', Token.GetTokenUriJson)
   .get('/:version/:cityname/token/get-total-supply', Token.GetTotalSupply)
+  .get('/token/get-total-supply/:cityname', Token.GetFullTotalSupply) // legacy route for old API integrations
+  .get('/:cityname/token/get-total-supply', Token.GetFullTotalSupply)
   // Tools
   .get('/tools/get-city-list', Tools.GetCityList)
   .get('/:cityname/tools/get-city-info', Tools.GetCityInfo)
@@ -73,7 +80,10 @@ export const handleRequest = async (request: Request): Promise<Response> => {
   const response: Response = await router.handle(request)
   const newResponse = new Response(response.body, response)
   newResponse.headers.append('Access-Control-Allow-Origin', '*')
-  newResponse.headers.append('Access-Control-Allow-Methods', 'GET, HEAD, POST, OPTIONS')
+  newResponse.headers.append(
+    'Access-Control-Allow-Methods',
+    'GET, HEAD, POST, OPTIONS',
+  )
   newResponse.headers.append('Access-Control-Max-Age', '86400')
   newResponse.headers.append('CityCoins-API', '2.0.0')
   return newResponse

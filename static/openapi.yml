@@ -706,8 +706,8 @@ paths:
 
   /{version}/{cityname}/token/get-total-supply:
     get:
-      summary: Get Total Supply
-      description: Get the SIP-010 total supply for a given CityCoin
+      summary: Get Total Supply (single)
+      description: Get the SIP-010 total supply for a given CityCoin and version
       tags:
         - Token
       parameters:
@@ -716,6 +716,47 @@ paths:
       responses:
         "200":
           $ref: '#/components/responses/200SuccessJsonNumber'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /{cityname}/token/get-total-supply:
+    get:
+      summary: Get Total Supply (all)
+      description: |
+        Get the SIP-010 total supply for a given CityCoin across all versions.
+
+        Note: This will return the value in "CityCoins" not "micro-CityCoins" with 6 decimal places added to the calculation.
+      tags:
+        - Token
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
+  /token/get-total-supply/{cityname}:
+    get:
+      summary: Get Total Supply (legacy)
+      description: |
+        Get the SIP-010 total supply for a given CityCoin across all versions.
+
+        Note: This will return the value in "CityCoins" not "micro-CityCoins" with 6 decimal places added to the calculation.
+
+        This endpoint is deprecated in favor of the new format `/{cityname}/token/get-total-supply` but will remain active until all known external services are converted.
+      deprecated: true
+      tags:
+        - Token
+      parameters:
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonString'
         "400":
           $ref: '#/components/responses/400BadRequest'
         "404":

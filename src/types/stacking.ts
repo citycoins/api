@@ -1,10 +1,9 @@
-
 export interface StackingStatsAtCycle {
-  amountUstx: number,
-  amountToken: number,
+  amountUstx: number
+  amountToken: number
 }
 
 export interface StackerAtCycle {
-  amountStacked: number,
-  toReturn: number,
+  amountStacked: number
+  toReturn: number
 }
