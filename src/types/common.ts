@@ -1,4 +1,3 @@
-
 export interface SingleValue {
   value: boolean | number | string
 }
