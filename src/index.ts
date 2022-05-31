@@ -57,6 +57,8 @@ router
   .get('/:version/:cityname/token/get-token-uri', Token.GetTokenUri)
   .get('/:version/:cityname/token/get-token-uri-json', Token.GetTokenUriJson)
   .get('/:version/:cityname/token/get-total-supply', Token.GetTotalSupply)
+  .get('/token/get-total-supply/:cityname', Token.GetFullTotalSupply) // legacy route for old API integrations
+  .get('/:cityname/token/get-total-supply', Token.GetFullTotalSupply)
   // Tools
   .get('/tools/get-city-list', Tools.GetCityList)
   .get('/:cityname/tools/get-city-info', Tools.GetCityInfo)

@@ -1,9 +1,11 @@
 import { StacksMainnet } from "micro-stacks/network"
 import { SingleValue } from "../types/common";
 
-export const STACKS_NETWORK = new StacksMainnet();
+export const STACKS_NETWORK = new StacksMainnet()
 
-export async function createSingleValue(value: string | boolean): Promise<SingleValue> {
+export const MICRO_UNITS = 1000000
+
+export async function createSingleValue(value: boolean | number | string): Promise<SingleValue> {
   return { value: value }
 }
 
