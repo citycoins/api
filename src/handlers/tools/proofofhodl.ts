@@ -2,6 +2,7 @@ import { Request as IttyRequest } from 'itty-router'
 import { getProofOfHodl } from '../../lib/citycoins'
 import { createResponse } from '../../lib/common'
 import { getCityConfig } from '../../types/cities'
+import { SingleValue } from '../../types/common'
 
 const ProofOfHodl = async (request: IttyRequest): Promise<Response> => {
   let cityConfig
