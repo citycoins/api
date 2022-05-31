@@ -12,7 +12,9 @@ const GetPrices = async (request: IttyRequest): Promise<Response> => {
   const city = request.params?.cityname ?? undefined
   const currency = request.params?.currency ?? undefined
   if (version === undefined || city === undefined) {
-    return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
+    return new Response(`Invalid request, missing parameter(s)`, {
+      status: 400,
+    })
   }
   // get/calculate response
   try {

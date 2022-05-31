@@ -6,7 +6,9 @@ const GetCityInfo = async (request: IttyRequest): Promise<Response> => {
   // check inputs
   const city = request.params?.cityname ?? undefined
   if (city === undefined) {
-    return new Response(`Invalid request, missing parameter(s)`, { status: 400 })
+    return new Response(`Invalid request, missing parameter(s)`, {
+      status: 400,
+    })
   }
   // get/calculate response
   try {
