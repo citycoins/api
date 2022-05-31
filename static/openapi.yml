@@ -53,6 +53,8 @@ paths:
       description: Get the current Stacks block height
       tags:
         - Stacks
+      parameters:
+        - $ref: '#/components/parameters/format'
       responses:
         "200":
           $ref: '#/components/responses/200SuccessJsonNumber'
@@ -66,6 +68,7 @@ paths:
       tags:
         - Stacks
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/address'
       responses:
         "200":
@@ -82,6 +85,7 @@ paths:
       tags:
         - Stacks
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/address'
       responses:
         "200":
@@ -98,6 +102,7 @@ paths:
       tags:
         - Stacks
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/blockheight'
       responses:
         "200":
@@ -114,6 +119,7 @@ paths:
       tags:
         - Activation
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
       responses:
@@ -131,6 +137,7 @@ paths:
       tags:
         - Activation
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
       responses:
@@ -148,6 +155,7 @@ paths:
       tags:
         - Activation
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
       responses:
@@ -165,6 +173,7 @@ paths:
       tags:
         - Activation
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
       responses:
@@ -182,6 +191,7 @@ paths:
       tags:
         - Activation
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/userid'
@@ -200,6 +210,7 @@ paths:
       tags:
         - Activation
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/address'
@@ -218,6 +229,7 @@ paths:
       tags:
         - Mining
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
@@ -318,6 +330,7 @@ paths:
       tags:
         - Mining
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
@@ -336,6 +349,7 @@ paths:
       tags:
         - Mining
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
@@ -355,6 +369,7 @@ paths:
       tags:
         - Mining Claims
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
@@ -374,6 +389,7 @@ paths:
       tags:
         - Mining Claims
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
@@ -460,6 +476,7 @@ paths:
       tags:
         - Stacking
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
@@ -478,6 +495,7 @@ paths:
       tags:
         - Stacking
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/cycleid'
@@ -496,6 +514,7 @@ paths:
       tags:
         - Stacking
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/cycleid'
@@ -518,6 +537,7 @@ paths:
       tags:
         - Stacking Claims
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/cycleid'
@@ -537,6 +557,7 @@ paths:
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/blockheight'
@@ -659,6 +680,7 @@ paths:
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
       responses:
@@ -676,6 +698,7 @@ paths:
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
       responses:
@@ -693,6 +716,7 @@ paths:
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/address'
@@ -711,6 +735,7 @@ paths:
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
       responses:
@@ -731,6 +756,7 @@ paths:
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
@@ -753,6 +779,7 @@ paths:
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/cityname'
       responses:
         "200":
@@ -769,6 +796,7 @@ paths:
       tags:
         - Token
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
       responses:
@@ -1052,6 +1080,7 @@ paths:
       tags:
         - Tools
       parameters:
+        - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/version'
         - $ref: '#/components/parameters/cityname'
         - $ref: '#/components/parameters/address'
@@ -1128,6 +1157,13 @@ components:
         type: string
         enum: ["true", "false"]
       description: (Optional) Toggle calling the `or-default` version of the function which returns an empty value instead of an error. Defaults to `false`.
+    format:
+      in: query
+      name: format
+      schema:
+        type: string
+        enum: ["json", "raw"]
+      description: (Optional) The output format for the response. Defaults to `json`.
   # Reusable objects
   schemas:
     citylist:
