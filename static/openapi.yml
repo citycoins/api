@@ -789,6 +789,26 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
 
+  /{cityname}/token/get-circulating-supply:
+    get:
+      summary: Get Circulating Supply (all)
+      description: |
+        Get the SIP-010 circulating supply for a given CityCoin across all versions.
+
+        Note: This will return the value in "CityCoins" not "micro-CityCoins" with 6 decimal places added to the calculation.
+      tags:
+        - Token
+      parameters:
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/cityname'
+      responses:
+        "200":
+          $ref: '#/components/responses/200SuccessJsonString'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+
   /{version}/{cityname}/token/get-token-uri:
     get:
       summary: Get Token URI

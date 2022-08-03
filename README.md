@@ -56,7 +56,7 @@ The API is divided into three main folders:
 - (optional) add new types in `/types`
 - add new handler file to top-level export in `/src/handlers`
   - e.g. `export { default as GetDateAtBlock } from './stacks/getdateatblock'`
-- add new handler file and route to `/src/handler.ts`
+- add new handler file and route to `/src/index.ts`
   - if querying city data, starts with: `:version/:cityname/`
   - order of operations: `:blockheight > :cycleid > :userid > :address`
 - add new endpoint to `/static/openapi.yml`
