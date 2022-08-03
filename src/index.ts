@@ -64,6 +64,7 @@ router
   .get('/:version/:cityname/token/get-total-supply', Token.GetTotalSupply)
   .get('/token/get-total-supply/:cityname', Token.GetFullTotalSupply) // legacy route for old API integrations
   .get('/:cityname/token/get-total-supply', Token.GetFullTotalSupply)
+  .get('/:cityname/token/get-circulating-supply', Token.GetFullTotalSupply) // additional route for aggregate services
   // Tools
   .get('/tools/get-city-list', Tools.GetCityList)
   .get('/:cityname/tools/get-city-info', Tools.GetCityInfo)
