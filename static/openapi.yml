@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: CityCoins API
   description: A simple API to interact with Stacks and CityCoins data. See the [CityCoins documentation site](https://docs.citycoins.co/developer-resources/api) or [GitHub for more info.](https://github.com/citycoins/api)
-  version: 2.0.0
+  version: 2.0.2
 servers:
   - url: https://api.citycoins.co
     description: Main
@@ -1182,7 +1182,7 @@ components:
       name: format
       schema:
         type: string
-        enum: ["json", "raw"]
+        enum: ["json", "raw", "number", "string", "boolean"]
       description: (Optional) The output format for the response. Defaults to `json`.
   # Reusable objects
   schemas:

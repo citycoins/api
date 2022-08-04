@@ -1,6 +1,6 @@
 {
   "name": "citycoins-api",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "A simple API to interact with Stacks and CityCoins data.",
   "main": "dist/worker.js",
   "scripts": {

@@ -17,15 +17,20 @@ export async function createResponse(
   value: boolean | number | string,
   format = 'json',
 ): Promise<SingleValue | boolean | number | string> {
-  // return only the value
-  if (format === 'raw') {
-    return value
+  switch (format) {
+    case 'json':
+      return await createSingleValue(value)
+    case 'raw':
+      return value
+    case 'number':
+      return Number(value)
+    case 'string':
+      return String(value)
+    case 'boolean':
+      return Boolean(value)
+    default:
+      throw new Error(`Unrecognized output format: ${format}`)
   }
-  // default, return value: value
-  if (format === 'json') {
-    return await createSingleValue(value)
-  }
-  throw new Error(`Unrecognized output format: ${format}`)
 }
 
 // fix for isNaN not being reliable
