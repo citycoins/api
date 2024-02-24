@@ -77,7 +77,14 @@ router
   // Default route
   .all('*', (request) => new Response(`Resource not found, please check the URL: ${request.url}`, { status: 404 }))
 
-export const handleRequest = async (request: Request): Promise<Response> => {
+export interface Env {
+  HIRO_API_KEY: string
+}
+
+export const handleRequest = async (
+  request: Request,
+  env: Env,
+): Promise<Response> => {
   const response: Response = await router.handle(request)
   const newResponse = new Response(response.body, response)
   newResponse.headers.append('Access-Control-Allow-Origin', '*')
@@ -87,6 +94,7 @@ export const handleRequest = async (request: Request): Promise<Response> => {
   )
   newResponse.headers.append('Access-Control-Max-Age', '86400')
   newResponse.headers.append('CityCoins-API', '2.0.0')
+  newResponse.headers.append('x-hiro-api-key', env.HIRO_API_KEY)
   return newResponse
 }
 
